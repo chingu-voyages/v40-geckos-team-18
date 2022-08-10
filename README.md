@@ -6,17 +6,25 @@ A platform that aims to educate individuals on their contributions of greenhouse
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ## Running the Project
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Run `npm i` to install all the dependencies.
+
+** TODO **
+Add instructions to configure .env file
+** /TODO **
+
+- `npm run dev` to start the developer server
+- `npm run test` to run tests
 
 ## Dependencies
-- Typescript
-- React
-- ReactQuery
-- TailwindCSS
+- [Typescript](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [React](https://reactjs.org/docs/getting-started.html)
+- [ReactQuery](https://react-query-v3.tanstack.com/overview)
+- [TailwindCSS](https://v2.tailwindcss.com/docs)
 - [Flowbite](https://flowbite-react.com/) (Component Library)
 - [NextJs](https://nextjs.org/docs/getting-started)
 - [tRPC](https://trpc.io/docs)
 - [Prisma](https://www.prisma.io/docs/concepts)
+- [Zod](https://zod.dev/)
 
 
 ### Contributors
