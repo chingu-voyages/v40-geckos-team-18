@@ -14,9 +14,9 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id String @id @default(cuid())
-}
+// model Example {
+//     id String @id @default(cuid())
+// }
 
 // Necessary for Next auth
 model Account {
@@ -46,13 +46,20 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id              String    @id @default(cuid())
+    name            String?
+    email           String   @unique
+    emailVerified   DateTime?
+    image           String?   // might not need this
+    country         String    // a part of registration
+    state           String    // a part of registration
+    unitPref        String?   // a part of registration
+    accounts        Account[] // next auth related
+    sessions        Session[] // next auth related
+    vehicles        Vehicle[]
+    electricityUse  ElectricityUse[]
+    fuelUsed        FuelUsed[]
+    flights         Flight[]
 }
 
 model VerificationToken {
@@ -61,4 +68,57 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Trips {
+    id                  String      @id @default(cuid())
+    distanceTraveled    DateTime
+    vehicleId           String
+    vehicle             Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+model Vehicle {
+    id              String      @id @default(cuid())
+    vehicleMakeId   String
+    vehicleModelId  String
+    userId          String
+    createdAt       DateTime    @default(now())
+    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    trips           Trips[]
+}
+
+model ElectricityUse {
+    id              String      @id @default(cuid())
+    electricalValue Decimal
+    userId          String
+    createdAt       DateTime    @default(now())
+    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model FuelUsed {
+    id          String      @id @default(cuid())
+    fuelType    String
+    fuelUnit    String
+    amountUsed  Decimal
+    createdAt   DateTime    @default(now())
+    userId      String
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Flight {
+    id          String      @id @default(cuid())
+    partySize   Decimal     @default(1)
+    createdAt   DateTime    @default(now())
+    userId      String
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    flightLeg   FlightLeg[]
+}
+
+model FlightLeg {
+    id          String  @id @default(cuid())
+    departure   String
+    destination String
+    legNumber   Decimal
+    flightId    String
+    flight      Flight  @relation(fields: [flightId], references: [id], onDelete: Cascade)
 }
