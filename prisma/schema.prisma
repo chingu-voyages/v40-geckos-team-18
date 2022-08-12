@@ -16,10 +16,6 @@ datasource db {
     referentialIntegrity = "prisma"
 }
 
-// model Example {
-//     id String @id @default(cuid())
-// }
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -27,12 +23,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? //@db.Text
-    access_token      String? //@db.Text
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? //@db.Text
+    id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,16 +44,16 @@ model Session {
 }
 
 model User {
-    id              String    @id @default(cuid())
+    id              String          @id @default(cuid())
     name            String?
-    email           String   @unique
+    email           String          @unique
     emailVerified   DateTime?
-    image           String?   // might not need this
-    country         String    // a part of registration
-    state           String    // a part of registration
-    unitPref        String?   // a part of registration
-    accounts        Account[] // next auth related
-    sessions        Session[] // next auth related
+    image           String?         // might not need this
+    country         String          // a part of registration
+    state           String          // a part of registration
+    unitPref        String?         // a part of registration
+    accounts        Account[]       // next auth related
+    sessions        Session[]       // next auth related
     vehicles        Vehicle[]
     electricityUse  ElectricityUse[]
     fuelUsed        FuelUsed[]
@@ -74,15 +70,19 @@ model VerificationToken {
 
 model Trips {
     id                  String      @id @default(cuid())
-    distanceTraveled    DateTime
+    distanceTraveled    Decimal     // response from Carbon
+    estimatedAt         DateTime    // response from Carbon
+    carbon_g            Int         // response from Carbon will have this field
     vehicleId           String
     vehicle             Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 }
 
 model Vehicle {
     id              String      @id @default(cuid())
-    vehicleMakeId   String
-    vehicleModelId  String
+    vehicleMake     String      
+    vehicleModel    String      
+    vehicleYear     Int         
+    vehicleModelId  String      // use for Carbon API when making calls. Comes from Carbon as well.
     userId          String
     createdAt       DateTime    @default(now())
     user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -92,35 +92,40 @@ model Vehicle {
 model ElectricityUse {
     id              String      @id @default(cuid())
     electricalValue Decimal
+    estimatedAt     DateTime
+    carbon_g        Int         // response from Carbon will have this field
     userId          String
-    createdAt       DateTime    @default(now())
     user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model FuelUsed {
-    id          String      @id @default(cuid())
-    fuelType    String
-    fuelUnit    String
-    amountUsed  Decimal
-    createdAt   DateTime    @default(now())
-    userId      String
-    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id              String      @id @default(cuid())
+    fuelType        String
+    fuelUnit        String
+    amountUsed      Decimal
+    estimatedAt     DateTime    // response from Carbon
+    carbon_g        Int         // response from Carbon will have this field   
+    userId          String
+    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Flight {
-    id          String      @id @default(cuid())
-    partySize   Decimal     @default(1)
-    createdAt   DateTime    @default(now())
-    userId      String
-    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-    flightLeg   FlightLeg[]
+    id              String      @id @default(cuid())
+    partySize       Int         @default(1)
+    estimatedAt     DateTime    // response from Carbon
+    carbon_g        Int         // response from Carbon will have this field
+    distance_km     Decimal     // response from Carbon
+    userId          String
+    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    flightLeg       FlightLeg[]
 }
 
 model FlightLeg {
-    id          String  @id @default(cuid())
-    departure   String
-    destination String
-    legNumber   Decimal
-    flightId    String
-    flight      Flight  @relation(fields: [flightId], references: [id], onDelete: Cascade)
+    id              String      @id @default(cuid())
+    departure       String
+    destination     String
+    legNumber       Int         // can be 1,2,3,etc
+    cabinClass      String      @default("economy")     // an optional argument from the user's standpoint
+    flightId        String
+    flight          Flight      @relation(fields: [flightId], references: [id], onDelete: Cascade)
 }
