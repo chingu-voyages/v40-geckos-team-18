@@ -68,9 +68,9 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model Trips {
+model Trip {
     id                  String      @id @default(cuid())
-    distanceTraveled    Decimal     // response from Carbon
+    distanceTraveled    Decimal     // user input
     estimatedAt         DateTime    // response from Carbon
     carbon_g            Int         // response from Carbon will have this field
     vehicleId           String
@@ -83,16 +83,16 @@ model Vehicle {
     vehicleModel    String      
     vehicleYear     Int         
     vehicleModelId  String      // use for Carbon API when making calls. Comes from Carbon as well.
-    userId          String
     createdAt       DateTime    @default(now())
+    userId          String
     user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-    trips           Trips[]
+    trips           Trip[]
 }
 
 model ElectricityUse {
     id              String      @id @default(cuid())
-    electricalValue Decimal
-    estimatedAt     DateTime
+    electricalValue Decimal     // user input
+    estimatedAt     DateTime    // response from Carbon
     carbon_g        Int         // response from Carbon will have this field
     userId          String
     user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -100,9 +100,9 @@ model ElectricityUse {
 
 model FuelUsed {
     id              String      @id @default(cuid())
-    fuelType        String
-    fuelUnit        String
-    amountUsed      Decimal
+    fuelType        String      // user input
+    fuelUnit        String      // user input
+    amountUsed      Decimal     // user input
     estimatedAt     DateTime    // response from Carbon
     carbon_g        Int         // response from Carbon will have this field   
     userId          String
@@ -111,10 +111,10 @@ model FuelUsed {
 
 model Flight {
     id              String      @id @default(cuid())
-    partySize       Int         @default(1)
-    estimatedAt     DateTime    // response from Carbon
-    carbon_g        Int         // response from Carbon will have this field
-    distance_km     Decimal     // response from Carbon
+    partySize       Int         @default(1)         // user input
+    estimatedAt     DateTime                        // response from Carbon
+    carbon_g        Int                             // response from Carbon will have this field
+    distance_km     Decimal                         // response from Carbon
     userId          String
     user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     flightLeg       FlightLeg[]
@@ -122,10 +122,10 @@ model Flight {
 
 model FlightLeg {
     id              String      @id @default(cuid())
-    departure       String
-    destination     String
-    legNumber       Int         // can be 1,2,3,etc
-    cabinClass      String      @default("economy")     // an optional argument from the user's standpoint
+    departure       String                              // user input: IATA code
+    destination     String                              // user input: IATA code
+    legNumber       Int                                 // user input: can be 1,2,3,etc
+    cabinClass      String      @default("economy")     // user input
     flightId        String
     flight          Flight      @relation(fields: [flightId], references: [id], onDelete: Cascade)
 }
