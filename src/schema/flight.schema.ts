@@ -1,15 +1,26 @@
 import z from 'zod';
 
+const FlightLegSchema = z.object({
+  departure_airport: z
+    .string()
+    .length(3, 'Must enter IATA code (airport code)'),
+  destination_airport: z
+    .string()
+    .length(3, 'Must enter IATA code (airport code)'),
+  cabin_class: z.string(),
+});
+
+const distanceUnitSchema = z.enum(['km', 'mi'])
+
 export const unregisteredFlightRequestSchema = z.object({
   passengers: z.number(),
-  distance_unit: z.enum(['km', 'mi']),
+  distance_unit: distanceUnitSchema,
   legs: z.array(
-    z.object({
-      departure_airport: z.string().length(3, 'Must enter IATA code (airport code)'),
-      destination_airport: z.string().length(3, 'Must enter IATA code (airport code)'),
-      cabin_class: z.string()
-    })
+    FlightLegSchema
   ),
 });
 
-export type unregisteredFlightRequest = z.TypeOf<typeof unregisteredFlightRequestSchema>
+export type FlightLeg = z.TypeOf<typeof FlightLegSchema>
+
+export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>
+// export type unregisteredFlightRequest = z.TypeOf<typeof unregisteredFlightRequestSchema>
