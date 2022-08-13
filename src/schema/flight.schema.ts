@@ -23,4 +23,3 @@ export const unregisteredFlightRequestSchema = z.object({
 export type FlightLeg = z.TypeOf<typeof FlightLegSchema>
 
 export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>
-// export type unregisteredFlightRequest = z.TypeOf<typeof unregisteredFlightRequestSchema>
