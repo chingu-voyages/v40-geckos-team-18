@@ -1,6 +1,6 @@
 import z from 'zod';
 
-const FlightLegSchema = z.object({
+const flightLegSchema = z.object({
   departure_airport: z
     .string()
     .length(3, 'Must enter IATA code (airport code)'),
@@ -16,10 +16,24 @@ export const unregisteredFlightRequestSchema = z.object({
   passengers: z.number(),
   distance_unit: distanceUnitSchema,
   legs: z.array(
-    FlightLegSchema
+    flightLegSchema
   ),
 });
 
-export type FlightLeg = z.TypeOf<typeof FlightLegSchema>
+export type FlightLeg = z.TypeOf<typeof flightLegSchema>
 
 export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>
+
+export type UnregisteredFlightRequest = z.TypeOf<typeof unregisteredFlightRequestSchema>
+
+const flightResponseUnqiue = z.object({
+  carbon_g: z.number(),
+  carbon_kg: z.number(),
+  carbon_lb: z.number(),
+  carbon_mt: z.number(),
+  estimated_at: z.string(),
+})
+
+const flightResponseSchema = unregisteredFlightRequestSchema.merge(flightResponseUnqiue)
+
+export type FlightResponse = z.TypeOf<typeof flightResponseSchema>

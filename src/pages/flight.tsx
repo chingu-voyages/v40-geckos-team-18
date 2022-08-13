@@ -8,25 +8,29 @@ import {
 } from 'flowbite-react';
 import React, { useState } from 'react';
 import FlightForm from '../components/FlightForm';
-import { FlightLeg, DistanceUnit } from '../schema/flight.schema';
+import {
+  FlightResponse,
+  UnregisteredFlightRequest,
+} from '../schema/flight.schema';
 import { trpc } from '../utils/trpc';
 
 const flightPage = () => {
-  // const [responseData, setResponseData] = useState()
-  // const { mutate, error } = trpc.useMutation(
-  //   ['flight.unregistered-request-flight'],
-  //   {
-  //     onSuccess: (data) => {
-  //       console.log(data)
-  //     },
-  //     onError: (e) => {
-  //       // console.log(e);
-  //     },
-  //   }
-  // );
+  const { mutate, data } = trpc.useMutation([
+    'flight.unregistered-request-flight',
+  ]);
 
+  const handleSubmit = (flightData: UnregisteredFlightRequest) => {
+    mutate({ ...flightData });
+  };
 
-  return (<div><FlightForm/></div>)
+  if (data) {
+    return <>{data.carbon_g}</>;
+  }
+  return (
+    <div>
+      <FlightForm handleSubmit={handleSubmit} />
+    </div>
+  );
 };
 
 export default flightPage;
