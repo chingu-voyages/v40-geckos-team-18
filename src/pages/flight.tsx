@@ -7,12 +7,10 @@ import {
   ToggleSwitch,
 } from 'flowbite-react';
 import React, { useState } from 'react';
-import { DistanceUnit, FlightLeg } from '../types/carbonTypes';
+import { FlightLeg, DistanceUnit } from '../schema/flight.schema';
 import { trpc } from '../utils/trpc';
 
-
-
-const flightCalculator = () => {
+const flightForm = () => {
   const [passengers, setPassengers] = useState(1);
   const [distanceUnit, setDistanceUnit] = useState<DistanceUnit>('km');
   const [legs, setLegs] = useState<FlightLeg[]>([]);
@@ -201,4 +199,4 @@ const flightCalculator = () => {
   );
 };
 
-export default flightCalculator;
+export default flightForm;
