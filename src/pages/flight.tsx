@@ -1,17 +1,7 @@
-import {
-  Button,
-  Checkbox,
-  Label,
-  Select,
-  TextInput,
-  ToggleSwitch,
-} from 'flowbite-react';
-import React, { useState } from 'react';
+import React from 'react';
 import FlightForm from '../components/FlightForm';
-import {
-  FlightResponse,
-  UnregisteredFlightRequest,
-} from '../schema/flight.schema';
+import FlightResponse from '../components/FlightResponse';
+import { UnregisteredFlightRequest } from '../schema/flight.schema';
 import { trpc } from '../utils/trpc';
 
 const flightPage = () => {
@@ -23,11 +13,10 @@ const flightPage = () => {
     mutate({ ...flightData });
   };
 
-  if (data) {
-    return <>{data.carbon_g}</>;
-  }
   return (
     <div>
+      {data && <FlightResponse data={data} />}
+
       <FlightForm handleSubmit={handleSubmit} />
     </div>
   );

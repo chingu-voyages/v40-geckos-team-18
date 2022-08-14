@@ -27,18 +27,6 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
   const [cabinType, setCabinType] = useState('Economy');
   const [roundTrip, setRoundTrip] = useState(false);
 
-  // const { mutate, error } = trpc.useMutation(
-  //   ['flight.unregistered-request-flight'],
-  //   {
-  //     onSuccess: (data) => {
-  //       console.log(data)
-  //     },
-  //     onError: (e) => {
-  //       // console.log(e);
-  //     },
-  //   }
-  // );
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -97,7 +85,6 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
     ]);
     // round trip is true, add the second leg automatically
     if (roundTrip) {
-      console.log('rountrip true');
       setLegs((oldLegs) => [
         ...oldLegs,
         {
