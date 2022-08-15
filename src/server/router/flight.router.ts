@@ -1,5 +1,5 @@
 import { unregisteredFlightRequestSchema } from '../../schema/flight.schema';
-import { carbonFlightRequest } from '../../utils/carbonAPI';
+import { carbonEstimateRequest } from '../../utils/carbonAPI';
 import { createRouter } from './context';
 
 export const flightRouter = createRouter().mutation(
@@ -10,9 +10,10 @@ export const flightRouter = createRouter().mutation(
     async resolve({ input }) {
       // call Carbon
       const response = await fetch(
-        carbonFlightRequest(JSON.stringify({ type: 'flight', ...input }))
+        carbonEstimateRequest(JSON.stringify({ type: 'flight', ...input }))
       );
 
+      // this response is not affected by the transformer attached to tRPC
       return response.json().then((data) => {
         return data.data.attributes;
       });
