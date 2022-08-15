@@ -1,0 +1,97 @@
+{
+  "request": {
+    "body": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "electricity_unit": { "type": "string" },
+        "electricity_value": { "type": "number" },
+        "country": { "type": "string" },
+        "state": { "type": "string" },
+        "passengers": { "type": "number" },
+        "distance_unit": { "type": "string" },
+        "legs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "departure_airport": { "type": "string" },
+              "destination_airport": { "type": "string" },
+              "cabin_class": { "type": "string" }
+            },
+            "required": ["departure_airport", "destination_airport"]
+          }
+        },
+        "distance_value": { "type": "number" },
+        "vehicle_model_id": { "type": "string" },
+        "fuel_source_type": { "type": "string" },
+        "fuel_source_unit": { "type": "string" },
+        "fuel_source_value": { "type": "number" }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    }
+  },
+  "response": {
+    "body": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "type": { "type": "string" },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "electricity_unit": { "type": "string" },
+                "electricity_value": { "type": "number" },
+                "country": { "type": "string" },
+                "state": { "type": "string" },
+                "passengers": { "type": "number" },
+                "distance_unit": { "type": "string" },
+                "legs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "departure_airport": { "type": "string" },
+                      "destination_airport": { "type": "string" },
+                      "cabin_class": { "type": "string" }
+                    },
+                    "required": ["departure_airport", "destination_airport"]
+                  }
+                },
+                "distance_value": { "type": "number" },
+                "vehicle_make": { "type": "string" },
+                "vehicle_model": { "type": "string" },
+                "vehicle_year": { "type": "number" },
+                "vehicle_model_id": { "type": "string" },
+                "fuel_source_type": { "type": "string" },
+                "fuel_source_unit": { "type": "string" },
+                "fuel_source_value": { "type": "number" },
+                "carbon_g": { "type": "number" },
+                "carbon_lb": { "type": "number" },
+                "carbon_kg": { "type": "number" },
+                "carbon_mt": { "type": "number" },
+                "estimated_at": { "type": "string" }
+              },
+              "required": [
+                "type",
+                "carbon_g",
+                "carbon_kg",
+                "carbon_lb",
+                "carbon_mt",
+                "estimated_at"
+              ]
+            }
+          },
+          "required": ["id", "type", "attributes"]
+        }
+      },
+      "required": ["data"],
+      "additionalProperties": false
+    }
+  }
+}
