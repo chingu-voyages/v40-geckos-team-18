@@ -13,7 +13,6 @@ export const serverSchema = z.object({
   CARBON_API_KEY: z.string(),
   CARBON_BASE_URL: z.string(),
   MOCK_CARBON_DEV_URL: z.string()
-
 });
 
 /**
