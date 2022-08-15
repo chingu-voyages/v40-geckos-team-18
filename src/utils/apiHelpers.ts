@@ -5,11 +5,9 @@ const carbonHeader = new Headers({
   Authorization: `Bearer ${env.CARBON_API_KEY}`,
 });
 
-// const carbonFlightUrl = 'https://www.carboninterface.com/api/v1/estimates';
-
 const carbonEstimateUrl =
   env.NODE_ENV === 'development'
-    ? 'http://localhost:3456/estimates'
+    ? `${env.MOCK_CARBON_DEV_URL}`
     : `${env.CARBON_BASE_URL}/estimates`;
 
 const carbonVehicleMakeUrl = `${env.CARBON_BASE_URL}/vehicle_makes`;

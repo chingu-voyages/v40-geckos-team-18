@@ -1,5 +1,5 @@
 import { unregisteredFlightRequestSchema } from '../../schema/flight.schema';
-import { carbonEstimateRequest } from '../../utils/carbonAPI';
+import { carbonEstimateRequest } from '../../utils/apiHelpers';
 import { createRouter } from './context';
 
 export const flightRouter = createRouter().mutation(
