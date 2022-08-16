@@ -10,9 +10,8 @@ export const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
   NEXTAUTH_SECRET: z.string(),
   NEXTAUTH_URL: z.string().url(),
-  CARBON_API_KEY: z.string(),
-  CARBON_BASE_URL: z.string(),
-  MOCK_CARBON_DEV_URL: z.string()
+  DISCORD_CLIENT_ID: z.string(),
+  DISCORD_CLIENT_SECRET: z.string(),
 });
 
 /**
