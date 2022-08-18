@@ -124,8 +124,8 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
         </div>
 
         <p className="mt-4 mb-1">Enter the legs of this trip:</p>
-        <div className="flex flex-row">
-          <div className="mb-2 mr-2 block">
+        <div className="flex flex-col">
+          <div className="mb-2 block">
             <Label htmlFor="departure" value="Departure" id="departureLabel" />
             <TextInput
               id="departure"
@@ -145,7 +145,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             />
           </div>
 
-          <div id="selectCabinType" className="ml-2 block w-40">
+          <div id="selectCabinType" className="block w-40">
             <div>
               <Label htmlFor="cabinType" value="Cabin Section" />
             </div>
@@ -159,7 +159,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             </Select>
           </div>
 
-          <div className="flex items-center gap-2 ml-2">
+          <div className="flex items-center gap-2 mt-2">
             <Checkbox
               id="roundTrip"
               onChange={toggleRoundTrip}
@@ -168,9 +168,9 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             <Label htmlFor="roundTrip" value="Round Trip?" />
           </div>
 
-          <div className="flex items-center ml-2">
+          <div className="flex items-center mt-2">
             <Button size="sm" onClick={addLeg}>
-              Add another
+              Confirm leg
             </Button>
           </div>
         </div>
