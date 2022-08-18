@@ -11,6 +11,7 @@ import {
   FlightLeg,
   DistanceUnit,
   UnregisteredFlightRequest,
+  CabinClass,
 } from '../schema/flight.schema';
 
 interface FlightFormProps {
@@ -24,7 +25,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
 
   const [departure, setDeparture] = useState('');
   const [destination, setDestination] = useState('');
-  const [cabinType, setCabinType] = useState('Economy');
+  const [cabinType, setCabinType] = useState<CabinClass>('economy');
   const [roundTrip, setRoundTrip] = useState(false);
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -80,7 +81,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
       {
         departure_airport: departure.toUpperCase(),
         destination_airport: destination.toUpperCase(),
-        cabin_class: cabinType.toLowerCase(),
+        cabin_class: cabinType,
       },
     ]);
     // round trip is true, add the second leg automatically
@@ -90,7 +91,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
         {
           departure_airport: destination.toUpperCase(),
           destination_airport: departure.toUpperCase(),
-          cabin_class: cabinType.toLowerCase(),
+          cabin_class: cabinType,
         },
       ]);
     }
@@ -98,7 +99,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
     setDeparture('');
     setDestination('');
     setRoundTrip(false);
-    setCabinType('Economy');
+    setCabinType('economy');
   };
 
   return (
@@ -151,11 +152,11 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             </div>
             <Select
               id="cabinType"
-              onChange={(e) => setCabinType(e.target.value)}
+              onChange={(e) => setCabinType(e.target.value as CabinClass)}
               value={cabinType}
             >
-              <option>Economy</option>
-              <option>Premium</option>
+              <option value="economy">Economy</option>
+              <option value="premium">Premium</option>
             </Select>
           </div>
 

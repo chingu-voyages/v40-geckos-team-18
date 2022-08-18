@@ -1,5 +1,6 @@
 import z from 'zod';
 
+const cabinClassSchema = z.enum(['economy', 'premium'])
 const flightLegSchema = z.object({
   departure_airport: z
     .string()
@@ -7,7 +8,7 @@ const flightLegSchema = z.object({
   destination_airport: z
     .string()
     .length(3, 'Must enter IATA code (airport code)'),
-  cabin_class: z.string(),
+  cabin_class: cabinClassSchema,
 });
 
 const distanceUnitSchema = z.enum(['km', 'mi'])
@@ -20,6 +21,7 @@ export const unregisteredFlightRequestSchema = z.object({
   ),
 });
 
+export type CabinClass = z.TypeOf<typeof cabinClassSchema>
 export type FlightLeg = z.TypeOf<typeof flightLegSchema>
 
 export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>
