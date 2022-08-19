@@ -15,6 +15,7 @@ import {
   UnregisteredFlightRequest,
   CabinClass,
 } from '../../schema/flight.schema';
+import { darkGreenColor } from '../../utils/colors';
 
 interface FlightFormProps {
   handleSubmit: (flightData: UnregisteredFlightRequest) => void;
@@ -53,30 +54,6 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
   };
 
   const addLeg = () => {
-    // check for empty fields
-    if (departure.length === 0) {
-      // TODO: add validation feedback
-      console.error('no empty field');
-      return;
-    }
-
-    if (destination.length === 0) {
-      // TODO: add validation feedback
-      console.error('no empty field');
-      return;
-    }
-    // check for strings longer than 3
-    if (departure.length !== 3) {
-      // TODO: add validation feedback
-      console.error('must enter 3 letter code');
-      return;
-    }
-
-    if (destination.length !== 3) {
-      // TODO: add validation feedback
-      console.error('must enter 3 letter code');
-      return;
-    }
     // add our leg to our leg array
     setLegs((oldLegs) => [
       ...oldLegs,
@@ -114,13 +91,12 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
     setPassengers(() => 1);
   };
 
-  const validateAirportInput = () => {};
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col items-center gap-4 ">
       <p>Ever wanted to know how much carbon your flights emit?</p>
 
-      <div className="flex v-screen justify-center items-center">
-        <div className="text-center w-1/3">
+      <div className="flex justify-center  items-center">
+        <div className="text-center w-2/3">
           <p className="mb-4">This calculator will do just that!</p>
           <p>
             Simply enter the three letter code for your departure and
@@ -134,20 +110,6 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
         className="flex flex-col gap-4"
         onSubmit={(e) => handleFormSubmit(e)}
       >
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="unitPref" value="Unit Preference" />
-          </div>
-          <div className="flex flex-col gap-4" id="unit-toggle">
-            <ToggleSwitch
-              id="unitPref"
-              checked={distanceUnit === 'mi' ? true : false}
-              label={distanceUnit === 'mi' ? 'Miles' : 'Kilometers'}
-              onChange={changeUnitPref}
-            />
-          </div>
-        </div>
-
         <p className="mt-4 mb-1">Enter the legs of this trip:</p>
 
         {/** departure/destination input block */}
@@ -169,7 +131,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
             </div>
           </Tooltip>
 
-          <HiArrowRight className='w-6 h-6'/>
+          <HiArrowRight className="w-6 h-6" />
 
           <Tooltip content="Three letter IATA airport code">
             <div className="mb-2 block">
@@ -211,7 +173,12 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
           </div>
 
           <div className="flex items-center mt-2 justify-end">
-            <Button size="sm" onClick={addLeg}>
+            <Button
+              type="button"
+              onClick={addLeg}
+              disabled={departure.length !== 3 || destination.length !== 3 ? true : false}
+              color="info"
+            >
               Confirm leg
             </Button>
           </div>
@@ -230,11 +197,37 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
           />
         </div>
 
-        <div className="flex flex-row gap-4 justify-end">
-          <Button onClick={resetForm}>Reset</Button>
-          <Button type="submit" disabled={legs.length === 0 ? true : false}>
-            Go!
-          </Button>
+        <div className="flex flex-row gap-4 justify-between">
+          <div className="justify-start">
+            <div className="mb-2 block">
+              <Label htmlFor="unitPref" value="Unit Preference" />
+            </div>
+
+            <div className="flex flex-col gap-4" id="unit-toggle">
+              <ToggleSwitch
+                id="unitPref"
+                checked={distanceUnit === 'mi' ? true : false}
+                label={distanceUnit === 'mi' ? 'Miles' : 'Kilometers'}
+                onChange={changeUnitPref}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row gap-2">
+            <Button
+              onClick={resetForm}
+              size='md'
+              color='info'
+            >
+              Reset
+            </Button>
+            <Button
+              type="submit"
+              disabled={legs.length === 0 ? true : false}
+              color="success"
+            >
+              Go!
+            </Button>
+          </div>
         </div>
       </form>
     </div>
