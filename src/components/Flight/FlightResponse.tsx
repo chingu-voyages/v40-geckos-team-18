@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlightResponse } from '../../schema/flight.schema';
-import { Card } from 'flowbite-react';
+import { Button, Card } from 'flowbite-react';
 import FlightItinerarySummary from './FlightItinerarySummary';
+import Link from 'next/link';
 
 interface FlightResponseProps {
   data: FlightResponse;
@@ -33,6 +34,11 @@ const FlightResponse = ({ data }: FlightResponseProps) => {
           <p>
             <strong>{data.carbon_kg} kg</strong>
           </p>
+          <div className='flex justify-end'>
+            <Button>
+              <Link href="register">Register</Link>
+            </Button>
+          </div>
         </div>
       </Card>
     </div>
