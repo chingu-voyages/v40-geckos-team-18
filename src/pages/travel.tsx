@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { Tabs } from 'flowbite-react';
+import { FaPlane, FaCarAlt } from 'react-icons/fa';
 import FlightQuestionaire from '../components/Flight/FlightQuestionaire';
 
 export default function TravelPage() {
@@ -16,10 +17,12 @@ export default function TravelPage() {
 
       <div className="flex justify-center">
         <Tabs.Group aria-label="Pills" style="pills">
-          <Tabs.Item active={true} title="Flight">
+          <Tabs.Item active={true} title="Flying" icon={FaPlane}>
             <FlightQuestionaire />
           </Tabs.Item>
-          <Tabs.Item title="Driving">Your Driving parent component here</Tabs.Item>
+          <Tabs.Item title="Driving" icon={FaCarAlt}>
+            Your Driving parent component here
+          </Tabs.Item>
         </Tabs.Group>
       </div>
     </div>
