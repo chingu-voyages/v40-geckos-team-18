@@ -1,10 +1,10 @@
 import React from 'react';
-import FlightForm from '../components/FlightForm';
-import FlightResponse from '../components/FlightResponse';
-import { UnregisteredFlightRequest } from '../schema/flight.schema';
-import { trpc } from '../utils/trpc';
+import FlightForm from './FlightForm';
+import FlightResponse from './FlightResponse';
+import { UnregisteredFlightRequest } from '../../schema/flight.schema';
+import { trpc } from '../../utils/trpc';
 
-const flightPage = () => {
+const FlightQuestionaire = () => {
   const { mutate, data } = trpc.useMutation([
     'flight.unregistered-request-flight',
   ]);
@@ -22,4 +22,4 @@ const flightPage = () => {
   );
 };
 
-export default flightPage;
+export default FlightQuestionaire;

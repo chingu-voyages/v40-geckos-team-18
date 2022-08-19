@@ -5,20 +5,22 @@ import {
   Select,
   TextInput,
   ToggleSwitch,
+  Tooltip,
 } from 'flowbite-react';
 import React, { useState } from 'react';
+import { HiArrowRight } from 'react-icons/hi';
 import {
   FlightLeg,
   DistanceUnit,
   UnregisteredFlightRequest,
   CabinClass,
-} from '../schema/flight.schema';
+} from '../../schema/flight.schema';
 
 interface FlightFormProps {
   handleSubmit: (flightData: UnregisteredFlightRequest) => void;
 }
 
-const flightForm = ({ handleSubmit }: FlightFormProps) => {
+const FlightForm = ({ handleSubmit }: FlightFormProps) => {
   const [passengers, setPassengers] = useState(1);
   const [distanceUnit, setDistanceUnit] = useState<DistanceUnit>('km');
   const [legs, setLegs] = useState<FlightLeg[]>([]);
@@ -102,9 +104,31 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
     setCabinType('economy');
   };
 
+  const resetForm = () => {
+    setDeparture(() => '');
+    setDestination(() => '');
+    setCabinType(() => 'economy');
+    setRoundTrip(() => false);
+    setLegs(() => []);
+    setDistanceUnit(() => 'km');
+    setPassengers(() => 1);
+  };
+
+  const validateAirportInput = () => {};
   return (
-    <div className="flex flex-col items-center justify-center">
-      <p className="mb-4">Text to describe what this calculator does</p>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <p>Ever wanted to know how much carbon your flights emit?</p>
+
+      <div className="flex v-screen justify-center items-center">
+        <div className="text-center w-1/3">
+          <p className="mb-4">This calculator will do just that!</p>
+          <p>
+            Simply enter the three letter code for your departure and
+            destination airports and choose between economy or premium seats on
+            your flight.
+          </p>
+        </div>
+      </div>
 
       <form
         className="flex flex-col gap-4"
@@ -125,27 +149,44 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
         </div>
 
         <p className="mt-4 mb-1">Enter the legs of this trip:</p>
-        <div className="flex flex-col">
-          <div className="mb-2 block">
-            <Label htmlFor="departure" value="Departure" id="departureLabel" />
-            <TextInput
-              id="departure"
-              type="text"
-              value={departure}
-              onChange={(e) => setDeparture(e.target.value)}
-            />
-          </div>
 
-          <div className="mb-2 block">
-            <Label htmlFor="destination" value="Destination" />
-            <TextInput
-              id="destination"
-              type="text"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
-            />
-          </div>
+        {/** departure/destination input block */}
+        <div className="flex flex-row gap-4 items-center">
+          <Tooltip content="Three letter IATA airport code">
+            <div className="mb-2 block">
+              <Label
+                htmlFor="departure"
+                value="Departure"
+                id="departureLabel"
+              />
+              <TextInput
+                id="departure"
+                type="text"
+                value={departure}
+                onChange={(e) => setDeparture(e.target.value)}
+                maxLength={3}
+              />
+            </div>
+          </Tooltip>
 
+          <HiArrowRight className='w-6 h-6'/>
+
+          <Tooltip content="Three letter IATA airport code">
+            <div className="mb-2 block">
+              <Label htmlFor="destination" value="Destination" />
+              <TextInput
+                id="destination"
+                type="text"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                maxLength={3}
+              />
+            </div>
+          </Tooltip>
+        </div>
+
+        {/** cabin, round trip, and confirm leg input block */}
+        <div className="flex flex-row justify-between">
           <div id="selectCabinType" className="block w-40">
             <div>
               <Label htmlFor="cabinType" value="Cabin Section" />
@@ -169,7 +210,7 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             <Label htmlFor="roundTrip" value="Round Trip?" />
           </div>
 
-          <div className="flex items-center mt-2">
+          <div className="flex items-center mt-2 justify-end">
             <Button size="sm" onClick={addLeg}>
               Confirm leg
             </Button>
@@ -182,18 +223,22 @@ const flightForm = ({ handleSubmit }: FlightFormProps) => {
             value="How many passengers on this trip?"
           />
           <TextInput
+            id="passengerCount"
             type="number"
             value={passengers}
             onChange={(e) => setPassengers(parseInt(e.target.value))}
           />
         </div>
 
-        <Button type="submit" disabled={legs.length === 0 ? true : false}>
-          Calculate Emissions
-        </Button>
+        <div className="flex flex-row gap-4 justify-end">
+          <Button onClick={resetForm}>Reset</Button>
+          <Button type="submit" disabled={legs.length === 0 ? true : false}>
+            Go!
+          </Button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default flightForm;
+export default FlightForm;
