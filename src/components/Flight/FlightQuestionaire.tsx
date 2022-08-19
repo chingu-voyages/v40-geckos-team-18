@@ -15,8 +15,8 @@ const FlightQuestionaire = () => {
 
   return (
     <div>
-      <FlightForm handleSubmit={handleSubmit} />
-      
+      {!data && <FlightForm handleSubmit={handleSubmit} /> }
+
       {data && <FlightResponse data={data} />}
     </div>
   );

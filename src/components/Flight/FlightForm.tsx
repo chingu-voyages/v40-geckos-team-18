@@ -15,7 +15,6 @@ import {
   UnregisteredFlightRequest,
   CabinClass,
 } from '../../schema/flight.schema';
-import { darkGreenColor } from '../../utils/colors';
 
 interface FlightFormProps {
   handleSubmit: (flightData: UnregisteredFlightRequest) => void;
