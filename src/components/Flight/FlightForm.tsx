@@ -185,8 +185,9 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
         </div>
 
         {/** itinerary summary */}
-        <div>
-          <p>Your itenerary summary</p>
+        <div className='flex flex-col text-center'>
+          <p className='mb-2'>Your itenerary summary</p>
+          {legs.length === 0 && <p>Add a leg to your itinerary</p>}
           <FlightItinerarySummary data={legs}/>
         </div>
         <div className="flex flex-row gap-4 justify-center items-center">
