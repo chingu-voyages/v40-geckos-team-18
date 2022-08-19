@@ -15,6 +15,7 @@ import {
   UnregisteredFlightRequest,
   CabinClass,
 } from '../../schema/flight.schema';
+import FlightItinerarySummary from './FlightItinerarySummary';
 
 interface FlightFormProps {
   handleSubmit: (flightData: UnregisteredFlightRequest) => void;
@@ -183,6 +184,11 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
           </div>
         </div>
 
+        {/** itinerary summary */}
+        <div>
+          <p>Your itenerary summary</p>
+          <FlightItinerarySummary data={legs}/>
+        </div>
         <div className="flex flex-row gap-4 justify-center items-center">
           <Label
             htmlFor="passengerCount"

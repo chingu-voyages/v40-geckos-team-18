@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlightResponse } from '../schema/flight.schema';
+import { FlightResponse } from '../../schema/flight.schema';
 import { Card } from 'flowbite-react';
+import FlightItinerarySummary from './FlightItinerarySummary';
 
 interface FlightResponseProps {
   data: FlightResponse;
@@ -21,16 +22,7 @@ const FlightResponse = ({ data }: FlightResponseProps) => {
 
           <p className="mb-2">This flight calculation with these legs:</p>
 
-          {data.legs.map((leg, index) => {
-            return (
-              <>
-                <p>
-                  {index + 1}: {leg.departure_airport} to{' '}
-                  {leg.destination_airport} in {leg.cabin_class}
-                </p>
-              </>
-            );
-          })}
+          <FlightItinerarySummary data={data.legs} />
 
           <p className="mt-2">
             with a party size of {data.passengers} passenger{' '}
