@@ -3,9 +3,10 @@ import FlightForm from './FlightForm';
 import FlightResponse from './FlightResponse';
 import { UnregisteredFlightRequest } from '../../schema/flight.schema';
 import { trpc } from '../../utils/trpc';
+import { Spinner } from 'flowbite-react';
 
 const FlightQuestionaire = () => {
-  const { mutate, data } = trpc.useMutation([
+  const { mutate, data, isLoading } = trpc.useMutation([
     'flight.unregistered-request-flight',
   ]);
 
@@ -13,11 +14,13 @@ const FlightQuestionaire = () => {
     mutate({ ...flightData });
   };
 
+  if (isLoading) return <Spinner aria-label='Flight response loading' />
+
   return (
     <div>
-      {!data && <FlightForm handleSubmit={handleSubmit} /> }
+      {!data && !isLoading && <FlightForm handleSubmit={handleSubmit} /> }
 
-      {data && <FlightResponse data={data} />}
+      {data && !isLoading && <FlightResponse data={data} />}
     </div>
   );
 };
