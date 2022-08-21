@@ -92,10 +92,10 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 ">
+    <div className="flex flex-col items-center gap-4 min-w-3/4">
       <p>Ever wanted to know how much carbon your flights emit?</p>
 
-      <div className="flex justify-center  items-center">
+      <div className="flex justify-center items-center">
         <div className="text-center w-2/3">
           <p className="mb-4">This calculator will do just that!</p>
           <p>
@@ -127,6 +127,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
                 value={departure}
                 onChange={(e) => setDeparture(e.target.value)}
                 maxLength={3}
+                color='gray-600'
               />
             </div>
           </Tooltip>
@@ -142,6 +143,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 maxLength={3}
+                color='gray-600'
               />
             </div>
           </Tooltip>
