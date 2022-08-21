@@ -92,11 +92,11 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 min-w-3/4">
+    <div className="flex flex-col items-center gap-4 w-full">
       <p>Ever wanted to know how much carbon your flights emit?</p>
 
       <div className="flex justify-center items-center">
-        <div className="text-center w-2/3">
+        <div className="text-center">
           <p className="mb-4">This calculator will do just that!</p>
           <p>
             Simply enter the three letter code for your departure and

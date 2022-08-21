@@ -14,11 +14,11 @@ const FlightQuestionaire = () => {
     mutate({ ...flightData });
   };
 
-  if (isLoading) return <Spinner aria-label='Flight response loading' />
+  if (isLoading) return <Spinner aria-label="Flight response loading" />;
 
   return (
-    <div>
-      {!data && !isLoading && <FlightForm handleSubmit={handleSubmit} /> }
+    <div className="w-[600px] mx-[5px]">
+      {!data && !isLoading && <FlightForm handleSubmit={handleSubmit} />}
 
       {data && !isLoading && <FlightResponse data={data} />}
     </div>

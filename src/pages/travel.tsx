@@ -27,7 +27,7 @@ export default function TravelPage() {
             <FlightQuestionaire />
           </Tabs.Item>
           <Tabs.Item title="Driving" icon={FaCarAlt}>
-            Your Driving parent component here
+            <p>Your Driving parent component here</p>
             <FlightQuestionaire />
           </Tabs.Item>
         </Tabs.Group>

@@ -10,7 +10,7 @@ interface FlightResponseProps {
 }
 const FlightResponse = ({ data }: FlightResponseProps) => {
   return (
-    <div className="mx-auto max-w-md mt-10">
+    <div className="mx-auto max-w-md mt-10 min-w-[50%] w-full">
       <Card>
         <div className="flex flex-col justify-center text-center">
           {/* This should only render when a user is logged in 
