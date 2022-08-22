@@ -32,27 +32,6 @@ export default function TravelPage() {
           </Tabs.Item>
         </Tabs.Group>
       </div>
-
-      {/* <div className='flex mx-auto min-w-fit w-96 justify-center'>
-        <Accordion alwaysOpen={true}>
-          <Accordion.Panel>
-            <Accordion.Title>
-              Flying
-            </Accordion.Title>
-            <Accordion.Content>
-              <FlightQuestionaire />
-            </Accordion.Content>
-          </Accordion.Panel>
-          <Accordion.Panel>
-            <Accordion.Title>
-              Driving
-            </Accordion.Title>
-            <Accordion.Content>
-              Driving stufff
-            </Accordion.Content>
-          </Accordion.Panel>
-        </Accordion>
-      </div> */}
     </div>
   );
 }
