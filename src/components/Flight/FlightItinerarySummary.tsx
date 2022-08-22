@@ -9,12 +9,10 @@ const FlightItinerarySummary = ({ data }: FlightItinerarySummaryProps) => {
     <div>
       {data.map((leg, index) => {
         return (
-          <>
-            <p>
-              {index + 1}: {leg.departure_airport} to {leg.destination_airport}{' '}
-              in {leg.cabin_class}
-            </p>
-          </>
+          <p key={leg.departure_airport + index}>
+            {index + 1}: {leg.departure_airport} to {leg.destination_airport} in{' '}
+            {leg.cabin_class}
+          </p>
         );
       })}
     </div>
