@@ -8,7 +8,6 @@ import { electricityRouter } from './electricity.router';
 import { flightRouter } from "./flight.router";
 
 export const appRouter = createRouter()
-  .transformer(superjson)
   .merge('example.', exampleRouter)
   .merge('question.', protectedExampleRouter)
   .merge('electricity.', electricityRouter)
