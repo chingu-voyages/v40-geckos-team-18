@@ -16,8 +16,8 @@ export const unregisteredFuelRequestSchema = z.object({
   fuel_source_value: z.number(),
 });
 
-export type fuelSourceUnit = z.TypeOf<typeof fuelSourceUnitSchema>;
-export type fuelSourceType = z.TypeOf<typeof fuelSourceTypeSchema>;
+export type FuelSourceUnit = z.TypeOf<typeof fuelSourceUnitSchema>;
+export type FuelSourceType = z.TypeOf<typeof fuelSourceTypeSchema>;
 
 export type UnregisteredFuelRequest = z.TypeOf<
   typeof unregisteredFuelRequestSchema

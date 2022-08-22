@@ -12,7 +12,7 @@ export const appRouter = createRouter()
   .merge('example.', exampleRouter)
   .merge('question.', protectedExampleRouter)
   .merge('electricity.', electricityRouter)
-  .merge('fuel', fuelRouter);
+  .merge('fuel.', fuelRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
