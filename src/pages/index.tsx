@@ -1,7 +1,8 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { trpc } from "../utils/trpc";
-import Link from 'next/link'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { trpc } from '../utils/trpc';
+import Link from 'next/link';
+import Footer from '../components/Footer';
 
 type TechnologyCardProps = {
   name: string;
@@ -10,7 +11,7 @@ type TechnologyCardProps = {
 };
 
 const Home: NextPage = () => {
-  const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const hello = trpc.useQuery(['example.hello', { text: 'from tRPC' }]);
 
   return (
     <>
@@ -20,12 +21,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <nav className="flex justify-center gap-4">
-        <Link href='/electricity'>Electricity</Link>
-        <Link href='/fuel'>Fuel</Link>
-        <Link href='/travel'>Travel</Link>
-        <Link href='/login'>Login</Link>
-        <Link href='/register'>Register</Link>
-
+        <Link href="/electricity">Electricity</Link>
+        <Link href="/fuel">Fuel</Link>
+        <Link href="/travel">Travel</Link>
+        <Link href="/login">Login</Link>
+        <Link href="/register">Register</Link>
       </nav>
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
@@ -59,6 +59,7 @@ const Home: NextPage = () => {
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
       </main>
+      <Footer />
     </>
   );
 };
