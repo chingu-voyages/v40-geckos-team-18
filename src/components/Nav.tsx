@@ -12,17 +12,6 @@ const Nav = () => {
   };
   return (
     <>
-      <Navbar fluid={true} rounded={true}>
-        <Navbar.Brand href="/">
-          <h1 className="text-xl font-bold text-gray">CarbonCalc</h1>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Navbar.Link href="/">Start Here</Navbar.Link>
-          <Navbar.Link href="/login">Login</Navbar.Link>
-        </Navbar.Collapse>
-      </Navbar>
-
       <nav className="flex justify-between items-center p-4">
         <div className="text-4xl font-bold">
           <Link href="/">CarbonCalc</Link>
