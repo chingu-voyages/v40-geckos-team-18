@@ -49,8 +49,8 @@ model User {
     email           String          @unique
     emailVerified   DateTime?
     image           String?         // might not need this
-    country         String          // a part of registration
-    state           String          // a part of registration
+    country         String?         // a part of registration
+    state           String?         // a part of registration
     unitPref        String?         // a part of registration
     accounts        Account[]       // next auth related
     sessions        Session[]       // next auth related
