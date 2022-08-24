@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import FuelForm from '../components/FuelUsed/FuelForm'
 
 export default function FuelConsumption() {
   return (
@@ -8,10 +9,10 @@ export default function FuelConsumption() {
         <title>Fuel Consumption</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <nav className="flex justify-center gap-4">
-        <Link href='/'>Home</Link>
-      </nav>
-      <h2>Fuel Consumption Page</h2>
+      <img src="../assets/images/watering-plants.png" alt="" />
+      <h2>How much carbon your fuel intake has emitted so far?</h2>
+      <FuelForm />
+  
     </div>
   )
 }
