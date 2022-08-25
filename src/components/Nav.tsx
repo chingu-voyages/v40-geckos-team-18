@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Navbar } from 'flowbite-react';
 import Link from 'next/link';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
