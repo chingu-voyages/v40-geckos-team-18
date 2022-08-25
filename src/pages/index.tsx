@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { trpc } from '../utils/trpc';
 import Link from 'next/link';
-import Footer from '../components/Footer';
 
 type TechnologyCardProps = {
   name: string;
@@ -59,7 +58,6 @@ const Home: NextPage = () => {
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
       </main>
-      <Footer />
     </>
   );
 };
