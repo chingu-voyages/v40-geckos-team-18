@@ -1,6 +1,8 @@
 import z from 'zod';
 
 const electricityUnitSchema = z.enum(['mwh', 'kwh']);
+// Temporary schema while application is limited to just USA and Canada
+const countryCodeSchema = z.enum(['us', 'ca']);
 
 export const unregisteredElectricityRequestSchema = z.object({
   electricity_value: z.number(),
@@ -10,6 +12,7 @@ export const unregisteredElectricityRequestSchema = z.object({
 });
 
 export type ElectricityUnit = z.TypeOf<typeof electricityUnitSchema>;
+export type CountryCode = z.TypeOf<typeof countryCodeSchema>;
 
 export type UnregisteredElectricityRequest = z.TypeOf<
   typeof unregisteredElectricityRequestSchema
