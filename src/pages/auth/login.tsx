@@ -1,7 +1,6 @@
 import {
   useSession,
   signIn,
-  signOut,
   ClientSafeProvider,
   getProviders,
   getCsrfToken,
@@ -13,26 +12,21 @@ import Image from 'next/image';
 import { FaGoogle } from 'react-icons/fa';
 import plantImage from '../../assets/images/holding-plant-removebg-preview.png';
 import { InferGetServerSidePropsType } from 'next';
-
-interface LoginPageProps {
-  providers: ClientSafeProvider[];
-  csrfToken: string;
-}
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function LoginPage({
   providers,
   csrfToken,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { data: session } = useSession();
+  const router = useRouter();
 
-  if (session) {
-    return (
-      <div>
-        <p>Welcome, {session.user?.name}</p>
-        <Button onClick={() => signOut()}>Log Out</Button>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (session) {
+      router.push('/account');
+    }
+  }, [session]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -53,7 +47,7 @@ export default function LoginPage({
       </div>
 
       <div className="mb-10 ">
-        <form method='POST' action='/api/auth/signin/email'>
+        <form method="POST" action="/api/auth/signin/email">
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           <div className="w-72 mb-4">
             <div className="mb-2 block">
@@ -67,7 +61,9 @@ export default function LoginPage({
             />
           </div>
           <div className="flex justify-center">
-            <Button color="success" type='submit'>Login</Button>
+            <Button color="success" type="submit">
+              Login
+            </Button>
           </div>
         </form>
       </div>
