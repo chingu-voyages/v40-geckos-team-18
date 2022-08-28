@@ -20,7 +20,9 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: '/auth/login'
+    signIn: '/auth/login',
+    verifyRequest: '/auth/verifyRequest',
+    newUser: '/account/preferences'
   },
   providers: [
     GoogleProvider({

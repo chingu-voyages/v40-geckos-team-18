@@ -20,6 +20,7 @@ export default function AccountPage() {
     <div>
       <h2>Account Page</h2>
       <Button onClick={() => signOut()}>Sign out</Button>
+      <Button onClick={() => {router.push('/account/preferences')}}>Preferences</Button>
     </div>
   )
 }
