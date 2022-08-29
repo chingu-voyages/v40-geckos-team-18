@@ -2,35 +2,36 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
     previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-    provider = "mysql"
+    provider             = "mysql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.text annotations in model Account below
     // Further reading: 
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+    url                  = env("DATABASE_URL")
     referentialIntegrity = "prisma"
 }
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id                       String  @id @default(cuid())
+    userId                   String
+    type                     String
+    provider                 String
+    providerAccountId        String
+    refresh_token            String? @db.Text
+    refresh_token_expires_in Int? 
+    access_token             String? @db.Text
+    expires_at               Int?
+    token_type               String?
+    scope                    String?
+    id_token                 String? @db.Text
+    session_state            String?
+    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
 }
@@ -44,20 +45,20 @@ model Session {
 }
 
 model User {
-    id              String          @id @default(cuid())
-    name            String?
-    email           String          @unique
-    emailVerified   DateTime?
-    image           String?         // might not need this
-    country         String?         // a part of registration
-    state           String?         // a part of registration
-    unitPref        String?         // a part of registration
-    accounts        Account[]       // next auth related
-    sessions        Session[]       // next auth related
-    vehicles        Vehicle[]
-    electricityUse  ElectricityUse[]
-    fuelUsed        FuelUsed[]
-    flights         Flight[]
+    id             String           @id @default(cuid())
+    name           String?
+    email          String           @unique
+    emailVerified  DateTime?
+    image          String? // might not need this
+    country        String? // a part of registration
+    state          String? // a part of registration
+    unitPref       String? // a part of registration
+    accounts       Account[] // next auth related
+    sessions       Session[] // next auth related
+    vehicles       Vehicle[]
+    electricityUse ElectricityUse[]
+    fuelUsed       FuelUsed[]
+    flights        Flight[]
 }
 
 model VerificationToken {
@@ -69,63 +70,63 @@ model VerificationToken {
 }
 
 model Trip {
-    id                  String      @id @default(cuid())
-    distanceTraveled    Decimal     // user input
-    estimatedAt         DateTime    // response from Carbon
-    carbon_g            Int         // response from Carbon will have this field
-    vehicleId           String
-    vehicle             Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+    id               String   @id @default(cuid())
+    distanceTraveled Decimal // user input
+    estimatedAt      DateTime // response from Carbon
+    carbon_g         Int // response from Carbon will have this field
+    vehicleId        String
+    vehicle          Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
 }
 
 model Vehicle {
-    id              String      @id @default(cuid())
-    vehicleMake     String      
-    vehicleModel    String      
-    vehicleYear     Int         
-    vehicleModelId  String      // use for Carbon API when making calls. Comes from Carbon as well.
-    createdAt       DateTime    @default(now())
-    userId          String
-    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-    trips           Trip[]
+    id             String   @id @default(cuid())
+    vehicleMake    String
+    vehicleModel   String
+    vehicleYear    Int
+    vehicleModelId String // use for Carbon API when making calls. Comes from Carbon as well.
+    createdAt      DateTime @default(now())
+    userId         String
+    user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    trips          Trip[]
 }
 
 model ElectricityUse {
-    id              String      @id @default(cuid())
-    electricalValue Decimal     // user input
-    estimatedAt     DateTime    // response from Carbon
-    carbon_g        Int         // response from Carbon will have this field
+    id              String   @id @default(cuid())
+    electricalValue Decimal // user input
+    estimatedAt     DateTime // response from Carbon
+    carbon_g        Int // response from Carbon will have this field
     userId          String
-    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model FuelUsed {
-    id              String      @id @default(cuid())
-    fuelType        String      // user input
-    fuelUnit        String      // user input
-    amountUsed      Decimal     // user input
-    estimatedAt     DateTime    // response from Carbon
-    carbon_g        Int         // response from Carbon will have this field   
-    userId          String
-    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id          String   @id @default(cuid())
+    fuelType    String // user input
+    fuelUnit    String // user input
+    amountUsed  Decimal // user input
+    estimatedAt DateTime // response from Carbon
+    carbon_g    Int // response from Carbon will have this field   
+    userId      String
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Flight {
-    id              String      @id @default(cuid())
-    partySize       Int         @default(1)         // user input
-    estimatedAt     DateTime                        // response from Carbon
-    carbon_g        Int                             // response from Carbon will have this field
-    distance_km     Decimal                         // response from Carbon
-    userId          String
-    user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-    flightLeg       FlightLeg[]
+    id          String      @id @default(cuid())
+    partySize   Int         @default(1) // user input
+    estimatedAt DateTime // response from Carbon
+    carbon_g    Int // response from Carbon will have this field
+    distance_km Decimal // response from Carbon
+    userId      String
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    flightLeg   FlightLeg[]
 }
 
 model FlightLeg {
-    id              String      @id @default(cuid())
-    departure       String                              // user input: IATA code
-    destination     String                              // user input: IATA code
-    legNumber       Int                                 // user input: can be 1,2,3,etc
-    cabinClass      String      @default("economy")     // user input
-    flightId        String
-    flight          Flight      @relation(fields: [flightId], references: [id], onDelete: Cascade)
+    id          String @id @default(cuid())
+    departure   String // user input: IATA code
+    destination String // user input: IATA code
+    legNumber   Int // user input: can be 1,2,3,etc
+    cabinClass  String @default("economy") // user input
+    flightId    String
+    flight      Flight @relation(fields: [flightId], references: [id], onDelete: Cascade)
 }

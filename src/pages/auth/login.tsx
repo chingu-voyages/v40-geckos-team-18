@@ -9,7 +9,8 @@ import { Button, Label, TextInput } from 'flowbite-react';
 import { CtxOrReq } from 'next-auth/client/_utils';
 import Head from 'next/head';
 import Image from 'next/image';
-import { FaGoogle } from 'react-icons/fa';
+import { FaGoogle, FaTwitter } from 'react-icons/fa';
+import { BsFacebook, BsTwitter } from 'react-icons/bs';
 import plantImage from '../../assets/images/holding-plant-removebg-preview.png';
 import { InferGetServerSidePropsType } from 'next';
 import { useEffect } from 'react';
@@ -48,7 +49,9 @@ export default function LoginPage({
 
       <div className="mb-10 ">
         <form method="POST" action="/api/auth/signin/email">
+          {/** required for email login */}
           <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+
           <div className="w-72 mb-4">
             <div className="mb-2 block">
               <Label htmlFor="email" value="Log in with your email" />
@@ -60,6 +63,7 @@ export default function LoginPage({
               placeholder="name@email.com"
             />
           </div>
+
           <div className="flex justify-center">
             <Button color="success" type="submit">
               Login
@@ -74,7 +78,7 @@ export default function LoginPage({
           ? Object.values(providers).map((provider) => {
               if (provider.id !== 'email') {
                 return (
-                  <div key={provider.name}>
+                  <div key={provider.name} className="mb-2">
                     <Button onClick={() => signIn(provider.id)} color="info">
                       Sign in with {provider.name}
                       {getProviderIcon(provider)}
@@ -101,6 +105,10 @@ const getProviderIcon = (provider: ClientSafeProvider) => {
   switch (provider.name) {
     case 'Google':
       return <FaGoogle className="ml-2" />;
+    case 'Facebook':
+      return <BsFacebook className="ml-2" />;
+    case 'Twitter':
+      return <FaTwitter className="ml-2" />;
     default:
       return;
   }
