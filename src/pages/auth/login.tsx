@@ -5,12 +5,12 @@ import {
   getProviders,
   getCsrfToken,
 } from 'next-auth/react';
-import { Button, Label, TextInput } from 'flowbite-react';
+import { Button, Card, Label, Spinner, TextInput } from 'flowbite-react';
 import { CtxOrReq } from 'next-auth/client/_utils';
 import Head from 'next/head';
 import Image from 'next/image';
-import { FaGoogle, FaTwitter } from 'react-icons/fa';
-import { BsFacebook, BsTwitter } from 'react-icons/bs';
+import { FaGoogle } from 'react-icons/fa';
+import { BsFacebook, BsGithub } from 'react-icons/bs';
 import plantImage from '../../assets/images/holding-plant-removebg-preview.png';
 import { InferGetServerSidePropsType } from 'next';
 import { useEffect } from 'react';
@@ -20,7 +20,7 @@ export default function LoginPage({
   providers,
   csrfToken,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
@@ -29,6 +29,13 @@ export default function LoginPage({
     }
   }, [session]);
 
+  if (status === 'loading')
+    return (
+      <div className="text-center">
+        <Spinner aria-label="Center-aligned spinner" size="xl" />
+      </div>
+    );
+
   return (
     <div className="flex flex-col justify-center items-center">
       <Head>
@@ -36,7 +43,7 @@ export default function LoginPage({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      {/* <h1 className="mt-8 text-3xl mb-14">Log in</h1> */}
+      {/** TODO: MISSING NAV BAR */}
 
       <div className="mb-8">
         <Image
@@ -47,48 +54,63 @@ export default function LoginPage({
         />
       </div>
 
-      <div className="mb-10 ">
-        <form method="POST" action="/api/auth/signin/email">
-          {/** required for email login */}
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+      <div className="max-w-4xl">
+        <Card>
+          <div className='px-10 py-5 flex flex-col items-center'>
+            <div className="mb-10">
+              <form method="POST" action="/api/auth/signin/email">
+                {/** required for email login */}
+                <input
+                  name="csrfToken"
+                  type="hidden"
+                  defaultValue={csrfToken}
+                />
 
-          <div className="w-72 mb-4">
-            <div className="mb-2 block">
-              <Label htmlFor="email" value="Log in with your email" />
+                <div className="w-72 mb-4">
+                  <div className="mb-2 block">
+                    <Label htmlFor="email" value="Log in with your email"/>
+                  </div>
+                  <TextInput
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="name@email.com"
+                  />
+                </div>
+
+                <div className="flex justify-center">
+                  <Button color="success" type="submit">
+                    Login
+                  </Button>
+                </div>
+              </form>
             </div>
-            <TextInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="name@email.com"
-            />
-          </div>
 
-          <div className="flex justify-center">
-            <Button color="success" type="submit">
-              Login
-            </Button>
+            <h1 className="mb-4 text-center">-OR-</h1>
+            <>
+              {providers
+                ? Object.values(providers).map((provider) => {
+                    if (provider.id !== 'email') {
+                      return (
+                        <div key={provider.name} className="mb-2">
+                          <Button
+                            onClick={() => signIn(provider.id)}
+                            color="info"
+                          >
+                            Sign in with {provider.name}
+                            {getProviderIcon(provider)}
+                          </Button>
+                        </div>
+                      );
+                    }
+                  })
+                : ''}
+            </>
           </div>
-        </form>
+        </Card>
       </div>
 
-      <h1 className="mb-4 text-center">-OR-</h1>
-      <>
-        {providers
-          ? Object.values(providers).map((provider) => {
-              if (provider.id !== 'email') {
-                return (
-                  <div key={provider.name} className="mb-2">
-                    <Button onClick={() => signIn(provider.id)} color="info">
-                      Sign in with {provider.name}
-                      {getProviderIcon(provider)}
-                    </Button>
-                  </div>
-                );
-              }
-            })
-          : ''}
-      </>
+      {/** TODO: MISSING FOOTER */}
     </div>
   );
 }
@@ -107,8 +129,8 @@ const getProviderIcon = (provider: ClientSafeProvider) => {
       return <FaGoogle className="ml-2" />;
     case 'Facebook':
       return <BsFacebook className="ml-2" />;
-    case 'Twitter':
-      return <FaTwitter className="ml-2" />;
+    case 'GitHub':
+      return <BsGithub className="ml-2" />;
     default:
       return;
   }
