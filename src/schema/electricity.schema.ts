@@ -9,7 +9,7 @@ export const unregisteredElectricityRequestSchema = z.object({
   state: z.string().length(2, 'Must enter state code (ISO state code)'),
 });
 
-export type electricityUnit = z.TypeOf<typeof electricityUnitSchema>;
+export type ElectricityUnit = z.TypeOf<typeof electricityUnitSchema>;
 
 export type UnregisteredElectricityRequest = z.TypeOf<
   typeof unregisteredElectricityRequestSchema
