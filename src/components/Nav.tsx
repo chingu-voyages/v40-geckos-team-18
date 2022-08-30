@@ -19,7 +19,16 @@ const Nav = () => {
         <div className="flex">
           <ul className="hidden sm:flex font-bold">
             <li className="px-4 ">
-              <Link href="/">Start Here</Link>
+              <Link href="/">Profile</Link>
+            </li>
+            <li className="px-4">
+              <Link href="/fuel">Fuel</Link>
+            </li>
+            <li className="px-4">
+              <Link href="/electricity">Electricity</Link>
+            </li>
+            <li className="px-4">
+              <Link href="/travel">Travel</Link>
             </li>
             <li className="px-4">
               <Link href="/login">Login</Link>
