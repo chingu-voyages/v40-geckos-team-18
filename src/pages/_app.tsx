@@ -5,6 +5,7 @@ import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
+import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 
 const MyApp: AppType = ({
@@ -15,6 +16,7 @@ const MyApp: AppType = ({
     <SessionProvider session={session}>
       <Nav />
       <Component {...pageProps} />
+      <Footer />
     </SessionProvider>
   );
 };
