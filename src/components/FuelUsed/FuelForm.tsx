@@ -23,7 +23,7 @@ export default function FuelForm () {
                     <option value="gallon">Thousand cubic feet</option>
                 </select>
 
-                <label htmlFor="value">What is the quantity of fuel you consumed? (based on the unit you've chosen above)</label>
+                <label htmlFor="value">What is the quantity of fuel you consumed? (based on the unit you&apos;ve chosen above)</label>
                 <input type="number" id="quantity" name="quantity" required />
 
                 <button type="submit">Submit</button>

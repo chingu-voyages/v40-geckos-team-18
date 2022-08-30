@@ -9,7 +9,10 @@ export default function FuelConsumption() {
         <title>Fuel Consumption</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <img src="../assets/images/watering-plants.png" alt="" />
+      <picture>
+        <img src="../assets/images/watering-plants.png" alt="" />
+      </picture>
+      
       <h2>How much carbon your fuel intake has emitted so far?</h2>
       <FuelForm />
   
