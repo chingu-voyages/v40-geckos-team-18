@@ -29,25 +29,17 @@ const CardInfo = [
 
 const Card = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 space-y-8 flex flex-col justify-center items-center">
       {/* CARD */}
       {CardInfo.map((card) => (
         <div
-          className="bg-secondary h-[335px] w-[280px] flex flex-col items-center justify-center"
+          className="bg-secondary h-[335px] w-[280px] flex flex-col items-center justify-center space-y-4 card"
           key={card.id}
         >
-          <Image src={card.image} alt="/" height={95} width={75} />
-          <p>{card.description}</p>
+          <Image src={card.image} alt="/" height={80} width={70} />
+          <p className="text-center font-bold text-white">{card.description}</p>
         </div>
       ))}
-
-      <div className="card h-[335px] w-[280px] flex flex-col items-center justify-center bg-secondary">
-        <img src="https://via.placeholder.com/100" alt="/" />
-        <p className="text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. A praesentium
-          sint quasi officiis vitae
-        </p>
-      </div>
     </div>
   );
 };
