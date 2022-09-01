@@ -22,11 +22,12 @@ const Home: NextPage = () => {
       </Head>
 
       <nav className="flex justify-center gap-4">
-        <Link href="/electricity">Electricity</Link>
-        <Link href="/fuel">Fuel</Link>
-        <Link href="/travel">Travel</Link>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Register</Link>
+        <Link href='/electricity'>Electricity</Link>
+        <Link href='/fuel'>Fuel</Link>
+        <Link href='/travel'>Travel</Link>
+        <Link passHref href='/auth/login'>Log in</Link>
+        <Link href='/register'>Register</Link>
+
       </nav>
 
       <Cards />
