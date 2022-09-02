@@ -7,7 +7,7 @@ import FuelForm from '../components/Fuel/FuelForm'
 
 export default function FuelPage() {
   return (
-    <div>
+    <div className='p-8'>
       <Head>
         <title>Fuel Consumption</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -19,7 +19,7 @@ export default function FuelPage() {
 
       <h2 className='text-4xl flex justify-center gap-4 w-100'>How much carbon your fuel intake has emitted so far?</h2>
 
-      <div  className="container mx-auto flex justify-center">
+      <div  className="container flex justify-center p-4">
         <FuelForm />
       </div>
      
