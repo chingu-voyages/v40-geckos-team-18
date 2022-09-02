@@ -1,7 +1,9 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { trpc } from '../utils/trpc';
-import Link from 'next/link';
+import type { NextPage } from "next";
+import Head from "next/head";
+import { trpc } from "../utils/trpc";
+import Link from 'next/link'
+import { signIn } from "next-auth/react";
+import { Button } from "flowbite-react";
 
 type TechnologyCardProps = {
   name: string;
@@ -21,11 +23,12 @@ const Home: NextPage = () => {
       </Head>
 
       <nav className="flex justify-center gap-4">
-        <Link href="/electricity">Electricity</Link>
-        <Link href="/fuel">Fuel</Link>
-        <Link href="/travel">Travel</Link>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Register</Link>
+        <Link href='/electricity'>Electricity</Link>
+        <Link href='/fuel'>Fuel</Link>
+        <Link href='/travel'>Travel</Link>
+        <Link passHref href='/auth/login'>Log in</Link>
+        <Link href='/register'>Register</Link>
+
       </nav>
 
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
