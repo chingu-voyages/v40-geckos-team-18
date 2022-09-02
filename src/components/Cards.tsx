@@ -32,6 +32,7 @@ const Cards = () => {
     <div className="w-full p-4 space-y-8 flex flex-col justify-center items-center sm:flex-row sm:space-x-8">
       {cardInfo.map((card) => (
         <Card
+          key={card.image}
           image={card.image}
           description={card.description}
           link={card.link}
