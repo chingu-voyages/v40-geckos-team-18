@@ -17,8 +17,8 @@ export default function TravelPage() {
         <Link href="/">Home</Link>
       </nav>
 
-      <div className='flex justify-center'>
-        <Image src={wateringPlantsImage} alt='person watering plant'/>
+      <div className="flex justify-center">
+        <Image src={wateringPlantsImage} alt="person watering plant" />
       </div>
 
       <div className="mx-auto flex justify-center w-1/3">
