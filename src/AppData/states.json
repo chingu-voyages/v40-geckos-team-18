@@ -1,0 +1,328 @@
+{
+    "states": {
+        "usStates": [
+        {
+            "id": 1,
+            "code": "al",
+            "name": "Alabama"
+        },
+        {
+            "id": 2,
+            "code": "ak",
+            "name": "Alaska"
+        },
+        {
+            "id": 3,
+            "code": "az",
+            "name": "Arizona"
+        },
+        {
+            "id": 4,
+            "code": "ar",
+            "name": "Arkansas"
+        },
+        {
+            "id": 5,
+            "code": "ca",
+            "name": "California"
+        },
+        {
+            "id": 6,
+            "code": "co",
+            "name": "Colorodo"
+        },
+        {
+            "id": 7,
+            "code": "ct",
+            "name": "Connecticut"
+        },
+        {
+            "id": 8,
+            "code": "de",
+            "name": "Delaware"
+        },
+        {
+            "id": 9,
+            "code": "dc",
+            "name": "District of Columbia"
+        },
+        {
+            "id": 10,
+            "code": "fl",
+            "name": "Florida"
+        },
+        {
+            "id": 11,
+            "code": "ga",
+            "name": "Georgia"
+        },
+        {
+            "id": 12,
+            "code": "hi",
+            "name": "Hawaii"
+        },
+        {
+            "id": 13,
+            "code": "id",
+            "name": "Idaho"
+        },
+        {
+            "id": 14,
+            "code": "il",
+            "name": "Illinois"
+        },
+        {
+            "id": 15,
+            "code": "in",
+            "name": "Indiana"
+        },
+        {
+            "id": 16,
+            "code": "ia",
+            "name": "Iowa"
+        },
+        {
+            "id": 18,
+            "code": "ks",
+            "name": "Kansas"
+        },
+        {
+            "id": 19,
+            "code": "ky",
+            "name": "Kentucky"
+        },
+        {
+            "id": 20,
+            "code": "la",
+            "name": "Louisiana"
+        },
+        {
+            "id": 21,
+            "code": "me",
+            "name": "Maine"
+        },
+        {
+            "id": 22,
+            "code": "md",
+            "name": "Maryland"
+        },
+        {
+            "id": 23,
+            "code": "ma",
+            "name": "Massachusetts"
+        },
+        {
+            "id": 24,
+            "code": "mi",
+            "name": "Michigan"
+        },
+        {
+            "id": 25,
+            "code": "mn",
+            "name": "Minnesota"
+        },
+        {
+            "id": 26,
+            "code": "ms",
+            "name": "Mississippi"
+        },
+        {
+            "id": 27,
+            "code": "mo",
+            "name": "Missouri"
+        },
+        {
+            "id": 28,
+            "code": "mt",
+            "name": "Montana"
+        },
+        {
+            "id": 29,
+            "code": "ne",
+            "name": "Nebraska"
+        },
+        {
+            "id": 30,
+            "code": "nv",
+            "name": "Nevada"
+        },
+        {
+            "id": 31,
+            "code": "nh",
+            "name": "New Hampshire"
+        },
+        {
+            "id": 32,
+            "code": "nj",
+            "name": "New Jersey"
+        },
+        {
+            "id": 33,
+            "code": "nm",
+            "name": "New Mexico"
+        },
+        {
+            "id": 34,
+            "code": "ny",
+            "name": "New York"
+        },
+        {
+            "id": 35,
+            "code": "nc",
+            "name": "North Carolina"
+        },
+        {
+            "id": 36,
+            "code": "nd",
+            "name": "North Dakota"
+        },
+        {
+            "id": 37,
+            "code": "oh",
+            "name": "Ohio"
+        },
+        {
+            "id": 38,
+            "code": "ok",
+            "name": "Oklahoma"
+        },
+        {
+            "id": 39,
+            "code": "or",
+            "name": "Oregon"
+        },
+        {
+            "id": 40,
+            "code": "pa",
+            "name": "Pennsylvania"
+        },
+        {
+            "id": 41,
+            "code": "ri",
+            "name": "Rhode Island"
+        },
+        {
+            "id": 42,
+            "code": "sc",
+            "name": "South Carolina"
+        },
+        {
+            "id": 43,
+            "code": "sd",
+            "name": "South Dakota"
+        },
+        {
+            "id": 44,
+            "code": "tn",
+            "name": "Tennessee"
+        },
+        {
+            "id": 45,
+            "code": "tx",
+            "name": "Texas"
+        },
+        {
+            "id": 46,
+            "code": "ut",
+            "name": "Utah"
+        },
+        {
+            "id": 47,
+            "code": "vt",
+            "name": "Vermont"
+        },
+        {
+            "id": 48,
+            "code": "va",
+            "name": "Virginia"
+        },
+        {
+            "id": 49,
+            "code": "wa",
+            "name": "Washington"
+        },
+        {
+            "id": 50,
+            "code": "wv",
+            "name": "West Virginia"
+        },
+        {
+            "id": 51,
+            "code": "wi",
+            "name": "Wisconsin"
+        },
+        {
+            "id": 52,
+            "code": "wy",
+            "name": "Wyoming"
+        }
+    ],
+    "caProvinces": [
+        {
+            "id": 1,
+            "code": "ab",
+            "name": "Alberta"
+        },
+        {
+            "id": 2,
+            "code": "bc",
+            "name": "British-Colombia"
+        },
+        {
+            "id": 3,
+            "code": "mb",
+            "name": "Manitoba"
+        },
+        {
+            "id": 4,
+            "code": "nb",
+            "name": "New Brunswick"
+        },
+        {
+            "id": 5,
+            "code": "nl",
+            "name": "Newfoundland and Labrador"
+        },
+        {
+            "id": 6,
+            "code": "ns",
+            "name": "Nova Scotia"
+        },
+        {
+            "id": 7,
+            "code": "on",
+            "name": "Ontario"
+        },
+        {
+            "id": 8,
+            "code": "pe",
+            "name": "Prince Edward Island"
+        },
+        {
+            "id": 9,
+            "code": "qc",
+            "name": "Quebec"
+        },
+        {
+            "id": 10,
+            "code": "sk",
+            "name": "Saskatchewan"
+        },
+        {
+            "id": 11,
+            "code": "nt",
+            "name": "Northwest Territories"
+        },
+        {
+            "id": 11,
+            "code": "nu",
+            "name": "Nunavut"
+        },
+        {
+            "id": 11,
+            "code": "yt",
+            "name": "Yukon"
+        }
+    ]
+}
+}
