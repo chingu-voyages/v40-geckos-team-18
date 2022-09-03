@@ -1,4 +1,4 @@
-import { Card, Progress } from 'flowbite-react';
+import { Button, Card, Progress } from 'flowbite-react';
 import { Circle } from 'rc-progress';
 import React from 'react';
 import { FaGasPump } from 'react-icons/fa';
@@ -9,7 +9,7 @@ interface SummaryTileProps {
   type: string;
   emissionsValue: number;
   totalEmissions: number;
-  handleOnClick: () => void;
+  handleOnClick: (type: string) => void;
 }
 
 const SummaryTile = ({
@@ -20,8 +20,8 @@ const SummaryTile = ({
 }: SummaryTileProps) => {
   const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
   return (
-    <div className="max-w-lg cursor-pointer">
-      <Card onClick={() => handleOnClick()}>
+    <div className="max-w-lg">
+      <Card>
         <div className="flex flex-col items-center gap-5 px-20 py-5">
           <h4 className="text-2xl font-bold">{type}</h4>
           {getIcon(type)}
@@ -36,6 +36,7 @@ const SummaryTile = ({
             strokeWidth={5}
             strokeColor={getColor(emissionsPercentage)}
           />
+          <Button onClick={() => handleOnClick(type)}>View All</Button>
         </div>
       </Card>
     </div>

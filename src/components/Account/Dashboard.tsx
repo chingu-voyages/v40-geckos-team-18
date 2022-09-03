@@ -27,11 +27,11 @@ const Dashboard = ({ greeting }: DashboardProps) => {
       case 'Electricity':
         return router.push('/account/electricity');
       case 'Driving':
-        router.push('/account/driving');
+        return router.push('/account/driving');
       case 'Fuel':
-        router.push('/account/fuel');
+        return router.push('/account/fuel');
       case 'Flight':
-        router.push('/account/flight');
+        return router.push('/account/flight');
       default:
         return;
     }
