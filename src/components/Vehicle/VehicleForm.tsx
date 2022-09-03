@@ -6,13 +6,13 @@ import { trpc } from '../../utils/trpc';
 import 'react-select-search/style.css';
 import {
   DistanceUnit,
-  UnregisteredVehicleRequest,
+  VehicleRequest,
   VehicleMakeSearch,
   VehicleModelSearch,
 } from '../../schema/vehicle.schema';
 
 interface VehicleFormProps {
-  handleSubmit: (vehicleData: UnregisteredVehicleRequest) => void;
+  handleSubmit: (vehicleData: VehicleRequest) => void;
 }
 
 const VehicleForm = ({ handleSubmit }: VehicleFormProps) => {
@@ -27,9 +27,9 @@ const VehicleForm = ({ handleSubmit }: VehicleFormProps) => {
   const [distance, setDistance] = useState(0);
   const [distanceUnit, setDistanceUnit] = useState<DistanceUnit>('km');
 
-  const makes = trpc.useQuery(['vehicle.request-vehicle-make']);
+  const makes = trpc.useQuery(['vehicle.get-vehicle-makes']);
   const models = trpc.useQuery([
-    'vehicle.request-vehicle-model',
+    'vehicle.get-vehicle-models',
     selectedVehicleMake as string,
   ]);
 
@@ -136,7 +136,7 @@ const VehicleForm = ({ handleSubmit }: VehicleFormProps) => {
           />
         </div>
         <div className="grid grid-cols-6 items-end">
-          <div className="col-span-4 mr-3">
+          <div className="col-span-3 mr-3">
             <Label
               htmlFor="distance"
               value="What was the average distance traveled for your trip?"
@@ -150,7 +150,7 @@ const VehicleForm = ({ handleSubmit }: VehicleFormProps) => {
               color="gray-600"
             />
           </div>
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-3 md:col-span-2">
             <Select
               id="distanceUnit"
               onChange={(e) => setDistanceUnit(e.target.value as DistanceUnit)}

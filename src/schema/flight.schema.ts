@@ -14,7 +14,7 @@ const flightLegSchema = z.object({
 
 const distanceUnitSchema = z.enum(['km', 'mi']);
 
-export const unregisteredFlightRequestSchema = z.object({
+export const flightRequestSchema = z.object({
   passengers: z.number(),
   distance_unit: distanceUnitSchema,
   legs: z.array(flightLegSchema),
@@ -25,11 +25,10 @@ export type FlightLeg = z.TypeOf<typeof flightLegSchema>;
 
 export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>;
 
-export type UnregisteredFlightRequest = z.TypeOf<
-  typeof unregisteredFlightRequestSchema
->;
+export type FlightRequest = z.TypeOf<typeof flightRequestSchema>;
 
 const flightResponseUnqiue = z.object({
+  distance_value: z.number(),
   carbon_g: z.number(),
   carbon_kg: z.number(),
   carbon_lb: z.number(),
@@ -37,7 +36,6 @@ const flightResponseUnqiue = z.object({
   estimated_at: z.string(),
 });
 
-const flightResponseSchema =
-  unregisteredFlightRequestSchema.merge(flightResponseUnqiue);
+const flightResponseSchema = flightRequestSchema.merge(flightResponseUnqiue);
 
 export type FlightResponse = z.TypeOf<typeof flightResponseSchema>;
