@@ -8,30 +8,33 @@ const Footer = () => {
         <div className="flex justify-start sm:space-x-24">
           <div className="hidden sm:flex flex-col">
             <h1 className="text-xl font-bold mb-4">LINKS</h1>
-            <p className="">
+            <p>
               <Link href="https://docs.carboninterface.com/#/">Carbon Emissions API</Link>
             </p>
-            <p className="">
+            <p>
               <Link href="https://www.chingu.io">Chingu</Link>
+            </p>
+            <p>
+              <Link href="https://create.t3.gg">T3 Stack</Link>
             </p>
            
           </div>
 
-          <div className="">
+          <div>
             <h1 className="text-xl font-bold mb-4">OUR TEAM</h1>
-            <p className="">
+            <p>
               <Link href="/">Ticia D.</Link>
             </p>
-            <p className="">
+            <p>
               <Link href="/">Ivan Alejandre</Link>
             </p>
-            <p className="">
+            <p>
               <Link href="/">Tramy Phan</Link>
             </p>
-            <p className="">
+            <p>
               <Link href="https://www.linkedin.com/in/amandavieiradev/">Amanda Vieira</Link>
             </p>
-            <p className="">
+            <p>
               <Link href="/">Cian</Link>
             </p>
           </div>
