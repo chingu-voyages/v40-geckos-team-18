@@ -1,16 +1,19 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import ControlPanel from '../../components/Dashboard/ControlPanel';
 import Dashboard from '../../components/Dashboard/Dashboard';
+import AccountLayout from '../../layouts/AccountLayout';
+import { NextPageWithLayout } from '../_app';
 
-export default function AccountPage() {
+const AccountPage: NextPageWithLayout = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const greetingMessage = `Welcome, ${session?.user?.name}`;
 
   useEffect(() => {
     if (!session) {
-      router.push('/');
+      router.push('/auth/login');
     }
   }, [session]);
 
@@ -18,17 +21,11 @@ export default function AccountPage() {
     return <div>Access denied. Please sign in.</div>;
   }
 
-  return (
-    <div className="flex mt-5">
-      <div className="grow-0 bg-gray-200">
-        <ControlPanel />
-      </div>
-      <div className="grow">
-        <div className="flex flex-col justify-between px-5 mb-10 gap-5">
-          <h2 className="text-4xl mb-14">Welcome, {session.user?.name}</h2>
-          <Dashboard />
-        </div>
-      </div>
-    </div>
-  );
-}
+  return <Dashboard greeting={greetingMessage} />;
+};
+
+AccountPage.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>;
+};
+
+export default AccountPage;
