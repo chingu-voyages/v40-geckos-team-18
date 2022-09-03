@@ -1,4 +1,5 @@
-import { Card } from 'flowbite-react';
+import { Card, Progress } from 'flowbite-react';
+import { Circle } from 'rc-progress';
 import React from 'react';
 import { FaGasPump } from 'react-icons/fa';
 import { ImPowerCord } from 'react-icons/im';
@@ -7,9 +8,15 @@ import { MdDriveEta, MdFlight } from 'react-icons/md';
 interface SummaryTileProps {
   type: string;
   emissionsValue: number;
+  totalEmissions: number;
 }
 
-const SummaryTile = ({ type, emissionsValue }: SummaryTileProps) => {
+const SummaryTile = ({
+  type,
+  emissionsValue,
+  totalEmissions,
+}: SummaryTileProps) => {
+  const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
   return (
     <div className="max-w-lg cursor-pointer">
       <Card onClick={() => console.log(type)}>
@@ -17,11 +24,24 @@ const SummaryTile = ({ type, emissionsValue }: SummaryTileProps) => {
           <h4 className="text-2xl font-bold">{type}</h4>
           {getIcon(type)}
           <h3 className="text-xl">Emissions</h3>
-          <h3 className="font-bold">{emissionsValue}</h3>
+          <h3 className="font-bold">{emissionsValue} g</h3>
+          <p className="text-center">{emissionsPercentage.toFixed(2)}% of all calculations</p>
+
+          <Circle
+            percent={emissionsPercentage}
+            strokeWidth={5}
+            strokeColor={getColor(emissionsPercentage)}
+          />
         </div>
       </Card>
     </div>
   );
+};
+
+const getColor = (emissionsPercentage: number) => {
+  if (emissionsPercentage > 80) return 'red';
+  if (emissionsPercentage > 40) return 'yellow';
+  return 'green';
 };
 
 const getIcon = (type: string) => {
