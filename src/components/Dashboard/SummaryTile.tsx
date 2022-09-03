@@ -28,7 +28,7 @@ const getIcon = (type: string) => {
   const buttonSize = 45;
 
   switch (type) {
-    case 'Power':
+    case 'Electricity':
       return <ImPowerCord size={buttonSize} />;
     case 'Fuel':
       return <FaGasPump size={buttonSize} />;
