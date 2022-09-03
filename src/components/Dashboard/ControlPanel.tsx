@@ -11,7 +11,7 @@ const ControlPanel = () => {
   const buttonSize = 50;
 
   return (
-    <div className="flex flex-col items-center justify-start py-4">
+    <div className="flex flex-col items-center justify-start p-4">
       <Tooltip content="Dashboard">
         <MdDashboard
           onClick={() => {
