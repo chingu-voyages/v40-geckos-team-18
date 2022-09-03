@@ -3,7 +3,10 @@ import React from 'react';
 import { trpc } from '../../utils/trpc';
 import SummaryTile from './SummaryTile';
 
-const Dashboard = () => {
+interface DashboardProps {
+  greeting: string;
+}
+const Dashboard = ({greeting}: DashboardProps) => {
   const dummyData = [
     { type: 'Electricity', emissions: 3000 },
     { type: 'Fuel', emissions: 2000 },
@@ -19,7 +22,8 @@ const Dashboard = () => {
   console.log(data, totalEmissions);
 
   return (
-    <div>
+    <div className="flex flex-col justify-between px-5 mb-10 gap-5">
+      <h2 className="text-4xl mb-14">{greeting}</h2>
       <div className="flex flex-col justify-center text-center">
         <h2 className="text-2xl mb-5">Your total emissions to date</h2>
         <h2 className='text-xl mb-5 font-bold'>{totalEmissions} g</h2>
