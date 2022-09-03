@@ -9,23 +9,27 @@ interface SummaryTileProps {
   type: string;
   emissionsValue: number;
   totalEmissions: number;
+  handleOnClick: () => void;
 }
 
 const SummaryTile = ({
   type,
   emissionsValue,
   totalEmissions,
+  handleOnClick,
 }: SummaryTileProps) => {
   const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
   return (
     <div className="max-w-lg cursor-pointer">
-      <Card onClick={() => console.log(type)}>
+      <Card onClick={() => handleOnClick()}>
         <div className="flex flex-col items-center gap-5 px-20 py-5">
           <h4 className="text-2xl font-bold">{type}</h4>
           {getIcon(type)}
           <h3 className="text-xl">Emissions</h3>
           <h3 className="font-bold">{emissionsValue} g</h3>
-          <p className="text-center">{emissionsPercentage.toFixed(2)}% of all calculations</p>
+          <p className="text-center">
+            {emissionsPercentage.toFixed(2)}% of all calculations
+          </p>
 
           <Circle
             percent={emissionsPercentage}
