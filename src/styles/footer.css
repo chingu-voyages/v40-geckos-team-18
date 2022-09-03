@@ -1,0 +1,10 @@
+.footer {
+    background-image: url('../assets/images/Vector\ 3.png');
+    min-height: 500px;
+    padding-top: 250px;
+}
+
+.footer a {
+    color: var(--dark-grey);
+    font-weight: 500;
+}

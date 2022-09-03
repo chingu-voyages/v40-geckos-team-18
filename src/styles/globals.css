@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --lime-green: #00ed5f;
+    --dark-grey: #1e1e1e;
+    --dark-green: #284f37;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
