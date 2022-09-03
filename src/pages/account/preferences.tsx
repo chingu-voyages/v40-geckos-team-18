@@ -1,8 +1,10 @@
 import { Button } from 'flowbite-react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import AccountLayout from '../../layouts/AccountLayout';
+import { NextPageWithLayout } from '../_app';
 
-const UserPreferences = () => {
+const UserPreferences: NextPageWithLayout = () => {
   const router = useRouter();
 
   return (
@@ -16,5 +18,9 @@ const UserPreferences = () => {
     </div>
   );
 };
+
+UserPreferences.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>
+}
 
 export default UserPreferences;
