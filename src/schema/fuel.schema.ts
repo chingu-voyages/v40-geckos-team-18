@@ -10,11 +10,10 @@ import z from 'zod';
 const fuelSourceUnitSchema = z.enum(['gallon', 'btu', 'thousand_cubic_feet']);
 const fuelSourceTypeSchema = z.enum(['dfo', 'ng', 'pg', 'ker']);
 
-export const unregisteredFuelRequestSchema = z.object({fuelData: z.object({
+export const unregisteredFuelRequestSchema = z.object({
   fuel_source_type: fuelSourceTypeSchema,
   fuel_source_unit: fuelSourceUnitSchema,
   fuel_source_value: z.number(),
-})
 });
 
 export type FuelSourceUnit = z.TypeOf<typeof fuelSourceUnitSchema>;

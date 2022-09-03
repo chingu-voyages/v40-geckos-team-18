@@ -23,7 +23,7 @@ export default function FuelForm ({ handleSubmit }: FuelFormProps) {
     function submitForm(e: React.FormEvent) {
         e.preventDefault();
         console.log(fuelData);
-        handleSubmit({fuelData}); 
+        handleSubmit(fuelData); 
     }
 
     /* Function that updates the state */
