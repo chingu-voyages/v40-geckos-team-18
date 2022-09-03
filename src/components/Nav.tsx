@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { MdClose } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
 
 const Nav = () => {
   const [nav, setNav] = useState(false);
+  const { data: session } = useSession();
 
   const handleNav = () => {
     setNav(!nav);
@@ -18,9 +20,6 @@ const Nav = () => {
 
         <div className="flex">
           <ul className="hidden sm:flex font-bold">
-            <li className="px-4 ">
-              <Link href="/">Profile</Link>
-            </li>
             <li className="px-4">
               <Link href="/fuel">Fuel</Link>
             </li>
@@ -30,9 +29,16 @@ const Nav = () => {
             <li className="px-4">
               <Link href="/travel">Travel</Link>
             </li>
-            <li className="px-4">
-              <Link href="/login">Login</Link>
-            </li>
+            {session && (
+              <li className="px-4 ">
+                <Link href="/account">Profile</Link>
+              </li>
+            )}
+            {!session && (
+              <li className="px-4">
+                <Link href="/auth/login">Login</Link>
+              </li>
+            )}
           </ul>
           {/* MOBILE BUTTON */}
           <div
@@ -51,9 +57,16 @@ const Nav = () => {
           }
         >
           <ul>
-            <li onClick={handleNav} className="p-4 text-4xl hover:text-green">
-              <Link href="/register">Profile</Link>
-            </li>
+            {session && (
+              <li onClick={handleNav} className="p-4 text-4xl hover:text-green">
+                <Link href="/account">Profile</Link>
+              </li>
+            )}
+            {!session && (
+              <li onClick={handleNav} className="p-4 text-4xl hover:text-green">
+                <Link href="/auth/login">Log in</Link>
+              </li>
+            )}
             <li onClick={handleNav} className="p-4 text-4xl hover:text-green">
               <Link href="/fuel">Fuel</Link>
             </li>
