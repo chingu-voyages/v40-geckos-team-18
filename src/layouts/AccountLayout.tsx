@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import ControlPanel from '../components/Dashboard/ControlPanel'
+import ControlPanel from '../components/Account/ControlPanel'
 
 interface AccountLayoutProps {
     children: ReactNode

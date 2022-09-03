@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
-import ControlPanel from '../../components/Dashboard/ControlPanel';
-import Dashboard from '../../components/Dashboard/Dashboard';
+import ControlPanel from '../../components/Account/ControlPanel';
+import Dashboard from '../../components/Account/Dashboard';
 import AccountLayout from '../../layouts/AccountLayout';
 import { NextPageWithLayout } from '../_app';
 
