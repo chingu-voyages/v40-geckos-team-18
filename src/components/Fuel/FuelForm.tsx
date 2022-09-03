@@ -1,56 +1,66 @@
 import React, { useState } from "react";
 import {
     Button,
+    Label,
     Select,
     TextInput
   } from 'flowbite-react';
+import {FuelSourceUnit, FuelSourceType, UnregisteredFuelRequest} from '../../schema/fuel.schema'
 
-export default function FuelForm () {
+interface FuelFormProps {
+    handleSubmit: (fuelData: UnregisteredFuelRequest) => void;
+}
 
-    /* Initializing state as single source of truth */
+export default function FuelForm ({ handleSubmit }: FuelFormProps) {
+
+      /* Initializing state */
     const [fuelData, setfuelData] = useState({
-        api_name: "",
-        unit: "",
-        quantity: 0
+        fuel_source_type: "ng" as FuelSourceType,
+        fuel_source_unit: "btu" as FuelSourceUnit,
+        fuel_source_value:  0 as number
         })
+
+    function submitForm(e: React.FormEvent) {
+        e.preventDefault();
+        console.log(fuelData);
+        handleSubmit({fuelData}); 
+    }
 
     /* Function that updates the state */
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         /* Destructuring the event.target object */
-        const {name, value} = event?.target;
-
+        const {name, value, valueAsNumber} = event?.target;
         setfuelData(prevFuelData => {
             return {
                 ...prevFuelData,
-                [name]: value
+                [name]: name == "fuel_source_value" ? valueAsNumber : value
             }
-        })
-
-        
+        })  
     }
 
-    const unitOptions = fuelData.api_name == "ng" ? ["thousand_cubic_feet", "btu"] : ["gallon", "btu"];
+    /* Renders the units conditionally */
+    const unitOptions = fuelData.fuel_source_type == "ng" ? ["thousand_cubic_feet", "btu"] : ["gallon", "btu"];
     
     function resetForm() {
-        setfuelData(prevFuelData => {
-            return {
-                api_name: "",
-                unit: "",
-                quantity: 0
+        setfuelData(
+            {
+                fuel_source_type: "ng",
+                fuel_source_unit: "btu",
+                fuel_source_value: 0
             }
-        })
+        )
     }
 
-    console.log(fuelData);
+    
     return (
         <div>
                           
-                <label htmlFor="api_name">Which fuel do you use?</label>
+                <Label htmlFor="fuel_source_type">Which fuel do you use?</Label>
                 <Select 
-                    id="api_name"
-                    value={fuelData.api_name}
+                    id="fuel_source_type"
+                    value={fuelData.fuel_source_type}
                     onChange={handleChange}
-                    name="api_name"
+                    name="fuel_source_type"
                 >
                     <option value="">--- Choose</option>
                     <option value="ng">Natural Gas</option>
@@ -61,12 +71,12 @@ export default function FuelForm () {
 
                 <br/>
 
-                <label htmlFor="unit">Which measuring unit do you use?</label>
+                <Label htmlFor="unit">Which measuring unit do you use?</Label>
                 <Select
-                    id="unit"
-                    value={fuelData.unit}
+                    id="fuel_source_unit"
+                    value={fuelData.fuel_source_unit}
                     onChange={handleChange}
-                    name="unit"
+                    name="fuel_source_unit"
                 >
                     <option value="">-- Choose</option>
                     <option value={unitOptions[0]}>{unitOptions[0]}</option>
@@ -75,13 +85,13 @@ export default function FuelForm () {
 
                 <br/>
 
-                <label htmlFor="value">What is the quantity of fuel you consumed? (based on the unit you&apos;ve chosen above)</label>
+                <Label htmlFor="value">What is the quantity of fuel you consumed? (based on the unit you&apos;ve chosen above)</Label>
                 <TextInput
-                id="quantity"
+                id="fuel_source_value"
                 type="number"
-                value={fuelData.quantity}
+                value={fuelData.fuel_source_value}
                 onChange={handleChange}
-                name="quantity"
+                name="fuel_source_value"
               />  
 
                 <div>
@@ -92,12 +102,15 @@ export default function FuelForm () {
                     
                     <Button
                         type="submit"
-                        disabled={!fuelData.api_name || !fuelData.unit || fuelData.quantity<1 ? true : false}
+                        disabled={!fuelData.fuel_source_type || !fuelData.fuel_source_unit || fuelData.fuel_source_value<1 ? true : false}
                         color="default"
+                        onClick={submitForm}
                     >
               Go!
             </Button>
 
+
+        
                 </div>
           
         </div>

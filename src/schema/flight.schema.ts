@@ -28,7 +28,7 @@ export type DistanceUnit = z.TypeOf<typeof distanceUnitSchema>;
 export type UnregisteredFlightRequest = z.TypeOf<
   typeof unregisteredFlightRequestSchema
 >;
-
+/* Fix typo */
 const flightResponseUnqiue = z.object({
   carbon_g: z.number(),
   carbon_kg: z.number(),
