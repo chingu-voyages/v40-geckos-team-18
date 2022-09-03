@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Accordion, Tabs } from 'flowbite-react';
 import { FaPlane, FaCarAlt } from 'react-icons/fa';
 import FlightQuestionaire from '../components/Flight/FlightQuestionaire';
-import wateringPlantsImage from '../assets/images/watering-plants-removebg-preview 1.png';
+import wateringPlantsImage from '../assets/images/watering-plants-img.png';
 import Image from 'next/image';
 
 export default function TravelPage() {
