@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { ReactElement } from 'react';
+import AccountLayout from '../../layouts/AccountLayout';
+import { NextPageWithLayout } from '../_app';
 
-const DrivingSummaryPage = () => {
-  return (
-    <div>DrivingSummaryPage</div>
-  )
-}
+const DrivingSummaryPage: NextPageWithLayout = () => {
+  return <div>DrivingSummaryPage</div>;
+};
 
-export default DrivingSummaryPage
+DrivingSummaryPage.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>;
+};
+
+export default DrivingSummaryPage;

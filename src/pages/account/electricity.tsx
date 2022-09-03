@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { ReactElement } from 'react';
+import AccountLayout from '../../layouts/AccountLayout';
+import { NextPageWithLayout } from '../_app';
 
-const ElectricitySummaryPage = () => {
-  return (
-    <div>ElectricitySummaryPage</div>
-  )
-}
+const ElectricitySummaryPage: NextPageWithLayout = () => {
+  return <div>ElectricitySummaryPage</div>;
+};
 
-export default ElectricitySummaryPage
+ElectricitySummaryPage.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>;
+};
+
+export default ElectricitySummaryPage;

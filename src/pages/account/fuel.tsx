@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { ReactElement } from 'react';
+import AccountLayout from '../../layouts/AccountLayout';
+import { NextPageWithLayout } from '../_app';
 
-const FuelSummaryPage = () => {
-  return (
-    <div>FuelSummaryPage</div>
-  )
-}
+const FuelSummaryPage: NextPageWithLayout = () => {
+  return <div>FuelSummaryPage</div>;
+};
 
-export default FuelSummaryPage
+FuelSummaryPage.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>;
+};
+
+export default FuelSummaryPage;
