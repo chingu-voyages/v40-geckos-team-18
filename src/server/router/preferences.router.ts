@@ -7,6 +7,26 @@ import {
 import { createRouter } from './context';
 
 export const preferencesRouter = createRouter()
+  .query('get-preferences', {
+    async resolve({ ctx }) {
+      const user = ctx.session?.user;
+
+      if (user) {
+        const preferences = await ctx.prisma.user.findFirst({
+          where: {
+            id: user.id,
+          },
+          select: {
+            unitPref: true,
+            country: true,
+            state: true
+          }
+        });
+
+        return preferences
+      }
+    },
+  })
   .mutation('update-user-location', {
     input: updateUserLocationSchema,
     async resolve({ ctx, input }) {
@@ -28,6 +48,8 @@ export const preferencesRouter = createRouter()
           .catch((e) => {
             console.error(e);
           });
+
+        return;
       }
 
       throw new TRPCError({
@@ -44,12 +66,14 @@ export const preferencesRouter = createRouter()
       if (user) {
         ctx.prisma.user.update({
           data: {
-            ...input,
+            unitPref: input,
           },
           where: {
             id: user.id,
           },
         });
+
+        return;
       }
 
       throw new TRPCError({
