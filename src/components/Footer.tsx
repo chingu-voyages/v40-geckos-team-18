@@ -26,7 +26,7 @@ const Footer = () => {
               <Link href="https://www.linkedin.com/in/ticia-dunn/">Ticia Dunn</Link>
             </p>
             <p>
-              <Link href="/">Ivan Alejandre</Link>
+              <Link href="https://www.linkedin.com/mwlite/in/ivan-alejandre-035613156">Ivan Alejandre</Link>
             </p>
             <p>
               <Link href="https://www.linkedin.com/in/my-pham-5555b7112/">My Phan</Link>
