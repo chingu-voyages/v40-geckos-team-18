@@ -94,7 +94,7 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
         name="fuel_source_value"
       />
 
-      <div>
+      <div className='flex flex-row justify-left gap-4'>
         <Button color="info" onClick={resetForm}>
           Reset
         </Button>
