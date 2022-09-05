@@ -31,6 +31,7 @@ button {
 .mainblob {
     background-image: url('../assets/images/Group\ 1.svg');
     background-size: cover;
+    background-position:right;
     min-height: 880px;
     padding: 90px;
 }
@@ -40,3 +41,15 @@ button {
         background: var(--lime-green)
     }
 }
+
+@media screen and (max-width: 840px) {
+    .mainblob {
+        padding: 40px;
+    }
+
+/*     .main-blob-image {
+        display: none;
+    } */
+}
+
+
