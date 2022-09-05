@@ -29,7 +29,7 @@ export type UnregisteredFlightRequest = z.TypeOf<
   typeof unregisteredFlightRequestSchema
 >;
 /* Fix typo */
-const flightResponseUnqiue = z.object({
+const flightResponseUnique = z.object({
   carbon_g: z.number(),
   carbon_kg: z.number(),
   carbon_lb: z.number(),
@@ -38,6 +38,6 @@ const flightResponseUnqiue = z.object({
 });
 
 const flightResponseSchema =
-  unregisteredFlightRequestSchema.merge(flightResponseUnqiue);
+  unregisteredFlightRequestSchema.merge(flightResponseUnique);
 
 export type FlightResponse = z.TypeOf<typeof flightResponseSchema>;
