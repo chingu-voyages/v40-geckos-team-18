@@ -9,8 +9,14 @@
     font-weight: 500;
 }
 
-@media screen and (min-width: 441px) {
+@media screen and (min-width: 441px) and (max-width: 1437px) {
     .footer {
         background-image: url('../assets/images/Vector\ 3.png');
+    }
+}
+
+@media screen and (min-width: 1437px) {
+    .footer {
+        background: var(--lime-green);
     }
 }

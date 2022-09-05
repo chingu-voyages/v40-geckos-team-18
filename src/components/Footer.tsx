@@ -23,19 +23,22 @@ const Footer = () => {
           <div>
             <h1 className="text-xl font-bold mb-4">OUR TEAM</h1>
             <p>
-              <Link href="/">Ticia D.</Link>
+              <Link href="https://www.linkedin.com/in/ticia-dunn/">Ticia Dunn</Link>
             </p>
             <p>
               <Link href="/">Ivan Alejandre</Link>
             </p>
             <p>
-              <Link href="/">Tramy Phan</Link>
+              <Link href="https://www.linkedin.com/in/my-pham-5555b7112/">My Phan</Link>
             </p>
             <p>
               <Link href="https://www.linkedin.com/in/amandavieiradev/">Amanda Vieira</Link>
             </p>
             <p>
               <Link href="/">Cian</Link>
+            </p>
+            <p>
+              <Link href="https://www.linkedin.com/in/victoriacheng15/">Victoria Cheng</Link>
             </p>
           </div>
         </div>
