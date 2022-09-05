@@ -1,16 +1,54 @@
 import { Accordion, Button, Label, Select } from 'flowbite-react';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import AccountLayout from '../../layouts/AccountLayout';
 import { CountryCode } from '../../schema/electricity.schema';
 import { NextPageWithLayout } from '../_app';
 import StatesData from '../../AppData/states.json';
+import Head from 'next/head';
+import { trpc } from '../../utils/trpc';
+import { UserUnitPreference } from '../../schema/preferences.schema';
+import { useSession } from 'next-auth/react';
 
 const UserPreferences: NextPageWithLayout = () => {
+  const { data: userPreferences } = trpc.useQuery([
+    'preferences.get-preferences',
+  ]);
   const [country, setCountry] = useState<CountryCode | string>('');
   const [state, setState] = useState('');
+  const [unitPreference, setUnitPreference] =
+    useState<string>('metric');
 
+  const { mutate: mutateLocation } = trpc.useMutation([
+    'preferences.update-user-location',
+  ]);
+
+  const { mutate: mutateUnitPreferences } = trpc.useMutation([
+    'preferences.update-user-unit-preference',
+  ]);
+
+  const handleLocationUpdate = () => {
+    mutateLocation({ country, state });
+  };
+
+  const handleUnitPreferenceUpdate = () => {
+    mutateUnitPreferences(unitPreference as UserUnitPreference);
+  };
+
+  useEffect(() => {
+    if (userPreferences) {
+      setCountry(() => userPreferences.country as string);
+      setState(() => userPreferences.state as string);
+      setUnitPreference(
+        () => (userPreferences.unitPref as UserUnitPreference) ?? ''
+      );
+    }
+  }, [userPreferences]);
   return (
     <div>
+      <Head>
+        <title>Preferences</title>
+      </Head>
+
       <Accordion flush={true}>
         {/** Location preferences */}
         <Accordion.Panel>
@@ -35,7 +73,11 @@ const UserPreferences: NextPageWithLayout = () => {
                 </Select>
               </div>
               <div className="col-span-3 md:col-span-2">
-                <Label htmlFor="stateValue" value="State (optional)" id="stateLabel" />
+                <Label
+                  htmlFor="stateValue"
+                  value="State (optional)"
+                  id="stateLabel"
+                />
                 <Select
                   id="state"
                   onChange={(e) => setState(e.target.value)}
@@ -69,7 +111,8 @@ const UserPreferences: NextPageWithLayout = () => {
               </div>
               <div className="col-span-3 md:col-span-2 col-end-7 md:col-end-6 place-self-end mt-3">
                 <Button
-                  disabled={country.length === 0 ? true : false}
+                  disabled={country?.length === 0 ? true : false}
+                  onClick={() => handleLocationUpdate()}
                 >
                   Save
                 </Button>
@@ -83,23 +126,26 @@ const UserPreferences: NextPageWithLayout = () => {
           <Accordion.Content>
             <div className="grid grid-cols-6 gap-2">
               <div className="col-span-3 md:col-span-2 col-start-1 md:col-start-2">
-                <p>Electrical Wattage Unit:</p>
-                <Select>
-                  <option value="">Select a unit</option>
-                  <option value="kwh">Kilowatt-hours (kWh)</option>
-                  <option value="mwh">Megawatt-hours (mWh)</option>
-                </Select>
-              </div>
-              <div className="col-span-3 md:col-span-2">
-                <p>Flight and Driving Distance Unit:</p>
-                <Select>
-                  <option value="">Select a unit</option>
-                  <option value="km">Kilometers (km)</option>
-                  <option value="mi">Miles (mi)</option>
+                <p>Metric or Imperial?</p>
+                <Select
+                  onChange={(e) =>
+                    setUnitPreference(e.target.value as UserUnitPreference)
+                  }
+                  value={unitPreference}
+                  
+                >
+                  <option value="">Choose one</option>
+                  <option value="metric">Metric units</option>
+                  <option value="imperial">Imperial units</option>
                 </Select>
               </div>
               <div className="col-span-3 md:col-span-2 col-end-7 md:col-end-6 place-self-end mt-3">
-                <Button disabled={false}>Save</Button>
+                <Button
+                  disabled={unitPreference === "" ? true : false}
+                  onClick={() => handleUnitPreferenceUpdate()}
+                >
+                  Save
+                </Button>
               </div>
             </div>
           </Accordion.Content>
