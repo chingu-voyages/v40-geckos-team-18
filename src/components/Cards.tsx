@@ -33,7 +33,7 @@ const Cards = () => {
     },
   ];
   return (
-    <div className="w-full p-4 space-y-8 flex flex-col justify-center items-center sm:flex-row sm:space-x-8">
+    <div className="w-full p-8 gap-8 flex flex-col justify-center items-center md:flex-row">
       {cardInfo.map((card) => (
         <Card
           key={card.id}
