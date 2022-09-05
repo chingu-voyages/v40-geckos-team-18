@@ -25,12 +25,6 @@ const Cards = () => {
       description: 'How much your house cost to the environment?',
       link: '/electricity',
     },
-    {
-      id: 3,
-      image: shipping,
-      description: 'How much your online shopping cost to the environment?',
-      link: '/shipping',
-    },
   ];
   return (
     <div className="w-full p-4 space-y-8 flex flex-col justify-center items-center sm:flex-row sm:space-x-8">
