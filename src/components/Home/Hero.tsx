@@ -3,7 +3,7 @@ import React from "react";
 import bikeWoman1 from "../../assets/images/bike-woman 1.png";
 
 const Hero = () => (
-    <div className="flex flex-col md:flex-row sm:flex-row">
+    <div className="flex justify-center flex-col md:flex-row sm:flex-row">
         <div>
             <Image src={bikeWoman1} className="h-1 w-1" width={200} height={200} alt="..." />
         </div>

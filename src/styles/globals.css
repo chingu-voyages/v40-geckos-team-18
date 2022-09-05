@@ -28,3 +28,9 @@ button {
   box-shadow: 5px 5px 0px #102016, -5px -5px 0px #00ed5f;
 }
 
+.mainblob {
+    background-image: url('../assets/images/Group\ 1.svg');
+    background-size: cover;
+    min-height: 880px;
+    padding: 90px;
+}

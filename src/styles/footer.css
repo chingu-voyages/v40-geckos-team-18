@@ -15,13 +15,13 @@
       text-decoration: underline;
 }
 
-@media screen and (min-width: 441px) and (max-width: 1436px) {
+@media screen and (min-width: 441px) and (max-width: 1600px) {
     .footer {
         background-image: url('../assets/images/Vector\ 3.png');
     }
 }
 
-@media screen and (min-width: 1437px) {
+@media screen and (min-width: 1601px) {
     .footer {
         background: var(--lime-green);
     }
