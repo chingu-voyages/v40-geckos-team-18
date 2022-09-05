@@ -13,39 +13,39 @@ interface FuelFormProps {
 export default function FuelForm({ handleSubmit }: FuelFormProps) {
   /* Initializing state */
   const [fuelData, setfuelData] = useState({
-    fuel_source_type: 'ng' as FuelSourceType,
-    fuel_source_unit: 'btu' as FuelSourceUnit,
+    fuel_source_type: '' as FuelSourceType,
+    fuel_source_unit: '' as FuelSourceUnit,
     fuel_source_value: 0 as number,
   });
 
-  function submitForm(e: React.FormEvent) {
-    e.preventDefault();
-    console.log(fuelData);
+  function submitForm(event: React.FormEvent) {
+    event.preventDefault();
+
     handleSubmit(fuelData);
   }
 
   /* Function that updates the state */
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     /* Destructuring the event.target object */
-    const { name, value, valueAsNumber } = event?.target;
+    const { name, value } = event?.target;
     setfuelData((prevFuelData) => {
       return {
         ...prevFuelData,
-        [name]: name == 'fuel_source_value' ? valueAsNumber : value,
+        [name]: name == 'fuel_source_value' ? parseFloat(value) : value,
       };
     });
   }
 
   /* Renders the units conditionally */
   const unitOptions =
-    fuelData.fuel_source_type == 'ng'
+    fuelData.fuel_source_type === 'ng'
       ? ['thousand_cubic_feet', 'btu']
       : ['gallon', 'btu'];
 
   function resetForm() {
     setfuelData({
-      fuel_source_type: 'ng',
-      fuel_source_unit: 'btu',
+      fuel_source_type: '',
+      fuel_source_unit: '',
       fuel_source_value: 0,
     });
   }
@@ -56,7 +56,7 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
       <Select
         id="fuel_source_type"
         value={fuelData.fuel_source_type}
-        onChange={handleChange}
+        onChange={(event) => handleChange(event)}
         name="fuel_source_type"
       >
         <option value="">--- Choose</option>
@@ -72,7 +72,7 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
       <Select
         id="fuel_source_unit"
         value={fuelData.fuel_source_unit}
-        onChange={handleChange}
+        onChange={(event) => handleChange(event)}
         name="fuel_source_unit"
       >
         <option value="">-- Choose</option>
@@ -90,7 +90,7 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
         id="fuel_source_value"
         type="number"
         value={fuelData.fuel_source_value}
-        onChange={handleChange}
+        onChange={(event) => handleChange(event)}
         name="fuel_source_value"
       />
 
@@ -105,8 +105,6 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
             !fuelData.fuel_source_type ||
             !fuelData.fuel_source_unit ||
             fuelData.fuel_source_value < 1
-              ? true
-              : false
           }
           color="success"
           onClick={submitForm}
