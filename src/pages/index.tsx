@@ -1,10 +1,13 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { trpc } from "../utils/trpc";
-import Link from 'next/link'
+
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { trpc } from '../utils/trpc';
+import Link from 'next/link';
+import Cards from '../components/Cards';
 import { signIn } from "next-auth/react";
 import { Button } from "flowbite-react";
 import Hero from "../components/Home/Hero";
+
 
 type TechnologyCardProps = {
   name: string;
@@ -32,7 +35,10 @@ const Home: NextPage = () => {
 
       </nav>
 
+
+      <Cards />
       <Hero />
+
     </>
   );
 };
