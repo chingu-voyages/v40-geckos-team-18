@@ -10,7 +10,7 @@ export const fuelRouter = createRouter().mutation('unregistered-request-fuel', {
         JSON.stringify({ type: 'fuel_combustion', ...input })
       )
     );
-
+    
     return response.json().then((data) => {
       return data.data.attributes;
     });
