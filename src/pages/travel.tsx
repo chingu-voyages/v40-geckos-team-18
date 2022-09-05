@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import Head from 'next/head';
-import { Accordion, Tabs } from 'flowbite-react';
+import { Tabs } from 'flowbite-react';
 import { FaPlane, FaCarAlt } from 'react-icons/fa';
 import FlightQuestionaire from '../components/Flight/FlightQuestionaire';
-import wateringPlantsImage from '../assets/images/watering-plants.png';
+import wateringPlantsImage from '../assets/images/watering-plants-img.png';
+import VehicleQuestionaire from '../components/Vehicle/VehicleQuestionaire';
 import Image from 'next/image';
 
 export default function TravelPage() {
@@ -13,9 +13,6 @@ export default function TravelPage() {
         <title>Travel Page</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <nav className="flex justify-center gap-4">
-        <Link href="/">Home</Link>
-      </nav>
 
       <div className="flex justify-center">
         <Image src={wateringPlantsImage} alt="person watering plant" />
@@ -27,7 +24,7 @@ export default function TravelPage() {
             <FlightQuestionaire />
           </Tabs.Item>
           <Tabs.Item title="Driving" icon={FaCarAlt}>
-            <FlightQuestionaire />
+            <VehicleQuestionaire />
           </Tabs.Item>
         </Tabs.Group>
       </div>
