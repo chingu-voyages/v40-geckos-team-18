@@ -7,8 +7,8 @@ import z from 'zod';
 > Kerosene ~ type_api_name: ker, units: gallon, btu
 */
 
-const fuelSourceUnitSchema = z.enum(['gallon', 'btu', 'thousand_cubic_feet']);
-const fuelSourceTypeSchema = z.enum(['dfo', 'ng', 'pg', 'ker']);
+const fuelSourceUnitSchema = z.enum(['','gallon', 'btu', 'thousand_cubic_feet']);
+const fuelSourceTypeSchema = z.enum(['','dfo', 'ng', 'pg', 'ker']);
 
 export const unregisteredFuelRequestSchema = z.object({
   fuel_source_type: fuelSourceTypeSchema,

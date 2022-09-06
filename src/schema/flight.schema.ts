@@ -36,6 +36,8 @@ const flightResponseUnqiue = z.object({
   estimated_at: z.string(),
 });
 
+
 const flightResponseSchema = flightRequestSchema.merge(flightResponseUnqiue);
+
 
 export type FlightResponse = z.TypeOf<typeof flightResponseSchema>;
