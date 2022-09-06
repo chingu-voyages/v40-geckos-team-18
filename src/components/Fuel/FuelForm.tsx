@@ -51,7 +51,7 @@ export default function FuelForm({ handleSubmit }: FuelFormProps) {
   }
 
   return (
-    <div>
+    <div className='container'>
       <Label htmlFor="fuel_source_type">Which fuel do you use?</Label>
       <Select
         id="fuel_source_type"
