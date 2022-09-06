@@ -12,13 +12,13 @@ import { HiArrowRight } from 'react-icons/hi';
 import {
   FlightLeg,
   DistanceUnit,
-  UnregisteredFlightRequest,
+  FlightRequest,
   CabinClass,
 } from '../../schema/flight.schema';
 import FlightItinerarySummary from './FlightItinerarySummary';
 
 interface FlightFormProps {
-  handleSubmit: (flightData: UnregisteredFlightRequest) => void;
+  handleSubmit: (flightData: FlightRequest) => void;
 }
 
 const FlightForm = ({ handleSubmit }: FlightFormProps) => {
@@ -127,7 +127,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
                 value={departure}
                 onChange={(e) => setDeparture(e.target.value)}
                 maxLength={3}
-                color='gray-600'
+                color="gray-600"
               />
             </div>
           </Tooltip>
@@ -143,7 +143,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 maxLength={3}
-                color='gray-600'
+                color="gray-600"
               />
             </div>
           </Tooltip>
@@ -178,7 +178,11 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
             <Button
               type="button"
               onClick={addLeg}
-              disabled={departure.length !== 3 || destination.length !== 3 ? true : false}
+              disabled={
+                departure.length !== 3 || destination.length !== 3
+                  ? true
+                  : false
+              }
               color="info"
             >
               Confirm leg
@@ -187,10 +191,10 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
         </div>
 
         {/** itinerary summary */}
-        <div className='flex flex-col text-center'>
-          <p className='mb-2'>Your itenerary summary</p>
+        <div className="flex flex-col text-center">
+          <p className="mb-2">Your itenerary summary</p>
           {legs.length === 0 && <p>Add a leg to your itinerary</p>}
-          <FlightItinerarySummary data={legs}/>
+          <FlightItinerarySummary data={legs} />
         </div>
         <div className="flex flex-row gap-4 justify-center items-center">
           <Label
@@ -221,11 +225,7 @@ const FlightForm = ({ handleSubmit }: FlightFormProps) => {
             </div>
           </div>
           <div className="flex flex-row gap-2">
-            <Button
-              onClick={resetForm}
-              size='md'
-              color='info'
-            >
+            <Button onClick={resetForm} size="md" color="info">
               Reset
             </Button>
             <Button

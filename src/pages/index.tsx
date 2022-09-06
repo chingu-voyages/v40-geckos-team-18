@@ -1,9 +1,9 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { trpc } from "../utils/trpc";
-import Link from 'next/link'
-import { signIn } from "next-auth/react";
-import { Button } from "flowbite-react";
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { trpc } from '../utils/trpc';
+import Link from 'next/link';
+import Cards from '../components/Cards';
+import Hero from '../components/Home/Hero';
 
 type TechnologyCardProps = {
   name: string;
@@ -23,45 +23,17 @@ const Home: NextPage = () => {
       </Head>
 
       <nav className="flex justify-center gap-4">
-        <Link href='/electricity'>Electricity</Link>
-        <Link href='/fuel'>Fuel</Link>
-        <Link href='/travel'>Travel</Link>
-        <Link passHref href='/auth/login'>Log in</Link>
-        <Link href='/register'>Register</Link>
-
+        <Link href="/electricity">Electricity</Link>
+        <Link href="/fuel">Fuel</Link>
+        <Link href="/travel">Travel</Link>
+        <Link passHref href="/auth/login">
+          Log in
+        </Link>
+        <Link href="/register">Register</Link>
       </nav>
 
-      <main className="container mx-auto flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-          Create <span className="text-purple-300">T3</span> App
-        </h1>
-        <p className="text-2xl text-gray-700">This stack uses:</p>
-        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
-          <TechnologyCard
-            name="NextJS"
-            description="The React framework for production"
-            documentation="https://nextjs.org/"
-          />
-          <TechnologyCard
-            name="TypeScript"
-            description="Strongly typed programming language that builds on JavaScript, giving you better tooling at any scale"
-            documentation="https://www.typescriptlang.org/"
-          />
-          <TechnologyCard
-            name="TailwindCSS"
-            description="Rapidly build modern websites without ever leaving your HTML"
-            documentation="https://tailwindcss.com/"
-          />
-          <TechnologyCard
-            name="tRPC"
-            description="End-to-end typesafe APIs made easy"
-            documentation="https://trpc.io/"
-          />
-        </div>
-        <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
-          {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
-        </div>
-      </main>
+      <Hero />
+      <Cards />
     </>
   );
 };
