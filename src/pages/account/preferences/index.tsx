@@ -8,7 +8,6 @@ import Head from 'next/head';
 import { trpc } from '../../../utils/trpc';
 import { UserUnitPreference } from '../../../schema/preferences.schema';
 import NewVehicleModal from '../../../components/Account/Preferences/NewVehicleModal';
-import dynamic from 'next/dynamic';
 import UserVehicles from '../../../components/Account/Preferences/UserVehicles';
 
 const UserPreferences: NextPageWithLayout = () => {

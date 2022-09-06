@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import {
   addNewVehicleSchema,
+  removeVehicleSchema,
   updateUserLocationSchema,
   updateUserPrimaryVehicleSchema,
   updateUserUnitPreferenceSchema,
@@ -177,8 +178,31 @@ export const preferencesRouter = createRouter()
 
         return vehicle;
       }
+
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You are not signed in and valid credentials are required.',
+      });
     },
   })
   .mutation('remove-user-vehicle', {
-    async resolve() {},
+    input: removeVehicleSchema,
+    async resolve({ ctx, input }) {
+      const user = ctx.session?.user;
+
+      if (user) {
+        await ctx.prisma.vehicle.delete({
+          where: {
+            id: input,
+          },
+        });
+
+        return;
+      }
+
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You are not signed in and valid credentials are required.',
+      });
+    },
   });
