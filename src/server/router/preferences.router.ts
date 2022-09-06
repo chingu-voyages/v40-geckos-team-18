@@ -23,7 +23,6 @@ export const preferencesRouter = createRouter()
             unitPref: true,
             country: true,
             state: true,
-            primaryVehicleId: true,
           },
         });
 
@@ -52,7 +51,18 @@ export const preferencesRouter = createRouter()
           .then((response) => response)
           .catch((e) => console.error(e));
 
-        return vehicles as Vehicles;
+        const userPrimaryVehicle = await ctx.prisma.user
+          .findFirst({
+            select: {
+              primaryVehicleId: true,
+            },
+            where: {
+              id: user.id,
+            },
+          })
+          .then((response) => response?.primaryVehicleId);
+
+        return { userPrimaryVehicle, vehicles };
       }
 
       throw new TRPCError({
@@ -125,16 +135,18 @@ export const preferencesRouter = createRouter()
       const user = ctx.session?.user;
 
       if (user) {
-        ctx.prisma.user.update({
-          data: {
-            ...input,
-          },
-          where: {
-            id: user.id,
-          },
-        }).then(response => response);
+        const userPrimaryVehicleId = await ctx.prisma.user
+          .update({
+            data: {
+              ...input,
+            },
+            where: {
+              id: user.id,
+            },
+          })
+          .then((response) => response.primaryVehicleId);
 
-        return;
+        return { userPrimaryVehicleId };
       }
 
       throw new TRPCError({

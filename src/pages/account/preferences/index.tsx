@@ -1,5 +1,5 @@
 import { Accordion, Button, Label, Select, Spinner } from 'flowbite-react';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, Suspense, useEffect, useState } from 'react';
 import AccountLayout from '../../../layouts/AccountLayout';
 import { CountryCode } from '../../../schema/electricity.schema';
 import { NextPageWithLayout } from '../../_app';
@@ -7,20 +7,14 @@ import StatesData from '../../../AppData/states.json';
 import Head from 'next/head';
 import { trpc } from '../../../utils/trpc';
 import { UserUnitPreference } from '../../../schema/preferences.schema';
-import VehicleTile from '../../../components/Account/Preferences/VehicleTile';
 import NewVehicleModal from '../../../components/Account/Preferences/NewVehicleModal';
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import UserVehicles from '../../../components/Account/Preferences/UserVehicles';
 
 const UserPreferences: NextPageWithLayout = () => {
-  const router = useRouter();
-
   const { data: userPreferences } = trpc.useQuery([
     'preferences.get-preferences',
   ]);
-
-  const { data: userVehicles, isLoading: isUserVehiclesLoading } =
-    trpc.useQuery(['preferences.get-user-vehicles']);
 
   const [country, setCountry] = useState<CountryCode | string>('');
   const [state, setState] = useState('');
@@ -32,10 +26,6 @@ const UserPreferences: NextPageWithLayout = () => {
 
   const { mutate: mutateUnitPreferences } = trpc.useMutation([
     'preferences.update-user-unit-preference',
-  ]);
-
-  const { mutate: mutateUserPrimaryVehicle } = trpc.useMutation([
-    'preferences.update-user-primary-vehicle',
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -52,17 +42,11 @@ const UserPreferences: NextPageWithLayout = () => {
     mutateUnitPreferences(unitPreference as UserUnitPreference);
   };
 
-  const handleUpdateUserPrimaryVehicle = (vehicleId: string) => {
-    mutateUserPrimaryVehicle({ primaryVehicleId: vehicleId });
-  };
-
   useEffect(() => {
     if (userPreferences) {
       setCountry(() => (userPreferences.country as string) ?? '');
       setState(() => (userPreferences.state as string) ?? '');
-      setUnitPreference(
-        () => (userPreferences.unitPref as UserUnitPreference) ?? ''
-      );
+      setUnitPreference(() => userPreferences.unitPref as UserUnitPreference);
     }
   }, [userPreferences]);
 
@@ -181,23 +165,7 @@ const UserPreferences: NextPageWithLayout = () => {
                 show={showModal}
                 toggleModal={handleToggleModal}
               />
-              <div className="grow grid grid-cols-6 gap-10 px-10">
-                {/** change this to a component */}
-                {isUserVehiclesLoading && !userVehicles && (
-                  <div>
-                    <Spinner />
-                  </div>
-                )}
-                {!isUserVehiclesLoading && userVehicles && userPreferences && (
-                  <UserVehicles
-                    vehicles={userVehicles}
-                    primaryVehicleId={userPreferences.primaryVehicleId}
-                    handleUpdateUserPrimaryVehicle={
-                      handleUpdateUserPrimaryVehicle
-                    }
-                  />
-                )}
-              </div>
+              <UserVehicles />
             </div>
           </Accordion.Content>
         </Accordion.Panel>

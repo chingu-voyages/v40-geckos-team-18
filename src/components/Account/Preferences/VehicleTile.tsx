@@ -9,42 +9,51 @@ interface VehicleTileProps {
   make: string;
   model: string;
   year: number;
-  isPrimary: boolean;
+  isPrimary: string;
   setPrimary: (vehicleId: string) => void;
 }
 
-const VehicleTile = ({ id, make, model, year, isPrimary, setPrimary }: VehicleTileProps) => {
+const VehicleTile = ({
+  id,
+  make,
+  model,
+  year,
+  isPrimary,
+  setPrimary,
+}: VehicleTileProps) => {
   return (
     <div className="col-span-1">
       <Card>
-        {/* <div className='flex justify-end'>
-          <Dropdown inline={true} label="" color="failure">
-            <Dropdown.Item>Edit</Dropdown.Item>
-          </Dropdown>
-        </div> */}
 
-        <p>{make}</p>
-        <p></p>
-        <p>
-          {year} {model}
-        </p>
+        <div>
+          <p>{make}</p>
+        </div>
+
+        <div>
+          <p>
+            {year} {model}
+          </p>
+        </div>
+
         <div className="flex flex-row gap-2 justify-between">
           <Button color="failure">
             <RiDeleteBinLine />
           </Button>
           <div className="flex flex-row self-end justify-self-end">
-            {isPrimary ? (
-              <Badge
-                onClick={() => console.log('click')}
-                size="md"
-                icon={HiCheck}
+            {isPrimary === id ? (
+              <Button
+                size="sm"
+                disabled={true}
+                color="success"
               >
+                <HiCheck className="mr-2" />
                 Primary
-              </Badge>
+              </Button>
             ) : (
-              <Badge size="md" icon={GrCheckbox} onClick={() => setPrimary(id)}>
+              <Button size="sm" onClick={() => setPrimary(id)}>
+                <GrCheckbox className="mr-2" />
                 Primary
-              </Badge>
+              </Button>
             )}
           </div>
         </div>

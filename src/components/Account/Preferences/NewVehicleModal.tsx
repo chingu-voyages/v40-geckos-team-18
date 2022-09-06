@@ -160,7 +160,6 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
             </div>
           </div>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
   );
