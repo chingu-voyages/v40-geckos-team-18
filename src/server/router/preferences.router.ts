@@ -27,6 +27,11 @@ export const preferencesRouter = createRouter()
 
         return preferences;
       }
+
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You are not signed in and valid credentials are required.',
+      });
     },
   })
   .query('get-user-vehicles', {
