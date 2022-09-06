@@ -34,32 +34,20 @@ const Home: NextPage = () => {
         headline={"Make an estimate based on your lifestyle."}
         text={"We'll sum what you consumed in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment."}
         />
-      <Cards />
-  
 
+        <div className='px-20'>
+          <p className='max-w-md text-4xl font-bold'>A throrough look into the carbon emissions of your life</p>
+          <p className='font-bold'>We use latest IEA emission factor data and follow industry best practice standards.</p>
+        </div>
+      
+
+      <Cards />
+
+      <p className='px-20 py-8 text-4xl font-bold'>And check your stats monthly to check on your carbon footprint evolution.</p>
     </>
   );
 };
 
-const TechnologyCard = ({
-  name,
-  description,
-  documentation,
-}: TechnologyCardProps) => {
-  return (
-    <section className="flex flex-col justify-center p-6 duration-500 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
-      <h2 className="text-lg text-gray-700">{name}</h2>
-      <p className="text-sm text-gray-600">{description}</p>
-      <a
-        className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
-        href={documentation}
-        target="_blank"
-        rel="noreferrer"
-      >
-        Documentation
-      </a>
-    </section>
-  );
-};
+
 
 export default Home;
