@@ -1,14 +1,14 @@
-import { Accordion, Button, Label, Select, Spinner } from 'flowbite-react';
-import React, { ReactElement, Suspense, useEffect, useState } from 'react';
-import AccountLayout from '../../../layouts/AccountLayout';
-import { CountryCode } from '../../../schema/electricity.schema';
-import { NextPageWithLayout } from '../../_app';
-import StatesData from '../../../AppData/states.json';
+import { Accordion, Button, Label, Select } from 'flowbite-react';
+import React, { ReactElement, useEffect, useState } from 'react';
+import AccountLayout from '../../layouts/AccountLayout';
+import { CountryCode } from '../../schema/electricity.schema';
+import { NextPageWithLayout } from '../_app';
+import StatesData from '../../AppData/states.json';
 import Head from 'next/head';
-import { trpc } from '../../../utils/trpc';
-import { UserUnitPreference } from '../../../schema/preferences.schema';
-import NewVehicleModal from '../../../components/Account/Preferences/NewVehicleModal';
-import UserVehicles from '../../../components/Account/Preferences/UserVehicles';
+import { trpc } from '../../utils/trpc';
+import { UserUnitPreference } from '../../schema/preferences.schema';
+import NewVehicleModal from '../../components/Account/Preferences/NewVehicleModal';
+import UserVehicles from '../../components/Account/Preferences/UserVehicles';
 
 const UserPreferences: NextPageWithLayout = () => {
   const { data: userPreferences } = trpc.useQuery([
