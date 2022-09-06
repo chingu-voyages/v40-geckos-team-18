@@ -3,6 +3,7 @@
     background-size: cover;
     min-height: 500px;
     padding-top: 250px;
+    position: relative;
 }
 
 .footer a {
@@ -15,14 +16,24 @@
       text-decoration: underline;
 }
 
-@media screen and (min-width: 441px) and (max-width: 1600px) {
+@media screen and (min-width: 441px)  {
     .footer {
         background-image: url('../assets/images/Vector\ 3.png');
+        background-size: cover;
+
     }
 }
 
 @media screen and (min-width: 1601px) {
     .footer {
-/*         background: var(--lime-green); */
+            background-size: cover;
+            background-position-y: top;
+            min-height: 800px;
+            padding-top: 400px;
     }
+
+/*     footer > .footer {
+        position: absolute;
+        bottom: 10%;
+    } */
 }
