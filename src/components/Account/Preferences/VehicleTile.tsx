@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Dropdown } from 'flowbite-react';
 import React from 'react';
+import { FaCarAlt } from 'react-icons/fa';
 import { GrCheckbox } from 'react-icons/gr';
 import { HiCheck } from 'react-icons/hi';
 import { RiDeleteBinLine } from 'react-icons/ri';
@@ -26,13 +27,14 @@ const VehicleTile = ({
   return (
     <div className="col-span-1">
       <Card>
-        <div>
-          <p>{make}</p>
+        <div className='flex flex-row justify-between'>
+          <FaCarAlt size={20} className='ml-2'/>
+          <p className='mr-5'>{year} </p>
         </div>
 
-        <div>
-          <p>
-            {year} {model}
+        <div className='flex justify-end text-lg'>
+          <p className='mr-5'>
+            {make} {model}
           </p>
         </div>
 
