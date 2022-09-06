@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import bikeWoman1 from '../../assets/images/bike-woman1.png';
+import bikeWoman1 from '../../assets/images/bike-woman 1.png';
 
 const Hero = () => (
   <div className="flex flex-col md:flex-row justify-center items-center">
