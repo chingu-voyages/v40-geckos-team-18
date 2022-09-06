@@ -22,3 +22,8 @@ button {
     border-radius: 10px;
     font-size: 12px;
 }
+
+.card {
+    border-radius: 43px;
+    box-shadow: 5px 5px 0px #102016, -5px -5px 0px #00ed5f;
+  }
