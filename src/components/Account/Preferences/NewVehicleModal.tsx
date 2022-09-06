@@ -1,5 +1,4 @@
 import { Button, Label, Modal } from 'flowbite-react';
-import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import SelectSearch, {
   fuzzySearch,
@@ -26,14 +25,22 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
     SelectedOptionValue | SelectedOptionValue[] | string
   >('');
 
+  const utils = trpc.useContext();
+
   const makes = trpc.useQuery(['vehicle.get-vehicle-makes']);
   const models = trpc.useQuery([
     'vehicle.get-vehicle-models',
     selectedVehicleMake as string,
   ]);
-  const { mutate: mutateVehicle } = trpc.useMutation([
-    'preferences.add-user-vehicle',
-  ]);
+
+  const { mutate: mutateVehicle } = trpc.useMutation(
+    ['preferences.add-user-vehicle'],
+    {
+      onSuccess() {
+        utils.refetchQueries(['preferences.get-user-vehicles'], {active: true, exact: true, inactive: true})
+      },
+    }
+  );
 
   useEffect(() => {
     if (!makes.isLoading && makes.data) {

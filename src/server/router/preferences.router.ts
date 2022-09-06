@@ -4,8 +4,6 @@ import {
   updateUserLocationSchema,
   updateUserPrimaryVehicleSchema,
   updateUserUnitPreferenceSchema,
-  Vehicles,
-  vehicleSchema,
 } from '../../schema/preferences.schema';
 import { createRouter } from './context';
 
@@ -161,14 +159,23 @@ export const preferencesRouter = createRouter()
       const user = ctx.session?.user;
 
       if (user) {
-        ctx.prisma.vehicle
+        const vehicle = await ctx.prisma.vehicle
           .create({
             data: {
               ...input,
               userId: user.id,
             },
+            select: {
+              id: true,
+              vehicle_make: true,
+              vehicle_model: true,
+              vehicle_model_id: true,
+              vehicle_year: true,
+            },
           })
           .then((response) => response);
+
+        return vehicle;
       }
     },
   })
