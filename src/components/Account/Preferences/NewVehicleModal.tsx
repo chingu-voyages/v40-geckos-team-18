@@ -86,12 +86,6 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
       ?.filter((model) => model.value === selectedVehicleModel)![0]!
       .name.split(' ');
 
-    console.log({
-      vehicle_model_id: selectedVehicleModel as string,
-      vehicle_make: make![0]!.name,
-      vehicle_model: yearAndModel![1],
-      vehicle_year: parseInt(yearAndModel![0] as string),
-    });
     mutateVehicle({
       vehicle_model_id: selectedVehicleModel as string,
       vehicle_make: make![0]!.name,
@@ -114,9 +108,9 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
 
   return (
     <div>
-      <Button onClick={() => toggleModal()}>Add new Vehicle</Button>
-      <Modal show={show} onClose={() => handleFormCancel()}>
-        <Modal.Header>Add new Vehicle</Modal.Header>
+      <Button onClick={() => toggleModal()}>Add Vehicle</Button>
+      <Modal show={show} onClose={() => handleFormCancel()} size='md'>
+        {/* <Modal.Header>Add new Vehicle</Modal.Header> */}
         <Modal.Body>
           <div className="flex flex-col items-center gap-4 w-full">
             <form className="flex flex-col gap-4">
