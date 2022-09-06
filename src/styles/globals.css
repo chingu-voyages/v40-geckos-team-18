@@ -27,25 +27,23 @@ button {
 .mainblob {
     margin-top: -50px;
     background-image: url('../assets/images/Group\ 1.svg');
-    background-size: cover;
-    background-position:left;
+    background-size:cover;
+    background-position: center;
     min-height: 880px;
-    padding: 90px;
+    padding: 40px;
 }
 
 @media screen and (min-width: 1440px) {
     .mainblob {
         margin-top: 50px;
-        /* background: var(--lime-green); */
         background-position:right;
     }
+
+/*     button {
+        width: 400px;
+        height: 150px;
+    } */
 }
 
-@media screen and (max-width: 840px) {
-    .mainblob {
-        padding: 40px;
-    }
-
-}
 
 

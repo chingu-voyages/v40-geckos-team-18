@@ -35,12 +35,11 @@ const Home: NextPage = () => {
         text={"We'll sum what you consumed in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment."}
         />
 
-        <div className='px-20'>
-          <p className='max-w-md text-4xl font-bold'>A throrough look into the carbon emissions of your life</p>
+        <div className='px-20 py-8 lg:w-2/4 md:w-3/4 w-4/4'>
+          <p className='text-4xl font-bold'>A throrough look into the carbon emissions of your life</p>
           <p className='font-bold'>We use latest IEA emission factor data and follow industry best practice standards.</p>
         </div>
       
-
       <Cards />
 
       <p className='px-20 py-8 text-4xl font-bold'>And check your stats monthly to check on your carbon footprint evolution.</p>
