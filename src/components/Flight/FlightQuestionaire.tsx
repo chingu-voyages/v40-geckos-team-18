@@ -1,16 +1,16 @@
 import React from 'react';
 import FlightForm from './FlightForm';
 import FlightResponse from './FlightResponse';
-import { UnregisteredFlightRequest } from '../../schema/flight.schema';
+import { FlightRequest } from '../../schema/flight.schema';
 import { trpc } from '../../utils/trpc';
 import { Spinner } from 'flowbite-react';
 
 const FlightQuestionaire = () => {
   const { mutate, data, isLoading } = trpc.useMutation([
-    'flight.unregistered-request-flight',
+    'flight.calculation-request',
   ]);
 
-  const handleSubmit = (flightData: UnregisteredFlightRequest) => {
+  const handleSubmit = (flightData: FlightRequest) => {
     mutate({ ...flightData });
   };
 

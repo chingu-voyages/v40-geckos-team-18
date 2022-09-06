@@ -18,7 +18,7 @@ export default function FuelPage() {
   };
 
   return (
-    <div className='p-8'>
+    <div className='p-8 max-w-3xl mx-auto'>
       <Head>
         <title>Fuel Consumption</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -28,7 +28,7 @@ export default function FuelPage() {
         <Image src={plantingTreesImage} alt="Four people planting trees"/>
       </div>
 
-      <h2 className='text-4xl flex justify-center gap-4 w-100'>How much carbon your fuel intake has emitted so far?</h2>
+      <h2 className='text-4xl flex justify-center gap-4 font-bold'>How much carbon your fuel intake has emitted so far?</h2>
 
 
         {isLoading && (
