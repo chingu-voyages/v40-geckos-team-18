@@ -9,11 +9,7 @@
 .footer a {
     color: var(--dark-grey);
     font-weight: 600;
-  
-}
-
-.footer a:hover {
-      text-decoration: underline;
+    text-decoration: underline;
 }
 
 @media screen and (min-width: 441px)  {
