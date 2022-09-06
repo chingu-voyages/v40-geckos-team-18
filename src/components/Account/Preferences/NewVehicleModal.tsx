@@ -32,7 +32,7 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
     selectedVehicleMake as string,
   ]);
   const { mutate: mutateVehicle } = trpc.useMutation([
-    'preferences.add-new-vehicle',
+    'preferences.add-user-vehicle',
   ]);
 
   useEffect(() => {
