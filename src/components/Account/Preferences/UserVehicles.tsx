@@ -80,6 +80,12 @@ const UserVehicles = () => {
       </div>
     );
 
+  if (userVehicleData.vehicles?.length === 0) {
+    return <div className='px-10 py-3 text-xl text-center'>
+      You have no saved vehicles.
+    </div>;
+  }
+
   return (
     <div className="grow grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-10 md:px-10">
       {userVehicleData.vehicles!.map((vehicle) => {
