@@ -1,16 +1,16 @@
 import React from 'react';
 import VehicleForm from './VehicleForm';
-import { UnregisteredVehicleRequest } from '../../schema/vehicle.schema';
+import { VehicleRequest } from '../../schema/vehicle.schema';
 import { trpc } from '../../utils/trpc';
 import { Spinner } from 'flowbite-react';
 import VehicleResponse from './VehicleResponse';
 
 const VehicleQuestionaire = () => {
   const { mutate, data, isLoading } = trpc.useMutation([
-    'vehicle.unregistered-request-vehicle',
+    'vehicle.calculation-request',
   ]);
 
-  const handleSubmit = (vehicleData: UnregisteredVehicleRequest) => {
+  const handleSubmit = (vehicleData: VehicleRequest) => {
     mutate({ ...vehicleData });
   };
 

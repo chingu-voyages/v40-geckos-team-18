@@ -4,11 +4,11 @@ import StatesData from '../../AppData/states.json';
 import {
   CountryCode,
   ElectricityUnit,
-  UnregisteredElectricityRequest,
+  ElectricityRequest,
 } from '../../schema/electricity.schema';
 
 interface ElectricityFormProps {
-  handleSubmit: (flightData: UnregisteredElectricityRequest) => void;
+  handleSubmit: (electricityData: ElectricityRequest) => void;
 }
 const ElectricityForm = ({ handleSubmit }: ElectricityFormProps) => {
   const [country, setCountry] = useState<CountryCode>('us');
@@ -37,7 +37,6 @@ const ElectricityForm = ({ handleSubmit }: ElectricityFormProps) => {
     setElectricityUnit(() => 'mwh');
   };
 
-
   return (
     <div className="mx-auto max-w-lg m-5">
       <Card>
@@ -61,7 +60,11 @@ const ElectricityForm = ({ handleSubmit }: ElectricityFormProps) => {
                 min={1}
                 max={1000000}
                 value={electricityValue}
-                onChange={(e) => e.target.value ? setElectricityValue(parseInt(e.target.value)) : setElectricityValue('')}
+                onChange={(e) =>
+                  e.target.value
+                    ? setElectricityValue(parseInt(e.target.value))
+                    : setElectricityValue('')
+                }
                 color="gray-600"
               />
             </div>
