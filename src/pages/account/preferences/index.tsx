@@ -1,15 +1,20 @@
 import { Accordion, Button, Label, Select } from 'flowbite-react';
 import React, { ReactElement, useEffect, useState } from 'react';
-import AccountLayout from '../../layouts/AccountLayout';
-import { CountryCode } from '../../schema/electricity.schema';
-import { NextPageWithLayout } from '../_app';
-import StatesData from '../../AppData/states.json';
+import AccountLayout from '../../../layouts/AccountLayout';
+import { CountryCode } from '../../../schema/electricity.schema';
+import { NextPageWithLayout } from '../../_app';
+import StatesData from '../../../AppData/states.json';
 import Head from 'next/head';
-import { trpc } from '../../utils/trpc';
-import { UserUnitPreference } from '../../schema/preferences.schema';
+import { trpc } from '../../../utils/trpc';
+import { UserUnitPreference } from '../../../schema/preferences.schema';
 import { useSession } from 'next-auth/react';
+import VehicleTile from '../../../components/Account/Preferences/VehicleTile';
+import NewVehicleModal from '../../../components/Account/Preferences/NewVehicleModal';
+import { useRouter } from 'next/router';
 
 const UserPreferences: NextPageWithLayout = () => {
+  const router = useRouter()
+
   const { data: userPreferences } = trpc.useQuery([
     'preferences.get-preferences',
   ]);
@@ -25,6 +30,12 @@ const UserPreferences: NextPageWithLayout = () => {
   const { mutate: mutateUnitPreferences } = trpc.useMutation([
     'preferences.update-user-unit-preference',
   ]);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleModal = () => {
+    setShowModal((old) => !old);
+  };
 
   const handleLocationUpdate = () => {
     mutateLocation({ country, state });
@@ -154,7 +165,13 @@ const UserPreferences: NextPageWithLayout = () => {
         {/** vehicle preferences */}
         <Accordion.Panel>
           <Accordion.Title>Vehicles</Accordion.Title>
-          <Accordion.Content></Accordion.Content>
+          <Accordion.Content>
+            {/* <div className='flex justify-end px-10'>
+              <Button color='success' onClick={() => router.push('/account/preferences/new-vehicle')}>Add new vehicle</Button>
+            </div> */}
+            <NewVehicleModal show={showModal} toggleModal={handleToggleModal} />
+            {/* <VehicleTile /> */}
+          </Accordion.Content>
         </Accordion.Panel>
       </Accordion>
     </div>

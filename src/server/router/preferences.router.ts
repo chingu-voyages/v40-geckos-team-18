@@ -1,5 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import {
+  addNewVehicleSchema,
   updateUserLocationSchema,
   updateUserPrimaryVehicleSchema,
   updateUserUnitPreferenceSchema,
@@ -25,6 +26,36 @@ export const preferencesRouter = createRouter()
 
         return preferences;
       }
+    },
+  })
+  .query('get-vehicles', {
+    async resolve({ ctx }) {
+      const user = ctx.session?.user;
+
+      if (user) {
+        const vehicles = await ctx.prisma.vehicle
+          .findMany({
+            select: {
+              id: true,
+              vehicle_make: true,
+              vehicle_model: true,
+              vehicle_model_id: true,
+              vehicle_year: true,
+            },
+            where: {
+              userId: user.id,
+            },
+          })
+          .then((response) => response)
+          .catch((e) => console.error(e));
+
+          return vehicles;
+      }
+
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You are not signed in and valid credentials are required.',
+      });
     },
   })
   .mutation('update-user-location', {
@@ -106,4 +137,18 @@ export const preferencesRouter = createRouter()
         message: 'You are not signed in and valid credentials are required.',
       });
     },
+  }).mutation('add-new-vehicle', {
+    input: addNewVehicleSchema,
+    async resolve({ctx, input}) {
+      const user = ctx.session?.user
+
+      if (user) {
+        ctx.prisma.vehicle.create({
+          data: {
+            ...input,
+            userId: user.id
+          }, 
+        }).then(response => response)
+      }
+    }
   });

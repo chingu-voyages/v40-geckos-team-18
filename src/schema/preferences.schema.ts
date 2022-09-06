@@ -11,6 +11,13 @@ export const updateUserPrimaryVehicleSchema = z.object({
   primaryVehicleId: z.string(),
 });
 
+export const addNewVehicleSchema = z.object({
+  vehicle_make: z.string(),
+  vehicle_model: z.string(),
+  vehicle_year: z.number(),
+  vehicle_model_id: z.string(),
+});
+
 export type UserLocation = z.TypeOf<typeof updateUserLocationSchema>;
 
 export type UserUnitPreference = z.TypeOf<
