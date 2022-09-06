@@ -19,11 +19,11 @@ export const preferencesRouter = createRouter()
           select: {
             unitPref: true,
             country: true,
-            state: true
-          }
+            state: true,
+          },
         });
 
-        return preferences
+        return preferences;
       }
     },
   })
@@ -62,16 +62,19 @@ export const preferencesRouter = createRouter()
     input: updateUserUnitPreferenceSchema,
     async resolve({ ctx, input }) {
       const user = ctx.session?.user;
-
+      console.log(`unitPref input: ${input}`);
       if (user) {
-        ctx.prisma.user.update({
-          data: {
-            unitPref: input,
-          },
-          where: {
-            id: user.id,
-          },
-        });
+        ctx.prisma.user
+          .update({
+            data: {
+              unitPref: input,
+            },
+            where: {
+              id: user.id,
+            },
+          })
+          .then((response) => response)
+          .catch((e) => console.error(e));
 
         return;
       }

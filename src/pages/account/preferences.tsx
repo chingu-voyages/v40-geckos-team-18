@@ -16,7 +16,7 @@ const UserPreferences: NextPageWithLayout = () => {
   const [country, setCountry] = useState<CountryCode | string>('');
   const [state, setState] = useState('');
   const [unitPreference, setUnitPreference] =
-    useState<string>('metric');
+    useState('metric');
 
   const { mutate: mutateLocation } = trpc.useMutation([
     'preferences.update-user-location',
@@ -36,13 +36,14 @@ const UserPreferences: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (userPreferences) {
-      setCountry(() => userPreferences.country as string);
-      setState(() => userPreferences.state as string);
+      setCountry(() => userPreferences.country as string ?? '');
+      setState(() => userPreferences.state as string ?? '');
       setUnitPreference(
-        () => (userPreferences.unitPref as UserUnitPreference) ?? ''
+        () => userPreferences.unitPref as UserUnitPreference ?? ''
       );
     }
   }, [userPreferences]);
+
   return (
     <div>
       <Head>
