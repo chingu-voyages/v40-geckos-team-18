@@ -15,7 +15,6 @@ body {
 }
 
 button {
-    color: var(--dark-grey);
     width: 170px;
     height: 50px;
 }
@@ -36,7 +35,9 @@ button {
 
 @media screen and (min-width: 1440px) {
     .mainblob {
-        background: var(--lime-green)
+        margin-top: 50px;
+        /* background: var(--lime-green); */
+        background-position:right;
     }
 }
 
