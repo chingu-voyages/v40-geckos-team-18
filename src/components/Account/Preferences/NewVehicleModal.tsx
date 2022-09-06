@@ -109,10 +109,10 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
   return (
     <div>
       <Button onClick={() => toggleModal()}>Add Vehicle</Button>
-      <Modal show={show} onClose={() => handleFormCancel()} size='md'>
+      <Modal show={show} onClose={() => handleFormCancel()} size='sm'>
         {/* <Modal.Header>Add new Vehicle</Modal.Header> */}
         <Modal.Body>
-          <div className="flex flex-col items-center gap-4 w-full">
+          <div className="flex flex-col items-center gap-4">
             <form className="flex flex-col gap-4">
               <div>
                 <Label

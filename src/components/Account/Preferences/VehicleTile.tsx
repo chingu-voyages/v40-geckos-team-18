@@ -25,7 +25,7 @@ const VehicleTile = ({
   toggleModal,
 }: VehicleTileProps) => {
   return (
-    <div className="col-span-1">
+    <div className="col-span-1 min-w-sm">
       <Card>
         <div className='flex flex-row justify-between'>
           <FaCarAlt size={20} className='ml-2'/>

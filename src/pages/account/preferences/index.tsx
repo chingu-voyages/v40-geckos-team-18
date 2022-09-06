@@ -159,7 +159,7 @@ const UserPreferences: NextPageWithLayout = () => {
         <Accordion.Panel>
           <Accordion.Title>Vehicles</Accordion.Title>
           <Accordion.Content>
-            <div className="flex justify-space">
+            <div className="flex flex-col items-end md:items-start md:flex-row md:justify-space gap-2">
               <NewVehicleModal
                 show={showModal}
                 toggleModal={handleToggleModal}
