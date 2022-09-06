@@ -107,11 +107,6 @@ const NewVehicleModal = ({ show, toggleModal }: NewVehicleModalProps) => {
 
   return (
     <div>
-      <Head>
-        <title>New Vehicle</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-
       <Button onClick={() => toggleModal()}>Add new Vehicle</Button>
       <Modal show={show} onClose={() => handleFormCancel()}>
         <Modal.Header>Add new Vehicle</Modal.Header>
