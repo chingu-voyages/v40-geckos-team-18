@@ -1,4 +1,4 @@
-import { Accordion, Button, Label, Select } from 'flowbite-react';
+import { Accordion, Button, Label, Select, Spinner } from 'flowbite-react';
 import React, { ReactElement, useEffect, useState } from 'react';
 import AccountLayout from '../../../layouts/AccountLayout';
 import { CountryCode } from '../../../schema/electricity.schema';
@@ -7,21 +7,24 @@ import StatesData from '../../../AppData/states.json';
 import Head from 'next/head';
 import { trpc } from '../../../utils/trpc';
 import { UserUnitPreference } from '../../../schema/preferences.schema';
-import { useSession } from 'next-auth/react';
 import VehicleTile from '../../../components/Account/Preferences/VehicleTile';
 import NewVehicleModal from '../../../components/Account/Preferences/NewVehicleModal';
 import { useRouter } from 'next/router';
+import UserVehicles from '../../../components/Account/Preferences/UserVehicles';
 
 const UserPreferences: NextPageWithLayout = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const { data: userPreferences } = trpc.useQuery([
     'preferences.get-preferences',
   ]);
+
+  const { data: userVehicles, isLoading: isUserVehiclesLoading } =
+    trpc.useQuery(['preferences.get-user-vehicles']);
+
   const [country, setCountry] = useState<CountryCode | string>('');
   const [state, setState] = useState('');
-  const [unitPreference, setUnitPreference] =
-    useState('metric');
+  const [unitPreference, setUnitPreference] = useState('metric');
 
   const { mutate: mutateLocation } = trpc.useMutation([
     'preferences.update-user-location',
@@ -29,6 +32,10 @@ const UserPreferences: NextPageWithLayout = () => {
 
   const { mutate: mutateUnitPreferences } = trpc.useMutation([
     'preferences.update-user-unit-preference',
+  ]);
+
+  const { mutate: mutateUserPrimaryVehicle } = trpc.useMutation([
+    'preferences.update-user-primary-vehicle',
   ]);
 
   const [showModal, setShowModal] = useState(false);
@@ -45,12 +52,16 @@ const UserPreferences: NextPageWithLayout = () => {
     mutateUnitPreferences(unitPreference as UserUnitPreference);
   };
 
+  const handleUpdateUserPrimaryVehicle = (vehicleId: string) => {
+    mutateUserPrimaryVehicle({ primaryVehicleId: vehicleId });
+  };
+
   useEffect(() => {
     if (userPreferences) {
-      setCountry(() => userPreferences.country as string ?? '');
-      setState(() => userPreferences.state as string ?? '');
+      setCountry(() => (userPreferences.country as string) ?? '');
+      setState(() => (userPreferences.state as string) ?? '');
       setUnitPreference(
-        () => userPreferences.unitPref as UserUnitPreference ?? ''
+        () => (userPreferences.unitPref as UserUnitPreference) ?? ''
       );
     }
   }, [userPreferences]);
@@ -144,7 +155,6 @@ const UserPreferences: NextPageWithLayout = () => {
                     setUnitPreference(e.target.value as UserUnitPreference)
                   }
                   value={unitPreference}
-                  
                 >
                   <option value="">Choose one</option>
                   <option value="metric">Metric units</option>
@@ -153,7 +163,7 @@ const UserPreferences: NextPageWithLayout = () => {
               </div>
               <div className="col-span-3 md:col-span-2 col-end-7 md:col-end-6 place-self-end mt-3">
                 <Button
-                  disabled={unitPreference === "" ? true : false}
+                  disabled={unitPreference === '' ? true : false}
                   onClick={() => handleUnitPreferenceUpdate()}
                 >
                   Save
@@ -166,11 +176,29 @@ const UserPreferences: NextPageWithLayout = () => {
         <Accordion.Panel>
           <Accordion.Title>Vehicles</Accordion.Title>
           <Accordion.Content>
-            {/* <div className='flex justify-end px-10'>
-              <Button color='success' onClick={() => router.push('/account/preferences/new-vehicle')}>Add new vehicle</Button>
-            </div> */}
-            <NewVehicleModal show={showModal} toggleModal={handleToggleModal} />
-            {/* <VehicleTile /> */}
+            <div className="flex justify-space">
+              <NewVehicleModal
+                show={showModal}
+                toggleModal={handleToggleModal}
+              />
+              <div className="grow grid grid-cols-6 gap-10 px-10">
+                {/** change this to a component */}
+                {isUserVehiclesLoading && !userVehicles && (
+                  <div>
+                    <Spinner />
+                  </div>
+                )}
+                {!isUserVehiclesLoading && userVehicles && userPreferences && (
+                  <UserVehicles
+                    vehicles={userVehicles}
+                    primaryVehicleId={userPreferences.primaryVehicleId}
+                    handleUpdateUserPrimaryVehicle={
+                      handleUpdateUserPrimaryVehicle
+                    }
+                  />
+                )}
+              </div>
+            </div>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion>

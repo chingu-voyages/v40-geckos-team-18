@@ -18,6 +18,14 @@ export const addNewVehicleSchema = z.object({
   vehicle_model_id: z.string(),
 });
 
+export const vehicleSchema = z.array(addNewVehicleSchema.merge(
+  z.object({
+    id: z.string(),
+  })
+));
+
+export type Vehicles = z.TypeOf<typeof vehicleSchema>
+
 export type UserLocation = z.TypeOf<typeof updateUserLocationSchema>;
 
 export type UserUnitPreference = z.TypeOf<

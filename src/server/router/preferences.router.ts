@@ -4,6 +4,8 @@ import {
   updateUserLocationSchema,
   updateUserPrimaryVehicleSchema,
   updateUserUnitPreferenceSchema,
+  Vehicles,
+  vehicleSchema,
 } from '../../schema/preferences.schema';
 import { createRouter } from './context';
 
@@ -21,6 +23,7 @@ export const preferencesRouter = createRouter()
             unitPref: true,
             country: true,
             state: true,
+            primaryVehicleId: true,
           },
         });
 
@@ -28,7 +31,7 @@ export const preferencesRouter = createRouter()
       }
     },
   })
-  .query('get-vehicles', {
+  .query('get-user-vehicles', {
     async resolve({ ctx }) {
       const user = ctx.session?.user;
 
@@ -49,7 +52,7 @@ export const preferencesRouter = createRouter()
           .then((response) => response)
           .catch((e) => console.error(e));
 
-          return vehicles;
+        return vehicles as Vehicles;
       }
 
       throw new TRPCError({
@@ -129,7 +132,9 @@ export const preferencesRouter = createRouter()
           where: {
             id: user.id,
           },
-        });
+        }).then(response => response);
+
+        return;
       }
 
       throw new TRPCError({
@@ -137,18 +142,24 @@ export const preferencesRouter = createRouter()
         message: 'You are not signed in and valid credentials are required.',
       });
     },
-  }).mutation('add-new-vehicle', {
+  })
+  .mutation('add-user-vehicle', {
     input: addNewVehicleSchema,
-    async resolve({ctx, input}) {
-      const user = ctx.session?.user
+    async resolve({ ctx, input }) {
+      const user = ctx.session?.user;
 
       if (user) {
-        ctx.prisma.vehicle.create({
-          data: {
-            ...input,
-            userId: user.id
-          }, 
-        }).then(response => response)
+        ctx.prisma.vehicle
+          .create({
+            data: {
+              ...input,
+              userId: user.id,
+            },
+          })
+          .then((response) => response);
       }
-    }
+    },
+  })
+  .mutation('remove-user-vehicle', {
+    async resolve() {},
   });
