@@ -11,7 +11,7 @@ interface CardProps {
 const Card = ({ image, description, link }: CardProps) => {
   return (
     <Link href={link}>
-      <div className="bg-secondary h-[335px] w-[280px] flex flex-col items-center justify-center space-y-4 card cursor-pointer p-4">
+      <div className="bg-secondary h-[335px] w-[280px] flex flex-col gap-10 items-center justify-center space-y-4 card cursor-pointer p-4">
         <div className="relative h-20 w-20">
           <Image
             src={image}
@@ -20,7 +20,7 @@ const Card = ({ image, description, link }: CardProps) => {
             objectFit="contain"
           />
         </div>
-        <p className="text-center font-bold text-white">{description}</p>
+        <p className="text-center text-2xl font-bold text-white">{description}</p>
       </div>
     </Link>
   );
