@@ -36,8 +36,8 @@ const Home: NextPage = () => {
         />
 
         <div className='p-20 lg:w-2/4 md:w-3/4 w-4/4'>
-          <p className='text-4xl font-bold'>A throrough look into the carbon emissions of your life</p>
-          <p className='font-bold'>We use latest IEA emission factor data and follow industry best practice standards.</p>
+          <p className='text-4xl font-bold xl:text-5xl'>A throrough look into the carbon emissions of your life</p>
+          <p className='font-bold xl:text-3xl py-8'>We use latest IEA emission factor data and follow industry best practice standards.</p>
         </div>
       
       <Cards />
