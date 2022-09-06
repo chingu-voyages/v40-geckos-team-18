@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --lime-green: #00ed5f;
+    --dark-grey: #1e1e1e;
+    --dark-green: #284f37;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    background-color: var(--lime-green);
+    color: var(--dark-grey);
+    width: 170px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.card {
+    border-radius: 43px;
+    box-shadow: 5px 5px 0px #102016, -5px -5px 0px #00ed5f;
+  }

@@ -27,7 +27,7 @@ module.exports = (req, res) => {
             carbon_kg: fakeCarbonKg,
             carbon_mt: parseInt((fakeCarbonG / 1000000).toFixed(2)),
             distance_unit: req.body.distance_unit ?? 'km', // respond default
-            distance_value: req.body.distance_value,
+            distance_value: faker.datatype.number({ min: 50, max: 1000 }),
           },
         },
       };
@@ -68,6 +68,7 @@ module.exports = (req, res) => {
             distance_unit: req.body.distance_unit ?? 'km', // respond default
             vehicle_make: faker.vehicle.manufacturer(),
             vehicle_model: faker.vehicle.model(),
+            vehicle_model_id: req.body.vehicle_model_id,
             vehicle_year: faker.datatype.number({ min: 1970, max: 2023 }),
             estimated_at: new Date().toISOString(),
             carbon_g: fakeCarbonG,
