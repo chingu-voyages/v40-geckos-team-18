@@ -1,4 +1,4 @@
-import { Accordion, Button, Label, Select } from 'flowbite-react';
+import { Accordion, Button, Label, Select, Toast } from 'flowbite-react';
 import React, { ReactElement, useEffect, useState } from 'react';
 import AccountLayout from '../../layouts/AccountLayout';
 import { CountryCode } from '../../schema/electricity.schema';
@@ -9,6 +9,7 @@ import { trpc } from '../../utils/trpc';
 import { UserUnitPreference } from '../../schema/preferences.schema';
 import NewVehicleModal from '../../components/Account/Preferences/NewVehicleModal';
 import UserVehicles from '../../components/Account/Preferences/UserVehicles';
+import { HiCheck } from 'react-icons/hi';
 
 const UserPreferences: NextPageWithLayout = () => {
   const { data: userPreferences } = trpc.useQuery([
@@ -19,19 +20,35 @@ const UserPreferences: NextPageWithLayout = () => {
   const [state, setState] = useState('');
   const [unitPreference, setUnitPreference] = useState('metric');
 
-  const { mutate: mutateLocation } = trpc.useMutation([
-    'preferences.update-user-location',
-  ]);
+  const { mutate: mutateLocation } = trpc.useMutation(
+    ['preferences.update-user-location'],
+    {
+      onSuccess() {
+        setSavedLocation((old) => !old);
+      },
+    }
+  );
 
   const { mutate: mutateUnitPreferences } = trpc.useMutation([
     'preferences.update-user-unit-preference',
   ]);
 
   const [showModal, setShowModal] = useState(false);
+  const [savedLocation, setSavedLocation] = useState(false);
 
   const handleToggleModal = () => {
     setShowModal((old) => !old);
   };
+
+  const handleCountryFieldUpdate = (countryCode: CountryCode) => {
+    setCountry(() => countryCode)
+    setSavedLocation(() => false)
+  }
+
+  const handleStateFieldUpdate = (stateCode: string) => {
+    setState(() => stateCode)
+    setSavedLocation(() => false)
+  }
 
   const handleLocationUpdate = () => {
     mutateLocation({ country, state });
@@ -55,6 +72,13 @@ const UserPreferences: NextPageWithLayout = () => {
         <title>Preferences</title>
       </Head>
 
+      <Toast>
+        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+          <HiCheck className="h-5 w-5" />
+        </div>
+        <div className="ml-3 text-sm font-normal">Item moved successfully.</div>
+        <Toast.Toggle />
+      </Toast>
       <Accordion flush={true}>
         {/** Location preferences */}
         <Accordion.Panel>
@@ -69,7 +93,7 @@ const UserPreferences: NextPageWithLayout = () => {
                 />
                 <Select
                   id="country"
-                  onChange={(e) => setCountry(e.target.value as CountryCode)}
+                  onChange={(e) => handleCountryFieldUpdate(e.target.value as CountryCode)}
                   value={country}
                   color="dark"
                 >
@@ -86,7 +110,7 @@ const UserPreferences: NextPageWithLayout = () => {
                 />
                 <Select
                   id="state"
-                  onChange={(e) => setState(e.target.value)}
+                  onChange={(e) => handleStateFieldUpdate(e.target.value)}
                   value={state}
                   color="dark"
                   disabled={country.length === 0 ? true : false}
@@ -119,8 +143,15 @@ const UserPreferences: NextPageWithLayout = () => {
                 <Button
                   disabled={country?.length === 0 ? true : false}
                   onClick={() => handleLocationUpdate()}
+                  color={savedLocation ? 'success' : 'info'}
                 >
-                  Save
+                  {savedLocation ? (
+                    <div className="flex flex-row items-center gap-2">
+                      <HiCheck /> Saved
+                    </div>
+                  ) : (
+                    'Save'
+                  )}
                 </Button>
               </div>
             </div>
