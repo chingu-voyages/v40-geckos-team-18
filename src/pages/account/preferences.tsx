@@ -1,4 +1,4 @@
-import { Accordion, Button, Label, Select, Toast } from 'flowbite-react';
+import { Accordion, Button, Label, Select, Spinner, Toast } from 'flowbite-react';
 import React, { ReactElement, useEffect, useState } from 'react';
 import AccountLayout from '../../layouts/AccountLayout';
 import { CountryCode } from '../../schema/electricity.schema';
@@ -10,8 +10,13 @@ import { UserUnitPreference } from '../../schema/preferences.schema';
 import NewVehicleModal from '../../components/Account/Preferences/NewVehicleModal';
 import UserVehicles from '../../components/Account/Preferences/UserVehicles';
 import { HiCheck } from 'react-icons/hi';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const UserPreferences: NextPageWithLayout = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   const { data: userPreferences } = trpc.useQuery([
     'preferences.get-preferences',
   ]);
@@ -33,7 +38,7 @@ const UserPreferences: NextPageWithLayout = () => {
     ['preferences.update-user-unit-preference'],
     {
       onSuccess() {
-        setSavedUnitPreference((old) => !old)
+        setSavedUnitPreference((old) => !old);
       },
     }
   );
@@ -61,8 +66,8 @@ const UserPreferences: NextPageWithLayout = () => {
   };
 
   const handleUnitPreferenceFieldChange = (unitPreference: string) => {
-    setUnitPreference(() => unitPreference)
-    setSavedUnitPreference(() => false)
+    setUnitPreference(() => unitPreference);
+    setSavedUnitPreference(() => false);
   };
 
   const handleUnitPreferenceUpdate = () => {
@@ -76,6 +81,19 @@ const UserPreferences: NextPageWithLayout = () => {
       setUnitPreference(() => userPreferences.unitPref as UserUnitPreference);
     }
   }, [userPreferences]);
+
+  useEffect(() => {
+    if (!session) {
+      router.push('/auth/login');
+    }
+  }, [session]);
+
+  if (status === 'loading')
+    return (
+      <div className='flex justify-center items-center'>
+        <Spinner />
+      </div>
+    );
 
   return (
     <div>
@@ -172,7 +190,9 @@ const UserPreferences: NextPageWithLayout = () => {
                 <p>Metric or Imperial?</p>
                 <Select
                   onChange={(e) =>
-                    handleUnitPreferenceFieldChange(e.target.value as UserUnitPreference)
+                    handleUnitPreferenceFieldChange(
+                      e.target.value as UserUnitPreference
+                    )
                   }
                   value={unitPreference}
                 >
