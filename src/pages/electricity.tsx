@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import Head from 'next/head';
 import { trpc } from '../utils/trpc';
 import ElectricityForm from '../components/Electricity/ElectricityForm';
-import { UnregisteredElectricityRequest } from '../schema/electricity.schema';
+import { ElectricityRequest } from '../schema/electricity.schema';
 import ElectricityResponse from '../components/Electricity/ElectricityResponse';
 import { Spinner } from 'flowbite-react';
 import wateringPlantsImage from '../assets/images/watering-plants-img.png';
@@ -10,9 +9,10 @@ import Image from 'next/image';
 
 export default function ElectricityConsumption() {
   const { mutate, data, isLoading } = trpc.useMutation([
-    'electricity.unregistered-request-electricity',
+    'electricity.calculation-request',
   ]);
-  const handleSubmit = (electricityData: UnregisteredElectricityRequest) => {
+
+  const handleSubmit = (electricityData: ElectricityRequest) => {
     mutate({ ...electricityData });
   };
 
