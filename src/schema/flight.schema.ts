@@ -14,12 +14,21 @@ const flightLegSchema = z.object({
 
 const distanceUnitSchema = z.enum(['km', 'mi']);
 
+const flightLegDataSchema = z.object({
+  departure_airport: z.string(),
+  destination_airport: z.string(),
+  legNumber: z.number(),
+  id: z.string(),
+  cabin_class: z.string()
+})
+
 export const flightRequestSchema = z.object({
   passengers: z.number(),
   distance_unit: distanceUnitSchema,
   legs: z.array(flightLegSchema),
 });
 
+export type FlightLegData = z.TypeOf<typeof flightLegDataSchema>
 export type CabinClass = z.TypeOf<typeof cabinClassSchema>;
 export type FlightLeg = z.TypeOf<typeof flightLegSchema>;
 

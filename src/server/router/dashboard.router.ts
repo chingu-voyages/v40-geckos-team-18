@@ -144,6 +144,7 @@ export const dashboardRouter = createRouter()
                   id: true,
                   departure_airport: true,
                   destination_airport: true,
+                  cabin_class: true,
                   legNumber: true,
                 },
               },

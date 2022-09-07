@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react'
+import FlightTable from '../../components/Account/FlightTable';
 import AccountLayout from '../../layouts/AccountLayout';
 import { NextPageWithLayout } from '../_app'
 
 const FlightSummaryPage: NextPageWithLayout = () => {
   return (
-    <div>FlightSummary</div>
+    <div><FlightTable /></div>
   )
 }
 
