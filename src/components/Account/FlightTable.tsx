@@ -83,7 +83,7 @@ const FlightTable = () => {
                   {/** Todo: update this to use the users unit preference */}
                   <Table.Cell className="font-medium text-gray-900 dark:text-white hidden sm:table-cell">
                     <>
-                      <p className='mb-2 md:hidden'>
+                      <p className="mb-2 md:hidden">
                         {entry.passengers}{' '}
                         {entry.passengers > 1 ? 'passengers' : 'passenger'}
                       </p>
@@ -121,7 +121,7 @@ const FlightTable = () => {
           </Button>
         </div>
       ) : (
-        <div></div>
+        ''
       )}
     </div>
   );
