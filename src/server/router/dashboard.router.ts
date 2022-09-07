@@ -1,4 +1,4 @@
-import { summarySchema } from '../../schema/dashboard.schema';
+import { electricityDataArraySchema, summarySchema } from '../../schema/dashboard.schema';
 import { createRouter } from './context';
 
 export const dashboardRouter = createRouter()

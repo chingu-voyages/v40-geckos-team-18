@@ -11,7 +11,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { FaGoogle } from 'react-icons/fa';
 import { BsFacebook, BsGithub } from 'react-icons/bs';
-import plantImage from '../../assets/images/holding-plant-removebg-preview.png';
+import plantImage from '../../assets/images/holding-plant.png';
 import { InferGetServerSidePropsType } from 'next';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
