@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
+import FuelTable from '../../components/Account/FuelTable';
 import AccountLayout from '../../layouts/AccountLayout';
 import { NextPageWithLayout } from '../_app';
 
 const FuelSummaryPage: NextPageWithLayout = () => {
-  return <div>FuelSummaryPage</div>;
+  return <div><FuelTable /></div>;
 };
 
 FuelSummaryPage.getLayout = function getLayout(page: ReactElement) {
