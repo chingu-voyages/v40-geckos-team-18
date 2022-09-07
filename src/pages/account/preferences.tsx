@@ -29,29 +29,40 @@ const UserPreferences: NextPageWithLayout = () => {
     }
   );
 
-  const { mutate: mutateUnitPreferences } = trpc.useMutation([
-    'preferences.update-user-unit-preference',
-  ]);
+  const { mutate: mutateUnitPreferences } = trpc.useMutation(
+    ['preferences.update-user-unit-preference'],
+    {
+      onSuccess() {
+        setSavedUnitPreference((old) => !old)
+      },
+    }
+  );
 
   const [showModal, setShowModal] = useState(false);
   const [savedLocation, setSavedLocation] = useState(false);
+  const [savedUnitPreference, setSavedUnitPreference] = useState(false);
 
   const handleToggleModal = () => {
     setShowModal((old) => !old);
   };
 
   const handleCountryFieldUpdate = (countryCode: CountryCode) => {
-    setCountry(() => countryCode)
-    setSavedLocation(() => false)
-  }
+    setCountry(() => countryCode);
+    setSavedLocation(() => false);
+  };
 
   const handleStateFieldUpdate = (stateCode: string) => {
-    setState(() => stateCode)
-    setSavedLocation(() => false)
-  }
+    setState(() => stateCode);
+    setSavedLocation(() => false);
+  };
 
   const handleLocationUpdate = () => {
     mutateLocation({ country, state });
+  };
+
+  const handleUnitPreferenceFieldChange = (unitPreference: string) => {
+    setUnitPreference(() => unitPreference)
+    setSavedUnitPreference(() => false)
   };
 
   const handleUnitPreferenceUpdate = () => {
@@ -72,13 +83,6 @@ const UserPreferences: NextPageWithLayout = () => {
         <title>Preferences</title>
       </Head>
 
-      <Toast>
-        <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-          <HiCheck className="h-5 w-5" />
-        </div>
-        <div className="ml-3 text-sm font-normal">Item moved successfully.</div>
-        <Toast.Toggle />
-      </Toast>
       <Accordion flush={true}>
         {/** Location preferences */}
         <Accordion.Panel>
@@ -93,7 +97,9 @@ const UserPreferences: NextPageWithLayout = () => {
                 />
                 <Select
                   id="country"
-                  onChange={(e) => handleCountryFieldUpdate(e.target.value as CountryCode)}
+                  onChange={(e) =>
+                    handleCountryFieldUpdate(e.target.value as CountryCode)
+                  }
                   value={country}
                   color="dark"
                 >
@@ -166,7 +172,7 @@ const UserPreferences: NextPageWithLayout = () => {
                 <p>Metric or Imperial?</p>
                 <Select
                   onChange={(e) =>
-                    setUnitPreference(e.target.value as UserUnitPreference)
+                    handleUnitPreferenceFieldChange(e.target.value as UserUnitPreference)
                   }
                   value={unitPreference}
                 >
@@ -179,8 +185,15 @@ const UserPreferences: NextPageWithLayout = () => {
                 <Button
                   disabled={unitPreference === '' ? true : false}
                   onClick={() => handleUnitPreferenceUpdate()}
+                  color={savedUnitPreference ? 'success' : 'info'}
                 >
-                  Save
+                  {savedUnitPreference ? (
+                    <div className="flex flex-row items-center gap-2">
+                      <HiCheck /> Saved
+                    </div>
+                  ) : (
+                    'Save'
+                  )}
                 </Button>
               </div>
             </div>
