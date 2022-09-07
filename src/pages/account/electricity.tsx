@@ -5,7 +5,7 @@ import { NextPageWithLayout } from '../_app';
 
 const ElectricitySummaryPage: NextPageWithLayout = () => {
   return (
-    <div className='px-10'>
+    <div>
       <ElectricityTable />
     </div>
   );

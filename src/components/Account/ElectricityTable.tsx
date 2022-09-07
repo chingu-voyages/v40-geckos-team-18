@@ -1,4 +1,5 @@
-import { Spinner, Table } from 'flowbite-react';
+import { Button, Spinner, Table } from 'flowbite-react';
+import Link from 'next/link';
 import React from 'react';
 import { trpc } from '../../utils/trpc';
 
@@ -17,14 +18,14 @@ const ElectricityTable = () => {
 
   if (!electricityData) {
     return (
-      <div>
+      <div className='flex justify-center items-center'>
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className='px-10'>
       <Table hoverable={true}>
         <Table.Head>
           <Table.HeadCell>Date</Table.HeadCell>
@@ -74,7 +75,13 @@ const ElectricityTable = () => {
           )}
         </Table.Body>
       </Table>
-      {electricityData.length === 0 ? <div></div> : <div></div>}
+      {electricityData.length === 0 ? <div className="flex flex-col items-center pt-10 gap-4">
+          <strong>You haven't recorded any electricity data.</strong>
+          <p>You can make your emissions calculation here:</p>
+          <Button size="sm">
+            <Link href='/electricity'>Make a new calculation</Link>
+          </Button>
+        </div> : <div></div>}
     </div>
   );
 };
