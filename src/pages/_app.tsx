@@ -65,3 +65,4 @@ export default withTRPC<AppRouter>({
    */
   ssr: false,
 })(MyApp);
+
