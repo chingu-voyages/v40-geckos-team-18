@@ -10,6 +10,11 @@ const ControlPanel = () => {
   const router = useRouter();
   const buttonSize = 50;
 
+  const handleSignOut = async () => {
+    await signOut();
+    router.push('/');
+  };
+
   return (
     <div className="flex flex-col items-center justify-start p-4">
       <Tooltip content="Dashboard">
@@ -33,7 +38,11 @@ const ControlPanel = () => {
       </Tooltip>
 
       <Tooltip content="Logout">
-        <CgLogOut onClick={() => signOut()} size={buttonSize} />
+        <CgLogOut
+          onClick={() => handleSignOut()}
+          size={buttonSize}
+          className="cursor-pointer hover:bg-gray-400 mb-5"
+        />
       </Tooltip>
     </div>
   );
