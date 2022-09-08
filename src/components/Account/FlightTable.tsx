@@ -29,7 +29,10 @@ const FlightTable = () => {
       <div className="flex flex-col">
         {flightLegs.map((leg) => {
           return (
-            <div className="flex flex-row gap-2 items-center justify-between">
+            <div
+              className="flex flex-row gap-2 items-center justify-between"
+              key={leg.id}
+            >
               <div className="flex flex-row gap-2 items-center">
                 <p>{leg.cabin_class === 'economy' ? 'Economy:' : 'Premium:'}</p>{' '}
                 <p> {leg.departure_airport}</p>
