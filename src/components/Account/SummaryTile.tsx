@@ -1,12 +1,14 @@
-import { Button, Card, Progress } from 'flowbite-react';
+import { Button, Card } from 'flowbite-react';
 import { Circle } from 'rc-progress';
 import React from 'react';
 import { FaGasPump } from 'react-icons/fa';
 import { ImPowerCord } from 'react-icons/im';
 import { MdDriveEta, MdFlight } from 'react-icons/md';
+import { formatWeightToUserUnitPreference } from '../../utils/unitConverter';
 
 interface SummaryTileProps {
   type: string;
+  unitPreference: string;
   emissionsValue: number;
   totalEmissions: number;
   handleOnClick: (type: string) => void;
@@ -14,11 +16,18 @@ interface SummaryTileProps {
 
 const SummaryTile = ({
   type,
+  unitPreference,
   emissionsValue,
   totalEmissions,
   handleOnClick,
 }: SummaryTileProps) => {
-  const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
+  const getEmissionsPercentage = (): string => {
+    if (totalEmissions === 0) {
+      return '0';
+    }
+    const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
+    return emissionsPercentage.toFixed(2);
+  };
   return (
     <div className="grid col-span-2 max-w-lg">
       <Card>
@@ -26,16 +35,20 @@ const SummaryTile = ({
           <h4 className="text-2xl font-bold">{type}</h4>
           {getIcon(type)}
           <h3 className="text-xl">Emissions</h3>
-          <h3 className="font-bold">{emissionsValue} g</h3>
-          <p className="text-center">
-            {emissionsPercentage.toFixed(2)}% of all calculations
-          </p>
+          <h3 className="font-bold">
+            {formatWeightToUserUnitPreference(unitPreference, emissionsValue)}
+          </h3>
+          <div className="relative h-24 w-24">
+            <div className="absolute inset-0">
+              <p className="mt-8 text-center">{getEmissionsPercentage()}%</p>
+            </div>
+            <Circle
+              percent={parseFloat(getEmissionsPercentage())}
+              strokeWidth={5}
+              strokeColor={getColor(parseFloat(getEmissionsPercentage()))}
+            />
+          </div>
 
-          <Circle
-            percent={emissionsPercentage}
-            strokeWidth={5}
-            strokeColor={getColor(emissionsPercentage)}
-          />
           <Button onClick={() => handleOnClick(type)}>View All</Button>
         </div>
       </Card>
