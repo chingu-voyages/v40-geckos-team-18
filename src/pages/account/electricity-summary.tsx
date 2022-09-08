@@ -1,15 +1,20 @@
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import ElectricityTable from '../../components/Account/ElectricityTable';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import AccountLayout from '../../layouts/AccountLayout';
 import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
 
 const ElectricitySummaryPage: NextPageWithLayout = () => {
-  const { data: electricityData } = trpc.useQuery([
+  const { data: electricityData, isLoading } = trpc.useQuery([
     'dashboard.get-electicity-data',
   ]);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  
   return (
     <div>
       <Head>

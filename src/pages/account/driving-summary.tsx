@@ -1,7 +1,8 @@
-import { Accordion, Spinner, Tabs } from 'flowbite-react';
+import { Accordion, Tabs } from 'flowbite-react';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import VehicleTripTable from '../../components/Account/VehicleTripTable';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import AccountLayout from '../../layouts/AccountLayout';
 import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
@@ -12,7 +13,7 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
   ]);
 
   if (!vehiclesWithTripsData) {
-    return <Spinner />;
+    return <LoadingSpinner />;
   }
 
   return (

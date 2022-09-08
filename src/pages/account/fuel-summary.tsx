@@ -1,13 +1,18 @@
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import FuelTable from '../../components/Account/FuelTable';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import AccountLayout from '../../layouts/AccountLayout';
 import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
 
 const FuelSummaryPage: NextPageWithLayout = () => {
-  const { data: fuelData } = trpc.useQuery(['dashboard.get-fuel-data']);
+  const { data: fuelData, isLoading } = trpc.useQuery(['dashboard.get-fuel-data']);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  
   return (
     <div>
       <Head>

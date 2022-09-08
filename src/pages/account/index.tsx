@@ -1,9 +1,9 @@
-import { Spinner } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
 import Dashboard from '../../components/Account/Dashboard';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import AccountLayout from '../../layouts/AccountLayout';
 import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
@@ -29,7 +29,7 @@ const AccountPage: NextPageWithLayout = () => {
     return <div>Access denied. Please sign in.</div>;
   }
 
-  if (isEmissionsLoading || isPreferencesLoading) return <Spinner />;
+  if (isEmissionsLoading || isPreferencesLoading) return <LoadingSpinner />;
 
   return (
     <>
