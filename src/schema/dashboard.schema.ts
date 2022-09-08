@@ -15,3 +15,4 @@ const electricityDataSchema = z.object({
 export const electricityDataArraySchema = z.array(electricityDataSchema);
 
 export type ElectricityData = z.TypeOf<typeof electricityDataSchema>;
+
