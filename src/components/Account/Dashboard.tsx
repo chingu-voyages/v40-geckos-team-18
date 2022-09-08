@@ -8,12 +8,6 @@ interface DashboardProps {
   greeting: string;
 }
 const Dashboard = ({ greeting }: DashboardProps) => {
-  const dummyData = [
-    { type: 'Electricity', emissions: 3000 },
-    { type: 'Fuel', emissions: 2000 },
-    { type: 'Flight', emissions: 4000 },
-    { type: 'Driving', emissions: 6000 },
-  ];
   const router = useRouter();
   const { data, isLoading } = trpc.useQuery(['dashboard.summary']);
 
@@ -49,7 +43,8 @@ const Dashboard = ({ greeting }: DashboardProps) => {
           To this date, your total emissions break down as follows
         </h4>
       </div>
-      <div className="flex flex-wrap justify-around content-around gap-5 max-w-6xl min-w-xl mx-auto">
+      {/* <div className="flex flex-wrap justify-around content-around gap-5 max-w-6xl min-w-xl mx-auto"> */}
+      <div className='grid grid-cols-1 md:grid-cols-4 xl:grid-cols-8 gap-5 md:px-10'>
         {isLoading && !data && <Spinner className="my-20" size="lg" />}
         {!isLoading &&
           data &&

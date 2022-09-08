@@ -20,7 +20,7 @@ const SummaryTile = ({
 }: SummaryTileProps) => {
   const emissionsPercentage = (emissionsValue / totalEmissions) * 100;
   return (
-    <div className="max-w-lg">
+    <div className="grid col-span-2 max-w-lg">
       <Card>
         <div className="flex flex-col items-center gap-5 px-20 py-5">
           <h4 className="text-2xl font-bold">{type}</h4>
