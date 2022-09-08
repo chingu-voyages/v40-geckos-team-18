@@ -11,6 +11,7 @@ const ElectricitySummaryPage: NextPageWithLayout = () => {
 
   return (
     <div>
+      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Electricity Emissions</p>
       <ElectricityTable electricityData={electricityData} />
     </div>
   );

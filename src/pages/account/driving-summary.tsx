@@ -17,6 +17,7 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
   console.log(vehiclesWithTripsData!);
   return (
     <>
+      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Driving Emissions</p>
       <div className="md:px-10 hidden sm:block">
         <Tabs.Group aria-label="Full width tabs" style="underline">
           {vehiclesWithTripsData.map((entry) => {
@@ -33,10 +34,6 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
               </Tabs.Item>
             );
           })}
-          {/* <Tabs.Item title="Profile">Profile content</Tabs.Item>
-        <Tabs.Item title="Dashboard"></Tabs.Item>
-        <Tabs.Item title="Settings">Settings content</Tabs.Item>
-        <Tabs.Item title="Invoice">Invoice content</Tabs.Item> */}
         </Tabs.Group>
       </div>
       <div className="md:hidden px-2">

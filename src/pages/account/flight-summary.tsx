@@ -9,6 +9,7 @@ const FlightSummaryPage: NextPageWithLayout = () => {
 
   return (
     <div>
+      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Flight Emissions</p>
       <FlightTable flightData={flightData} />
     </div>
   );

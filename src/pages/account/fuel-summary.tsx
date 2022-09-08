@@ -9,6 +9,7 @@ const FuelSummaryPage: NextPageWithLayout = () => {
 
   return (
     <div>
+      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Fuel Emissions</p>
       <FuelTable fuelData={fuelData} />
     </div>
   );
