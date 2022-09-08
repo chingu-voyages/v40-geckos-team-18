@@ -1,15 +1,22 @@
+import { Spinner } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
-import ControlPanel from '../../components/Account/ControlPanel';
 import Dashboard from '../../components/Account/Dashboard';
 import AccountLayout from '../../layouts/AccountLayout';
+import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
 
 const AccountPage: NextPageWithLayout = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const greetingMessage = `Welcome, ${session?.user?.name}`;
+
+  const { data: emissionsSummaryData, isLoading: isEmissionsLoading } =
+    trpc.useQuery(['dashboard.summary']);
+
+  const { data: userPreferences, isLoading: isPreferencesLoading } =
+    trpc.useQuery(['preferences.get-preferences']);
 
   useEffect(() => {
     if (!session) {
@@ -21,7 +28,15 @@ const AccountPage: NextPageWithLayout = () => {
     return <div>Access denied. Please sign in.</div>;
   }
 
-  return <Dashboard greeting={greetingMessage} />;
+  if (isEmissionsLoading || isPreferencesLoading) return <Spinner />;
+
+  return (
+    <Dashboard
+      greeting={greetingMessage}
+      emissionsSummaryData={emissionsSummaryData}
+      unitPreference={userPreferences!.unitPref} // DB value defaulted to metric, always present
+    />
+  );
 };
 
 AccountPage.getLayout = function getLayout(page: ReactElement) {

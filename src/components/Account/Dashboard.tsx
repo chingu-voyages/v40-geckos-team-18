@@ -1,18 +1,20 @@
 import { Spinner } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { trpc } from '../../utils/trpc';
+import { EmissionsSummaryData } from '../../schema/dashboard.schema';
 import SummaryTile from './SummaryTile';
 
 interface DashboardProps {
   greeting: string;
+  emissionsSummaryData: EmissionsSummaryData[] | undefined;
+  unitPreference: string;
 }
-const Dashboard = ({ greeting }: DashboardProps) => {
+
+const Dashboard = ({ greeting, emissionsSummaryData, unitPreference }: DashboardProps) => {
   const router = useRouter();
-  const { data, isLoading } = trpc.useQuery(['dashboard.summary']);
 
   const totalEmissions =
-    data?.reduce((previousValue, current) => {
+    emissionsSummaryData?.reduce((previousValue, current) => {
       return previousValue + current.emissions;
     }, 0) ?? 0;
 
@@ -31,6 +33,8 @@ const Dashboard = ({ greeting }: DashboardProps) => {
     }
   };
 
+  if (!emissionsSummaryData) return <p>Something went wrong</p>;
+
   return (
     <div className="flex flex-col justify-between px-5 mb-10 gap-5">
       <h2 className="text-4xl mb-14">{greeting}</h2>
@@ -44,21 +48,18 @@ const Dashboard = ({ greeting }: DashboardProps) => {
         </h4>
       </div>
       {/* <div className="flex flex-wrap justify-around content-around gap-5 max-w-6xl min-w-xl mx-auto"> */}
-      <div className='grid grid-cols-1 md:grid-cols-4 xl:grid-cols-8 gap-5 md:px-10'>
-        {isLoading && !data && <Spinner className="my-20" size="lg" />}
-        {!isLoading &&
-          data &&
-          data.map((classification) => {
-            return (
-              <SummaryTile
-                type={classification.type}
-                emissionsValue={classification.emissions}
-                totalEmissions={totalEmissions}
-                key={classification.type}
-                handleOnClick={() => handleOnClickTile(classification.type)}
-              />
-            );
-          })}
+      <div className="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-8 gap-5 md:px-10">
+        {emissionsSummaryData.map((classification) => {
+          return (
+            <SummaryTile
+              type={classification.type}
+              emissionsValue={classification.emissions}
+              totalEmissions={totalEmissions}
+              key={classification.type}
+              handleOnClick={() => handleOnClickTile(classification.type)}
+            />
+          );
+        })}
       </div>
     </div>
   );

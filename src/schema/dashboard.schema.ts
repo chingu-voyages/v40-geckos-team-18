@@ -5,6 +5,11 @@ export const summarySchema = z.array(
   z.object({ type: z.string(), emissions: z.number() })
 );
 
+export type EmissionsSummaryData = {
+  type: string;
+  emissions: number;
+};
+
 export type ElectricityData = {
   electricity_value: Prisma.Decimal;
   electricity_unit: string;
