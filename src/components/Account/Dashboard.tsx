@@ -1,7 +1,7 @@
-import { Spinner } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { EmissionsSummaryData } from '../../schema/dashboard.schema';
+import { formatWeightToUserUnitPreference } from '../../utils/unitConverter';
 import SummaryTile from './SummaryTile';
 
 interface DashboardProps {
@@ -10,7 +10,11 @@ interface DashboardProps {
   unitPreference: string;
 }
 
-const Dashboard = ({ greeting, emissionsSummaryData, unitPreference }: DashboardProps) => {
+const Dashboard = ({
+  greeting,
+  emissionsSummaryData,
+  unitPreference,
+}: DashboardProps) => {
   const router = useRouter();
 
   const totalEmissions =
@@ -40,7 +44,9 @@ const Dashboard = ({ greeting, emissionsSummaryData, unitPreference }: Dashboard
       <h2 className="text-4xl mb-14">{greeting}</h2>
       <div className="flex flex-col justify-center text-center">
         <h2 className="text-2xl mb-5">Your total emissions to date</h2>
-        <h2 className="text-xl mb-5 font-bold">{totalEmissions} g</h2>
+        <h2 className="text-xl mb-5 font-bold">
+          {formatWeightToUserUnitPreference(unitPreference, totalEmissions)}
+        </h2>
       </div>
       <div className="flex justify-center text-center">
         <h4 className="text-2xl mb-5">
@@ -53,6 +59,7 @@ const Dashboard = ({ greeting, emissionsSummaryData, unitPreference }: Dashboard
           return (
             <SummaryTile
               type={classification.type}
+              unitPreference={unitPreference}
               emissionsValue={classification.emissions}
               totalEmissions={totalEmissions}
               key={classification.type}
