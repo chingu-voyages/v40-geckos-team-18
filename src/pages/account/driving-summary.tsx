@@ -1,5 +1,6 @@
-import { Accordion, Tabs } from 'flowbite-react';
+import { Accordion, Button, Tabs } from 'flowbite-react';
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { ReactElement } from 'react';
 import VehicleTripTable from '../../components/Account/VehicleTripTable';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -8,12 +9,32 @@ import { trpc } from '../../utils/trpc';
 import { NextPageWithLayout } from '../_app';
 
 const DrivingSummaryPage: NextPageWithLayout = () => {
-  const { data: vehiclesWithTripsData } = trpc.useQuery([
+  const { data: vehiclesWithTripsData, isLoading } = trpc.useQuery([
     'dashboard.get-vehicle-trip-data',
   ]);
 
   if (!vehiclesWithTripsData) {
     return <LoadingSpinner />;
+  }
+
+  if (vehiclesWithTripsData.length === 0) {
+    return (
+      <>
+        <Head>
+          <title>Driving Summary</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+
+        <p className="text-2xl mb-6 ml-2 md:ml-10">Your Driving Emissions</p>
+        <div className="flex flex-col items-center gap-4 text-center">
+          <strong>You haven't recorded any driving data.</strong>
+          <p>You can make your emissions calculation here:</p>
+          <Button size="sm">
+            <Link href="/travel">Make a new calculation</Link>
+          </Button>
+        </div>
+      </>
+    );
   }
 
   return (
