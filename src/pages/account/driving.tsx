@@ -1,4 +1,4 @@
-import { Spinner, Tabs } from 'flowbite-react';
+import { Accordion, Spinner, Tabs } from 'flowbite-react';
 import React, { ReactElement } from 'react';
 import VehicleTripTable from '../../components/Account/VehicleTripTable';
 import AccountLayout from '../../layouts/AccountLayout';
@@ -16,28 +16,51 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
 
   console.log(vehiclesWithTripsData!);
   return (
-    <div>
-      <Tabs.Group aria-label="Full width tabs" style="underline">
-        {vehiclesWithTripsData.map((entry) => {
-          return (
-            <Tabs.Item
-              title={[
-                entry.vehicle_year,
-                entry.vehicle_make,
-                entry.vehicle_model,
-              ].join(' ')}
-              key={entry.id}
-            >
-              <VehicleTripTable tripData={entry.trips} />
-            </Tabs.Item>
-          );
-        })}
-        {/* <Tabs.Item title="Profile">Profile content</Tabs.Item>
+    <>
+      <div className="md:px-10 hidden sm:block">
+        <Tabs.Group aria-label="Full width tabs" style="underline">
+          {vehiclesWithTripsData.map((entry) => {
+            return (
+              <Tabs.Item
+                title={[
+                  entry.vehicle_year,
+                  entry.vehicle_make,
+                  entry.vehicle_model,
+                ].join(' ')}
+                key={entry.id}
+              >
+                <VehicleTripTable tripData={entry.trips} />
+              </Tabs.Item>
+            );
+          })}
+          {/* <Tabs.Item title="Profile">Profile content</Tabs.Item>
         <Tabs.Item title="Dashboard"></Tabs.Item>
         <Tabs.Item title="Settings">Settings content</Tabs.Item>
         <Tabs.Item title="Invoice">Invoice content</Tabs.Item> */}
-      </Tabs.Group>
-    </div>
+        </Tabs.Group>
+      </div>
+      <div className="md:hidden px-2">
+        <Accordion>
+          {vehiclesWithTripsData.map((entry) => {
+            return (
+              <Accordion.Panel>
+                <Accordion.Title >
+                  <p className='text-gray-900'>{[
+                    entry.vehicle_year,
+                    entry.vehicle_make,
+                    entry.vehicle_model,
+                  ].join(' ')}</p>
+                  
+                </Accordion.Title>
+                <Accordion.Content>
+                  <VehicleTripTable tripData={entry.trips} />
+                </Accordion.Content>
+              </Accordion.Panel>
+            );
+          })}
+        </Accordion>
+      </div>
+    </>
   );
 };
 

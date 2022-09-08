@@ -86,8 +86,8 @@ const VehicleTripTable = ({ tripData }: VehicleTripTableProps) => {
         </Table.Body>
       </Table>
       {tripData.length === 0 ? (
-        <div className="flex flex-col items-center pt-10 gap-4">
-          <strong>You haven't recorded any driving data.</strong>
+        <div className="flex flex-col items-center pt-10 gap-4 text-center">
+          <strong>You haven't recorded any driving data for this vehicle.</strong>
           <p>You can make your emissions calculation here:</p>
           <Button size="sm">
             <Link href="/travel">Make a new calculation</Link>
