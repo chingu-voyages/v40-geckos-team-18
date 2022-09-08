@@ -25,13 +25,13 @@ const Dashboard = ({ greeting }: DashboardProps) => {
   const handleOnClickTile = (type: string) => {
     switch (type) {
       case 'Electricity':
-        return router.push('/account/electricity');
+        return router.push('/account/electricity-summary');
       case 'Driving':
-        return router.push('/account/driving');
+        return router.push('/account/driving-summary');
       case 'Fuel':
-        return router.push('/account/fuel');
+        return router.push('/account/fuel-summary');
       case 'Flight':
-        return router.push('/account/flight');
+        return router.push('/account/flight-summary');
       default:
         return;
     }
