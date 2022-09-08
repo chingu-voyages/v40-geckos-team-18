@@ -1,4 +1,5 @@
 import { Accordion, Spinner, Tabs } from 'flowbite-react';
+import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import VehicleTripTable from '../../components/Account/VehicleTripTable';
 import AccountLayout from '../../layouts/AccountLayout';
@@ -14,10 +15,14 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
     return <Spinner />;
   }
 
-  console.log(vehiclesWithTripsData!);
   return (
     <>
-      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Driving Emissions</p>
+      <Head>
+        <title>Driving Summary</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <p className="text-2xl mb-6 ml-2 md:ml-10">Your Driving Emissions</p>
       <div className="md:px-10 hidden sm:block">
         <Tabs.Group aria-label="Full width tabs" style="underline">
           {vehiclesWithTripsData.map((entry) => {
@@ -41,13 +46,14 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
           {vehiclesWithTripsData.map((entry) => {
             return (
               <Accordion.Panel>
-                <Accordion.Title >
-                  <p className='text-gray-900'>{[
-                    entry.vehicle_year,
-                    entry.vehicle_make,
-                    entry.vehicle_model,
-                  ].join(' ')}</p>
-                  
+                <Accordion.Title>
+                  <p className="text-gray-900">
+                    {[
+                      entry.vehicle_year,
+                      entry.vehicle_make,
+                      entry.vehicle_model,
+                    ].join(' ')}
+                  </p>
                 </Accordion.Title>
                 <Accordion.Content>
                   <VehicleTripTable tripData={entry.trips} />

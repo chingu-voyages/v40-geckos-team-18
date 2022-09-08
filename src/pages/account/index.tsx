@@ -1,5 +1,6 @@
 import { Spinner } from 'flowbite-react';
 import { useSession } from 'next-auth/react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
 import Dashboard from '../../components/Account/Dashboard';
@@ -31,11 +32,18 @@ const AccountPage: NextPageWithLayout = () => {
   if (isEmissionsLoading || isPreferencesLoading) return <Spinner />;
 
   return (
-    <Dashboard
-      greeting={greetingMessage}
-      emissionsSummaryData={emissionsSummaryData}
-      unitPreference={userPreferences!.unitPref} // DB value defaulted to metric, always present
-    />
+    <>
+      <Head>
+        <title>Dashboard</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <Dashboard
+        greeting={greetingMessage}
+        emissionsSummaryData={emissionsSummaryData}
+        unitPreference={userPreferences!.unitPref} // DB value defaulted to metric, always present
+      />
+    </>
   );
 };
 

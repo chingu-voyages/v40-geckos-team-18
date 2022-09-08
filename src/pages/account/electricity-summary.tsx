@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import ElectricityTable from '../../components/Account/ElectricityTable';
 import AccountLayout from '../../layouts/AccountLayout';
@@ -11,7 +12,12 @@ const ElectricitySummaryPage: NextPageWithLayout = () => {
 
   return (
     <div>
-      <p className='text-2xl mb-6 ml-2 md:ml-10'>Your Electricity Emissions</p>
+      <Head>
+        <title>Electricity Summary</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <p className="text-2xl mb-6 ml-2 md:ml-10">Your Electricity Emissions</p>
       <ElectricityTable electricityData={electricityData} />
     </div>
   );
