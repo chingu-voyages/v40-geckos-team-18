@@ -1,13 +1,12 @@
-import { Prisma } from '@prisma/client/';
 import { Button, Spinner, Table } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react';
-import { trpc } from '../../utils/trpc';
-import { Decimal } from 'Decimal.js';
+import { FuelData } from '../../schema/dashboard.schema';
 
-const FuelTable = () => {
-  const { data: fuelData } = trpc.useQuery(['dashboard.get-fuel-data']);
-
+interface FuelTableProps {
+  fuelData: FuelData[] | undefined;
+}
+const FuelTable = ({ fuelData }: FuelTableProps) => {
   const electricityDataDatesDesc = () => {
     const dataToBeSorted = [...fuelData!];
     if (fuelData)

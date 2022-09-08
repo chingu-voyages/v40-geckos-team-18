@@ -1,13 +1,13 @@
 import { Button, Spinner, Table } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react';
-import { trpc } from '../../utils/trpc';
+import { ElectricityData } from '../../schema/dashboard.schema';
 
-const ElectricityTable = () => {
-  const { data: electricityData } = trpc.useQuery([
-    'dashboard.get-electicity-data',
-  ]);
+interface ElectricityTableProps {
+  electricityData: ElectricityData[] | undefined;
+}
 
+const ElectricityTable = ({ electricityData }: ElectricityTableProps) => {
   const electricityDataDatesDesc = () => {
     const dataToBeSorted = [...electricityData!];
     if (electricityData)

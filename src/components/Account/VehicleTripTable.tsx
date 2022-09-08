@@ -1,20 +1,12 @@
 import React from 'react';
-import { Prisma } from '@prisma/client';
 import { Button, Spinner, Table } from 'flowbite-react';
 import Link from 'next/link';
-import { trpc } from '../../utils/trpc';
-
-type TripData = {
-  carbon_g: number;
-  estimated_at: Date;
-  distance_unit: string;
-  distance_value: Prisma.Decimal;
-  id: string;
-};
+import { TripData } from '../../schema/dashboard.schema';
 
 interface VehicleTripTableProps {
   tripData: TripData[];
 }
+
 const VehicleTripTable = ({ tripData }: VehicleTripTableProps) => {
   const tripDataDatesDesc = () => {
     const dataToBeSorted = [...tripData!];
@@ -87,7 +79,9 @@ const VehicleTripTable = ({ tripData }: VehicleTripTableProps) => {
       </Table>
       {tripData.length === 0 ? (
         <div className="flex flex-col items-center pt-10 gap-4 text-center">
-          <strong>You haven't recorded any driving data for this vehicle.</strong>
+          <strong>
+            You haven't recorded any driving data for this vehicle.
+          </strong>
           <p>You can make your emissions calculation here:</p>
           <Button size="sm">
             <Link href="/travel">Make a new calculation</Link>

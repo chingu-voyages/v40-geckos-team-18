@@ -1,15 +1,20 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 import FlightTable from '../../components/Account/FlightTable';
 import AccountLayout from '../../layouts/AccountLayout';
-import { NextPageWithLayout } from '../_app'
+import { trpc } from '../../utils/trpc';
+import { NextPageWithLayout } from '../_app';
 
 const FlightSummaryPage: NextPageWithLayout = () => {
+  const { data: flightData } = trpc.useQuery(['dashboard.get-flight-data']);
+
   return (
-    <div><FlightTable /></div>
-  )
-}
+    <div>
+      <FlightTable flightData={flightData} />
+    </div>
+  );
+};
 
 FlightSummaryPage.getLayout = function getLayout(page: ReactElement) {
-    return <AccountLayout>{page}</AccountLayout>;
-  };
-export default FlightSummaryPage
+  return <AccountLayout>{page}</AccountLayout>;
+};
+export default FlightSummaryPage;

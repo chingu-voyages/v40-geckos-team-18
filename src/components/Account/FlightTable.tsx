@@ -2,11 +2,14 @@ import { Button, Spinner, Table } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react';
 import { HiArrowRight } from 'react-icons/hi';
+import { FlightData } from '../../schema/dashboard.schema';
 import { FlightLegData } from '../../schema/flight.schema';
 import { trpc } from '../../utils/trpc';
 
-const FlightTable = () => {
-  const { data: flightData } = trpc.useQuery(['dashboard.get-flight-data']);
+interface FlightTableProps {
+  flightData: FlightData[] | undefined
+}
+const FlightTable = ({flightData}: FlightTableProps) => {
 
   const flightDataDatesDesc = () => {
     const dataToBeSorted = [...flightData!];
