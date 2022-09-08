@@ -45,7 +45,7 @@ const FuelTable = () => {
       case 'ker':
         return <p>Kerosene</p>;
       default:
-        return <div></div>;
+        return '';
     }
   };
 
@@ -108,15 +108,15 @@ const FuelTable = () => {
                   {/** mobile screen */}
                   <Table.Cell className="whitespace font-medium text-gray-900 flex flex-col dark:text-white text-end sm:hidden">
                     <div className="gap-4">
-                      <p className="text-wrap">
+                      <div className="text-wrap">
                         {getFuelType(entry.fuel_source_type)}
-                      </p>
-                      <p>
+                      </div>
+                      <div>
                         {getFormattedFuelData(
                           entry.fuel_source_unit,
                           parseFloat(String(entry.fuel_source_value))
                         )}
-                      </p>
+                      </div>
                       <strong>{entry.carbon_g / 1000.0}kg</strong>
                     </div>
                   </Table.Cell>
