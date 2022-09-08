@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       <MainBlob 
         image={WheelchairGuy}
         headline={"Make an estimate based on your lifestyle."}
-        text={"We'll sum what you consumed in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment."}
+        text={"We offer you the ability to track your emissions by your various habits, whether that be in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment."}
         />
 
         <div className='p-20 lg:w-2/4 md:w-3/4 w-4/4'>
