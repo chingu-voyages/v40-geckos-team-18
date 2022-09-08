@@ -8,15 +8,28 @@ import '../styles/globals.css';
 import Footer from '../components/Footer';
 import '../styles/footer.css'
 import Nav from '../components/Nav';
+import { NextPage } from 'next';
+import { ReactElement, ReactNode } from 'react';
+import { AppProps } from 'next/app';
 
-const MyApp: AppType = ({
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const MyApp = ({
   Component,
   pageProps: { session, ...pageProps },
-}) => {
+}: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <SessionProvider session={session}>
       <Nav />
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
       <Footer />
     </SessionProvider>
   );
@@ -53,3 +66,4 @@ export default withTRPC<AppRouter>({
    */
   ssr: false,
 })(MyApp);
+

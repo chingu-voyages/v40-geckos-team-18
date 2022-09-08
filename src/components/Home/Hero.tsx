@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import bikeWoman1 from "../../assets/images/bike-woman 1.png";
 
+
 const Hero = () => (
     <div className="flex justify-center flex-col md:flex-row sm:flex-row p-10 gap-10 2xl:gap-20 xl:min-w-full">
         <div className="sm:w-2/6">
