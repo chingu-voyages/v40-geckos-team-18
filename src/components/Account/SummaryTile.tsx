@@ -31,7 +31,7 @@ const SummaryTile = ({
   return (
     <div className="grid col-span-2 max-w-lg">
       <Card>
-        <div className="flex flex-col items-center gap-5 px-20 py-5">
+        <div className="flex flex-col items-center gap-5 px-5 sm:px-10 md:px-15 py-5">
           <h4 className="text-2xl font-bold">{type}</h4>
           {getIcon(type)}
           <h3 className="text-xl">Emissions</h3>
