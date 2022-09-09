@@ -26,7 +26,7 @@ const Cards = () => {
     },
   ];
   return (
-    <div className="w-full p-8 gap-8 flex flex-col justify-center items-center md:flex-row">
+    <div className="w-full px-20 py-8 md:gap-8 gap-3 flex flex-col justify-center items-center md:flex-row">
       {cardInfo.map((card) => (
         <Card
           key={card.id}

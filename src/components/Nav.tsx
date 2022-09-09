@@ -19,8 +19,8 @@ const Nav = () => {
         </div>
 
         <div className="flex">
-          <ul className="hidden sm:flex font-bold">
-            <li className="px-4">
+          <ul className="hidden sm:flex font-bold md:text-2xl">
+            <li className="px-4 ">
               <Link href="/fuel">Fuel</Link>
             </li>
             <li className="px-4">
