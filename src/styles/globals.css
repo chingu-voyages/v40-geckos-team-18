@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
     --lime-green: #00ed5f;
@@ -15,15 +15,30 @@ body {
 }
 
 button {
-    background-color: var(--lime-green);
-    color: var(--dark-grey);
     width: 170px;
     height: 50px;
-    border-radius: 10px;
-    font-size: 12px;
 }
 
 .card {
-    border-radius: 43px;
-    box-shadow: 5px 5px 0px #102016, -5px -5px 0px #00ed5f;
-  }
+  border-radius: 43px;
+  box-shadow: 5px 5px 0px #102016, -5px -5px 0px #00ed5f;
+}
+
+.mainblob {
+    margin-top: -50px;
+    background-image: url('../assets/images/Group\ 1.svg');
+    background-size:cover;
+    background-position: center;
+    min-height: 880px;
+    padding: 40px;
+}
+
+@media screen and (min-width: 1440px) {
+    .mainblob {
+        margin-top: 50px;
+        background-position:right;
+    }
+}
+
+
+

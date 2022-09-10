@@ -1,38 +1,54 @@
-import { router } from '@trpc/server';
-import { Button, Spinner } from 'flowbite-react';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect } from 'react';
+import Dashboard from '../../components/Account/Dashboard';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import AccountLayout from '../../layouts/AccountLayout';
+import { trpc } from '../../utils/trpc';
+import { NextPageWithLayout } from '../_app';
 
-export default function AccountPage() {
+const AccountPage: NextPageWithLayout = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const greetingMessage = `Welcome, ${session?.user?.name}`;
+
+  const { data: emissionsSummaryData, isLoading: isEmissionsLoading } =
+    trpc.useQuery(['dashboard.summary']);
+
+  const { data: userPreferences, isLoading: isPreferencesLoading } =
+    trpc.useQuery(['preferences.get-preferences']);
 
   useEffect(() => {
     if (!session) {
-      router.push('/');
+      router.push('/auth/login');
     }
   }, [session, router]);
 
   if (!session) {
-    return (
-      <div>
-        Access denied. Please sign in.
-      </div>
-    )
+    return <div>Access denied. Please sign in.</div>;
   }
-  return (
-    <div>
-      <h2>Account Page</h2>
-      <Button onClick={() => signOut()}>Sign out</Button>
-      <Button
-        onClick={() => {
-          router.push('/account/preferences');
-        }}
-      >
-        Preferences
-      </Button>
-    </div>
-  );
-}
 
+  if (isEmissionsLoading || isPreferencesLoading) return <LoadingSpinner />;
+
+  return (
+    <>
+      <Head>
+        <title>Dashboard</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+
+      <Dashboard
+        greeting={greetingMessage}
+        emissionsSummaryData={emissionsSummaryData}
+        unitPreference={userPreferences!.unitPref} // DB value defaulted to metric, always present
+      />
+    </>
+  );
+};
+
+AccountPage.getLayout = function getLayout(page: ReactElement) {
+  return <AccountLayout>{page}</AccountLayout>;
+};
+
+export default AccountPage;
