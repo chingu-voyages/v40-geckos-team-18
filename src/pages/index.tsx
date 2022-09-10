@@ -1,21 +1,9 @@
-
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { trpc } from '../utils/trpc';
-import Link from 'next/link';
-import Cards from '../components/Cards';
-import { signIn } from "next-auth/react";
-import { Button } from "flowbite-react";
-import Hero from "../components/Home/Hero";
-import MainBlob from '../components/Home/MainBlob'
-import WheelchairGuy from '../assets/images/guy-wheelchair 1.png'
-
-
-type TechnologyCardProps = {
-  name: string;
-  description: string;
-  documentation: string;
-};
+import Cards from '../components/Home/Cards';
+import Hero from '../components/Home/Hero';
+import MainBlob from '../components/Home/MainBlob';
+import WheelchairGuy from '../assets/images/guy-wheelchair 1.png';
 
 const Home: NextPage = () => {
   return (
@@ -27,24 +15,32 @@ const Home: NextPage = () => {
       </Head>
       <Hero />
 
-      <MainBlob 
+      <MainBlob
         image={WheelchairGuy}
-        headline={"Make an estimate based on your lifestyle."}
-        text={"We offer you the ability to track your emissions by your various habits, whether that be in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment."}
-        />
+        headline={'Make an estimate based on your lifestyle.'}
+        text={
+          'We offer you the ability to track your emissions by your various habits, whether that be in your car, in your flights, to heat your house and give you the total estimate of how your lifestyle impacts the environment.'
+        }
+      />
 
-        <div className='p-20 lg:w-2/4 md:w-3/4 w-4/4'>
-          <p className='text-4xl font-bold xl:text-5xl'>A throrough look into the carbon emissions of your life</p>
-          <p className='font-bold xl:text-3xl py-8'>We use latest IEA emission factor data and follow industry best practice standards.</p>
-        </div>
-      
+      <div className="p-20 lg:w-2/4 md:w-3/4 w-4/4">
+        <p className="text-4xl font-bold xl:text-5xl">
+          A throrough look into the carbon emissions of your life
+        </p>
+        <p className="font-bold xl:text-3xl py-8">
+          We use latest IEA emission factor data and follow industry best
+          practice standards.
+        </p>
+      </div>
+
       <Cards />
 
-      <p className='px-20 py-8 text-4xl font-bold'>And check your stats monthly to check on your carbon footprint evolution.</p>
+      <p className="px-20 py-8 text-4xl font-bold">
+        And check your stats monthly to check on your carbon footprint
+        evolution.
+      </p>
     </>
   );
 };
-
-
 
 export default Home;
