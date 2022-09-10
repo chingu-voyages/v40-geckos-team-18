@@ -12,7 +12,7 @@ export default function AccountPage() {
     if (!session) {
       router.push('/');
     }
-  }, [session]);
+  }, [session, router]);
 
   if (!session) {
     return (
