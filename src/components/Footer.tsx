@@ -58,7 +58,7 @@ const Footer = () => {
           CarbonCalc is a web app created by a team of volunteers from{' '}
           <Link href="https://chingu.io">Chingu</Link>, using the T3 Stack.{' '}
           <Link href="https://www.chingu.io/howItWorks">
-            Click here to know more about how Chingu works.{' '}
+            Click here to know more about how Chingu works.
           </Link>
         </p>
       </footer>
