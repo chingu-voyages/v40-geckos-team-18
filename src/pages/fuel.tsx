@@ -11,6 +11,7 @@ export default function FuelPage() {
   const { mutate, data, isLoading } = trpc.useMutation([
     'fuel.unregistered-request-fuel',
   ]);
+  
   const handleSubmit = (fuelData: UnregisteredFuelRequest) => {
     mutate({ ...fuelData });
   };
