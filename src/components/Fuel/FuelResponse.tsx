@@ -24,7 +24,7 @@ const FuelResponse = ({ data }: FuelResponseProps) => {
         </p>
         <div className="flex justify-center">
           <Button>
-            <Link href="register">Register</Link>
+            <Link href="/auth/login">Register</Link>
           </Button>
         </div>
       </Card>

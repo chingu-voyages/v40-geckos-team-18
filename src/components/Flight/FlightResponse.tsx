@@ -36,7 +36,7 @@ const FlightResponse = ({ data }: FlightResponseProps) => {
           </p>
           <div className='flex justify-end'>
             <Button>
-              <Link href="register">Register</Link>
+              <Link href="/auth/login">Register</Link>
             </Button>
           </div>
         </div>
