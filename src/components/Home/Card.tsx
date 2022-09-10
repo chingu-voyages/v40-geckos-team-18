@@ -20,7 +20,9 @@ const Card = ({ image, description, link }: CardProps) => {
             objectFit="contain"
           />
         </div>
-        <p className="text-center text-2xl md:text-lg font-bold text-white">{description}</p>
+        <p className="text-center text-2xl md:text-lg font-bold text-white">
+          {description}
+        </p>
       </div>
     </Link>
   );

@@ -31,7 +31,7 @@ const ConfirmVehicleDeleteModal = ({
                 color="failure"
                 onClick={() => handleConfirmDelete()}
               >
-                Yes, I'm sure
+                {'Yes, I\'m sure'}
               </Button>
               <Button onClick={closeModal}>No, cancel</Button>
             </div>

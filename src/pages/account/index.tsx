@@ -23,7 +23,7 @@ const AccountPage: NextPageWithLayout = () => {
     if (!session) {
       router.push('/auth/login');
     }
-  }, [session]);
+  }, [session, router]);
 
   if (!session) {
     return <div>Access denied. Please sign in.</div>;

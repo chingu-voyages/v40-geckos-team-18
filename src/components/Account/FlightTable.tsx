@@ -120,7 +120,7 @@ const FlightTable = ({flightData}: FlightTableProps) => {
       </Table>
       {flightData.length === 0 ? (
         <div className="flex flex-col items-center pt-10 gap-4">
-          <strong>You haven't recorded any flight data.</strong>
+          <strong>{'You haven\'t recorded any flight data.'}</strong>
           <p>You can make your emissions calculation here:</p>
           <Button size="sm">
             <Link href="/travel">Make a new calculation</Link>

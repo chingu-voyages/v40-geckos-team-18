@@ -27,7 +27,7 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
 
         <p className="text-2xl mb-6 ml-2 md:ml-10">Your Driving Emissions</p>
         <div className="flex flex-col items-center gap-4 text-center">
-          <strong>You haven't recorded any driving data.</strong>
+          <strong>{'You haven\'t recorded any driving data.'}</strong>
           <p>You can make your emissions calculation here:</p>
           <Button size="sm">
             <Link href="/travel">Make a new calculation</Link>
@@ -67,7 +67,7 @@ const DrivingSummaryPage: NextPageWithLayout = () => {
         <Accordion>
           {vehiclesWithTripsData.map((entry) => {
             return (
-              <Accordion.Panel>
+              <Accordion.Panel key={entry.id}>
                 <Accordion.Title>
                   <p className="text-gray-900">
                     {[

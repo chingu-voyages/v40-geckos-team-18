@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from './Card';
-import car from '../../public/car.png';
-import plane from '../../public/plane.png';
-import house from '../../public/house.png';
+import car from '../../../public/car.png';
+import plane from '../../../public/plane.png';
+import house from '../../../public/house.png';
 
 const Cards = () => {
   const cardInfo = [

@@ -6,7 +6,7 @@ import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 import Footer from '../components/Footer';
-import '../styles/footer.css'
+import '../styles/footer.css';
 import Nav from '../components/Nav';
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
@@ -66,4 +66,3 @@ export default withTRPC<AppRouter>({
    */
   ssr: false,
 })(MyApp);
-

@@ -45,7 +45,7 @@ const ElectricityForm = ({ handleSubmit }: ElectricityFormProps) => {
           onSubmit={(e) => handleFormSubmit(e)}
         >
           <p className="text-center">
-            Let's measure the carbon emissions from your electricity usage!
+            {'Let\'s measure the carbon emissions from your electricity usage!'}
           </p>
           <div className="grid grid-cols-6 items-end">
             <div className="col-span-4 mr-3">

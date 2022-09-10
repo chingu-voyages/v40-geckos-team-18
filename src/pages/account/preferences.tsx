@@ -80,13 +80,13 @@ const UserPreferences: NextPageWithLayout = () => {
       setState(() => (userPreferences.state as string) ?? '');
       setUnitPreference(() => userPreferences.unitPref as UserUnitPreference);
     }
-  }, [userPreferences]);
+  }, [userPreferences, router]);
 
   useEffect(() => {
     if (!session) {
       router.push('/auth/login');
     }
-  }, [session]);
+  }, [session, router]);
 
   if (status === 'loading')
     return (
