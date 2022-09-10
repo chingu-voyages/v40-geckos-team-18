@@ -44,7 +44,7 @@ const Footer = () => {
               </Link>
             </p>
             <p>
-              <Link href="/">Cian</Link>
+              <Link href="https://www.linkedin.com/in/cianbutlerdev/">Cian Butler</Link>
             </p>
             <p>
               <Link href="https://www.linkedin.com/in/victoriacheng15/">
